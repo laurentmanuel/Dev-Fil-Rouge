@@ -1,0 +1,472 @@
+/*temp pour construction*/
+/* *{
+    border: 1px solid rgb(255, 187, 0);
+} */
+
+/*Définition police */
+@font-face{
+    font-family: 'futura-renner';
+    src: url('polices/futura-renner/FuturaRenner-Light.otf');
+    src: url('polices/futura-renner/FuturaRenner-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body{
+    min-height: 100vh;
+    font-family: 'futura-renner', sans-serif;  
+    background-color: #949494;
+    background-image: url(images_fR/fond_home_transparent.png);
+    border-image-repeat: round;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    z-index: 10;
+    display: flex;
+    margin: 0;
+    height: 75px;
+    width: 130%;
+    background-color:#030A8C;
+    border-bottom: 3px solid #b3daf2;
+    box-shadow: 0px 0px 20px 0px black;
+    opacity: 1;
+}
+
+/*Allonger les champs*/
+input{
+    size: 50;
+}
+
+
+#logo{
+    z-index: 9;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    left: 0px;
+    margin-left: 10%;
+    margin-top: 1em;
+    border-radius: 50%; /*Contour arrondi*/
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px 0px black;
+}
+
+#une{
+    width: 95%;
+    display: flex;
+}
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFF;
+    font-size: 2.8em;
+}
+
+h3{
+    color: #FFF;
+    font-size: 2em;
+    font-style: Futura, bold;
+}
+
+p{
+    color: hsl(0, 0%, 100%);
+    font-size: 1.2em;
+}
+
+nav{
+    position: absolute;
+    right: 0px;
+    display: flex;
+    height:auto;
+    width: auto;
+    font-style: italic;
+    margin-top: 1.5em;
+    margin-right: 3%;
+}
+
+nav a, article a{
+    text-decoration: none; /*liens non soulignés*/
+    color: #FFFFFF;
+}
+
+nav ul{
+    list-style-type: none;  /*puces supprimées */
+    display: flex;
+    color: #FFFFFF;
+}
+
+nav li{
+    margin-right: 25px;
+    font-size: 1.5em;
+}
+
+
+.container{
+    z-index: -1;
+    position: absolute;
+    color: #FFF;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right:3%;
+}
+#bordure{
+    z-index: 9;
+    display: flex;
+    position: fixed;
+    width: 100px;
+    height: 100%;
+    top: 0px; left: 0px;
+    background-image: url(images_fR/banniere.jpg);
+    box-shadow: 0px 20px 20px 0px black;
+}
+
+#vertical_title{
+    z-index: -1;
+    vertical-align: middle;
+    color: #5c5b5b;
+    font-size: 3em;
+    font-style: italic;
+    position: absolute;
+    left: 0px; top: 40%;
+    width: 400px;
+    margin-left: -150px;
+    transform: rotate(-90deg);
+}
+
+.userForm{
+    z-index: -11;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid #707070;
+    border-radius: 70px;
+    width: 55%;
+    height: 30em;
+    margin: auto;
+    margin-top: 4em;
+    padding-top: 30px;
+}
+
+.userForm p, .userForm h3, .connexionBtn{
+    margin-top: auto;
+    color: #000;
+    font-style: italic;
+    padding-top: 3px;
+    font-family: 'futura-renner';
+    text-align: center;
+}
+
+.connexionBtn{
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.userForm span{
+    display: flex;
+    justify-content: center;
+}
+
+article{
+    z-index: -2;
+    position: absolute;
+    text-align: center;
+    width: 380px;
+    margin-left: 19%;
+    text-shadow: 1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000,
+    0px 1px 0 #000,
+    0px -1px 0 #000,
+    -1px 0px 0 #000,
+    1px 0px 0 #000,
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0px 2px 0 #000,
+    0px -2px 0 #000,
+    -2px 0px 0 #000,
+    2px 0px 0 #000,
+    1px 2px 0 #000,
+    -1px 2px 0 #000,
+    1px -2px 0 #000,
+    -1px -2px 0 #000,
+    2px 1px 0 #000,
+    -2px 1px 0 #000,
+    2px -1px 0 #000,
+    -2px -1px 0 #000;
+}
+
+#image_park{
+    position: absolute;
+    border-radius: 70px;
+    width: 624px ;
+    height: 564px ;
+    border: 1px solid #707070;
+    right: 0px;
+    margin-top: 40px;
+    margin-right: 3%;
+    z-index: -3;
+}
+
+#decollage{
+    z-index: -4;
+    position: absolute;
+    right: 0px;
+    margin-right: 30%;
+    border-radius: 70px;
+    width: 650px;
+    height: 650px ;
+    margin-top: 190px;
+    border: 1px solid #707070;
+}
+
+.pgTitle{
+    display: none;
+
+}
+
+footer{    
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    margin-top: 2500px;
+    height: 75px;
+    width: 100%;
+    background-color:#030A8C;
+    border-top: 3px solid #b3daf2;
+    box-shadow: 0px 0px 20px 0px black;
+    opacity: 1;
+    justify-content: center;
+}
+
+footer a{
+    margin-top: 27px;
+    color: white;
+    text-decoration: none;
+    position: absolute;
+    text-align: center;
+}
+
+.menuBg{
+    display: none;
+}
+
+.burgerBtn{
+    display: none;
+}
+
+
+
+
+
+
+
+
+/* Bouton burger et animation */
+.burgerBtn{
+    z-index: 10;
+    width: 21px;
+    height: 12px;   
+    cursor: pointer;
+    position: relative;    
+}
+
+.burgerBtn span{
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);    
+    transition: background-color 0.5s ease-in-out;
+}
+
+.burgerBtn span::before, .burgerBtn span::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: transform 0.5s ease-in-out;
+}
+
+.burgerBtn span::before{
+    transform: translateY(-6px);
+}
+
+.burgerBtn span::after{
+    transform: translateY(6px);
+}
+
+/*******Btn se transforme en croix******/
+.burgerBtn.active span{
+    background-color: transparent;
+}
+
+.burgerBtn.active span::before{
+    transform: translateY(0px) rotateZ(45deg);
+}
+
+.burgerBtn.active span::after{
+    transform: translateY(0px) rotateZ(-45deg);
+}
+
+/******Contenu Menu déployant burger*****/
+.menuBg{
+    height: 350px;
+    background-color:#030A8C;
+    width: 200px;
+    border-radius: 0 0 0px 10px;
+    border: 1px solid #b3daf2;
+    box-shadow: 0 0 2px 2px;
+    margin-right: -5px;
+}
+
+.menuBg ul{
+    margin-top: 90px;
+}
+
+.menuBg li{
+    list-style-type: none;
+    margin-top: 14px;
+}
+
+.menuBg a{
+    text-decoration: none; 
+    color: #FFFFFF;
+    font-size: 1em;
+    display: block;
+    text-align: left;
+    padding-top: 12px; 
+    font-family: sans-serif;
+}
+
+/* menu déployant fermé */
+.invisible{
+    z-index: -1;
+    margin-top: -300px;
+    transition-duration: 0.3s;
+    position: absolute;
+    right: 0px; 
+  } 
+  
+/* ouverture menu déployant */
+.invisible.visible{
+    z-index: -1;
+    margin-top: -10px;
+    transition-duration: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Responsive (media queries)*/
+@media all and (max-width: 1024px){
+    
+    #bordure{
+        display: none;
+    }
+    
+    #logo{
+        width: 65px;
+        height: 65px;
+        position: absolute;
+        left: 0px;
+        margin-left: 25px;
+        margin-top: 5px;
+    }
+    
+    .burgerBtn{
+        position: absolute;
+        right: 25px;
+        top: 20px;
+    }
+    
+    /****masquer la nav desktop******/
+    nav{
+        display: none;
+    }
+    
+    
+    /***Activation menu small devices*******/
+    .burgerBtn{
+        display: block;
+    }
+    
+    .menuBg{
+        display: block;
+    }
+    
+    /***reduction hauteur du bandeau supérieur****/
+    header{
+        height: 50px;
+    }
+
+    /* set opacity property to 0.5*/
+    #decollage{  
+        transition: opacity 1s;  
+        opacity: 0.3; 
+    }
+
+    #image_park{
+        transition: opacity 1s;  
+        opacity: 0.3; 
+    }
+
+    .pgTitle{
+        display: block;
+        position: absolute;
+        top: 0.2em;
+        left: 85px;
+        margin-left: 5%;
+        font-size: 1.5em;
+        font-style: italic;
+        text-shadow: 1px 1px 0 #000,
+        -1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000,
+        0px 1px 0 #000,
+        0px -1px 0 #000,
+        -1px 0px 0 #000,
+        1px 0px 0 #000,
+        2px 2px 0 #000,
+        -2px 2px 0 #000,
+        2px -2px 0 #000,
+        -2px -2px 0 #000,
+        0px 2px 0 #000,
+        0px -2px 0 #000,
+        -2px 0px 0 #000,
+        2px 0px 0 #000,
+        1px 2px 0 #000,
+        -1px 2px 0 #000,
+        1px -2px 0 #000,
+        -1px -2px 0 #000,
+        2px 1px 0 #000,
+        -2px 1px 0 #000,
+        2px -1px 0 #000,
+        -2px -1px 0 #000;
+    }
+
+    .userForm{
+        width: 82%;
+        height: 30em;
+        margin-top: 3em;
+        margin-bottom: 4em;
+    }
+
+}
