@@ -14,7 +14,7 @@ CREATE TABLE users(
         id_user Int auto_increment primary key not null,
         name_user Varchar (50),
         first_name_user Varchar (50),
-        login_user Varchar (50),
+        email_user Varchar (50),
         mdp_user Varchar (50));
 
 #------------------------------------------------------------

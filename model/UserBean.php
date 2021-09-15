@@ -151,7 +151,7 @@
                
                 //requête sql pour création d'un utilisateur
                 $sql = "INSERT INTO `users` (`name_user`, `first_name_user`, `email_user`, `mdp_user`) 
-                VALUES (:name_user, :first_name_user, :email_user, $mdpUser)"; //ici le mdp est hashé
+                VALUES (:name_user, :first_name_user, :email_user, :mdp_user)"; //ici le mdp est hashé
 
                 //Création de la requête préparée pour protéger des injections SQL (et améliorer les perfs dans le cas de requêtes exécutées plusieurs fois dans la même session)
                 $query = $bdd->prepare($sql);
