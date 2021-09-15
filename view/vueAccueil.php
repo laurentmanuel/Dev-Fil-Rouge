@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
   <!-- head  -->
   <?php include("head.php"); ?>
   <title>Apollo Space Park Home</title>
