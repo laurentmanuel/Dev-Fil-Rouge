@@ -32,7 +32,7 @@
   <?php endif ?>
 
   ?>
-  <div class="userForm">
+  <div action="../controller/logUser.php" class="userForm">
     <form method="post">
       <h3>Connexion</h3>
       <p>Votre email: <input type="text" name="email_user" size="35"></p>
