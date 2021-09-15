@@ -10,9 +10,9 @@
 
 <body>
 
-  <div id="bordure">
-    <span id="vertical_title">Bonjour <?= $_SESSION["user"]["first_name_user"] ?>!</span>
-  </div>
+  <!-- bordure -->
+  <?php include "bordure.php"; ?>
+  
   <header>
     <!-- banniere supérieure        -->
     <?php include("header.php"); ?>

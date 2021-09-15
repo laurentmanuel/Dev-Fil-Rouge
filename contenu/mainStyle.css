@@ -326,6 +326,7 @@ footer a{
     border: 1px solid #b3daf2;
     box-shadow: 0 0 2px 2px;
     margin-right: -5px;
+    /*display: inline-block;test pour faire marcher effet surligné*/
 }
 
 .menuBg ul{

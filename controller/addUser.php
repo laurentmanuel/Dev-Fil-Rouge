@@ -12,7 +12,7 @@
     //On vérifie si le formulaire a été envoyé
     if(!empty($_POST)){
       //le formulaire a été envoyé
-
+      
       //on vérifie que tous les champs sont remplis
       if(isset($_POST["name_user"], $_POST["first_name_user"], $_POST["email_user"], $_POST["mdp_user"])
       && !empty($_POST["name_user"]) && !empty($_POST["first_name_user"]) && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"])){
@@ -49,7 +49,6 @@
         (:name_user, :first_name_user, :email_user, :mdp_user, false)";
 
         $query = $bdd->prepare($sql);
-        var_dump($bdd);
 
         try{         
 
@@ -60,6 +59,7 @@
             "mdp_user" => $mdp_user));
 
             echo "<p>Votre compte a été créé!</p>";
+            var_dump($query);
 
             //On récupère l'id du nouvel utilisateur
             $id = $bdd->lastInsertId();
@@ -70,12 +70,11 @@
             "id_user" => $id, //Récupéré grâce à lastInsertId()
             "name_user" => $name_user,
             "first_name_user" => $first_name_user,
-            "email_user" => $email_user,
-            "admin_user" => $_POST["admin_user"]
+            "email_user" => $email_user
             ];
 
             //On redirige vers la page profil.php par exemple
-            header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+            //header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
 
 
 

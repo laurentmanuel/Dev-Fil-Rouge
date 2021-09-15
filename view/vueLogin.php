@@ -8,9 +8,9 @@
 
 <body>
 
-  <div id="bordure">
-    <span id="vertical_title">Apollo Space Park</span>
-  </div>
+  <!-- bordure -->
+  <?php include "bordure.php"; ?>
+  
   <header>
     <!-- banniere supérieure        -->
     <?php include("header.php"); ?>
@@ -30,7 +30,6 @@
   <?php else : ?>
   <?php endif ?>
 
-  ?> 
   <div class="userForm">
     <form action="../controller/logUser.php" method="post">
       <h3>Connexion</h3>

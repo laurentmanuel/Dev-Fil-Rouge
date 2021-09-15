@@ -61,16 +61,8 @@
 
           //On redirige vers la page profil.php par exemple
           header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
-
-
-          var_dump($_SESSION);
-
-        
-
-
-
-
         }
+        
       } else {
 
         //Dans le cas, le formulaire est incomplet

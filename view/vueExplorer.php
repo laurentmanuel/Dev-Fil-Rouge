@@ -7,9 +7,9 @@
 </head>
 
 <body>
-  <div id="bordure">
-    <span id="vertical_title">Apollo Space Park</span>
-  </div>
+
+  <!-- bordure -->
+  <?php include "bordure.php"; ?>
 
   <header>
     <!-- banniere supérieure        -->
