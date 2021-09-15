@@ -364,7 +364,29 @@ footer a{
 }
 
 
+/*****************************/
+/*effect surligné*/
 
+nav a {
+  display: inline-block;
+}
+
+.menu__item:before {
+ content: "";
+ display: block;
+ height: 0.17em;
+ width: 0%;
+ margin-bottom: -3px;
+ background-color: #FFF;
+ transition: width 0.4s;
+}
+
+.menu__item:hover:before {
+ width: 100%;
+}
+
+
+/*****************************/
 
 
 
