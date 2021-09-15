@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <!-- head  -->
-  <?php include("head.php"); ?>
+<?php 
+  session_start();
+  //head
+  include("head.php"); 
+?>
   <title>Apollo Space Park Explorer</title>
 </head>
 

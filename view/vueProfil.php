@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php 
+  session_start();
+  //head
+  include("head.php"); 
+?>
 
-<head>
-  <!-- head  -->
-  <?php include("head.php"); ?>
-  <title>Apollo Space Park Mon Profil</title>
+ 
+<title>Apollo Space Park Mon Profil</title>
 </head>
 
 <body>
 
   <div id="bordure">
-    <span id="vertical_title">Apollo Space Park</span>
+    <span id="vertical_title">Bonjour <?= $_SESSION["user"]["first_name_user"] ?>!</span>
   </div>
   <header>
     <!-- banniere supérieure        -->
@@ -23,12 +24,16 @@
     </div>
     <!-- Menu burger -->
     <?php include("burger.php"); ?>
-    <h1 class="pgTitle">Mon Compte</h1>>
+    <h1 class="pgTitle">Bonjour <?= $_SESSION["user"]["first_name_user"] ?> !</h1>
   </header>
 
-  <h2>Bonjour <?= $_SESSION["user"]["first_name_user"] ?> !</h2>
+  <h2>Votre profil:</h2>
 
-  <!-- footer  -->
+  <p>Nom: <?= $_SESSION["user"]["name_user"] ?></p>
+  <p>Prénom: <?= $_SESSION["user"]["first_name_user"] ?></p>
+  <p>Email: <?= $_SESSION["user"]["email_user"] ?></p>
+
+  <!-- footer  -->  
   <?php include("footer.php"); ?>
 </body>
 

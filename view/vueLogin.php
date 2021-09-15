@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-  <!-- head  -->
-  <?php include("head.php"); ?>
+<?php 
+  session_start();
+  //head
+  include("head.php"); 
+?>
   <title>Apollo Space Park Mon compte</title>
 </head>
 
@@ -31,9 +30,9 @@
   <?php else : ?>
   <?php endif ?>
 
-  ?>
-  <div action="../controller/logUser.php" class="userForm">
-    <form method="post">
+  ?> 
+  <div class="userForm">
+    <form action="../controller/logUser.php" method="post">
       <h3>Connexion</h3>
       <p>Votre email: <input type="text" name="email_user" size="35"></p>
       <p>Votre Mot de passe: <input type="password" name="mdp_user"></p>

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php 
+  session_start();
+  //head
+  include("head.php"); 
+?>
 
-<head>
-  <!-- head  -->
-  <?php include("head.php"); ?>
   <title>Apollo Space Park Réservations</title>
 </head>
 
