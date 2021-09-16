@@ -1,10 +1,35 @@
 <?php
- 
+
+  /*----------------------------------------------------
+                          SESSSION:
+  -----------------------------------------------------*/
+  
   //On connecte l'utilisateur aprés la création de son compte
   session_start();// on démarre la session php (un cookie se crée à cet instant, la session est un tableau )
   
-  //pour interdire accés page addUser.php si déjà connecté
+
+  /*----------------------------------------------------
+             IMPORTS à effectuer pour ajout en bdd:
+  -----------------------------------------------------*/
+
+    //appel de la classe UserBean
+    require("../model/UserBean.php");
+
+    //appel du fichier de connexion bdd
+    require("../utils/connexionBdd.php");
+
+    //appel vue Inscription
+    require("../view/vueInscription.php"); 
+
+
+  /*-----------------------------------------------------
+                        CONTROLLER:
+   -----------------------------------------------------*/
+
+
+  //pour interdire l'accés à "addUser.php" si déjà connecté (on renvoie vers page "vueProfil.php")
   if(isset($_SESSION["user"])){
+    
     header("Location: ../view/vueProfil.php");
     exit;
   } else {
@@ -24,73 +49,56 @@
 
         //Filtrage par le Back-end du format email (plus sûr qu'en JS car peut-être js peut être désactivé)
         if(!filter_var($_POST["email_user"], FILTER_VALIDATE_EMAIL)){
-          die ("L'adresse email est incorrecte");
+          die ("<p>L'adresse email est incorrecte</p>");
 
         } else {
 
-          //l'adresse mail est correcte, on la stocke dans une variable
+          //Le format de l'adresse mail est correcte, on peut donc la stocker dans une variable
           $email_user = $_POST["email_user"];
         }  
-
-        //On va hasher le mdp (algo de hashage BCRYPT (60 caractères) et non de chiffrement comme avec du md5 (obsolète et réversible)).
-        $mdp_user = password_hash($_POST["mdp_user"], PASSWORD_BCRYPT);
 
 
         //Ajouter ici tous les contrôles requis
         // ******
         // ******
+        // ******      
         // ******
-        // ******
+        
+
+        //On va hasher le mdp (algo de hashage BCRYPT (60 caractères) et non de chiffrement comme avec du md5 (obsolète et réversible)).
+        $mdp_user = password_hash($_POST["mdp_user"], PASSWORD_BCRYPT);
 
         //On enregistre le mdp hashé en bdd
-        require_once "../utils/connexionBdd.php";
+        require_once "../utils/connexionBdd.php";        
 
-        $sql = "INSERT INTO users(name_user, first_name_user, email_user, mdp_user, admin_user) VALUES
-        (:name_user, :first_name_user, :email_user, :mdp_user, false)";
+        //création d'un objet depuis les valeurs contenues dans le formulaire
+        //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"], "$admin_user");
+        $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user");
 
-        $query = $bdd->prepare($sql);
+        $user->createUser($bdd);
 
-        try{         
-
-          $query->execute(array(
-            "name_user" => $name_user,
-            "first_name_user" => $first_name_user,
-            "email_user" => $email_user,
-            "mdp_user" => $mdp_user));
-
-            echo "<p>Votre compte a été créé!</p>";
-            var_dump($query);
-
-            //On récupère l'id du nouvel utilisateur
-            $id = $bdd->lastInsertId();
+        //réponse si l'utilisateur existe déja
+        echo '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';  
 
 
-            //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
-            $_SESSION["user"] = [
-            "id_user" => $id, //Récupéré grâce à lastInsertId()
-            "name_user" => $name_user,
-            "first_name_user" => $first_name_user,
-            "email_user" => $email_user
-            ];
-
-            //On redirige vers la page profil.php par exemple
-            //header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
-
-
-
-
-
-
-
-        } catch(Exception $e) {
-          //affichage d'une exception en cas d’erreur
-           die('Erreur : '.$e->getMessage());
-        }   
-
+        //On récupère l'id du nouvel utilisateur
+         $id = $bdd->lastInsertId();
+        
+        //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+        $_SESSION["user"] = [
+          "id_user" => $id, //Récupéré grâce à lastInsertId()
+          "name_user" => $name_user,
+          "first_name_user" => $first_name_user,
+          "email_user" => $email_user
+        ];
+          
+        //On redirige vers la page profil.php par exemple
+        //header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
 
       } else {
-          die("Le formulaire est incomplet"); 
-      };
+
+        die("<p>Le formulaire est incomplet</p>"); 
+      }
     }
   }
 ?>
