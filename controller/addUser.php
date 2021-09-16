@@ -74,15 +74,22 @@
         //création d'un objet depuis les valeurs contenues dans le formulaire
         //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"], "$admin_user");
         $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user");
+        
+        //On teste si l'utilisateur ("email_user") existe déjà (fonction userExists())
+        if($user->userExists($bdd)==true){
 
-        $user->createUser($bdd);
+          die("<p>L'utilisateur existe déjà!");
+        } else {
+
+          $user->createUser($bdd);
+        }
 
         //réponse si l'utilisateur existe déja
         echo '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';  
 
 
         //On récupère l'id du nouvel utilisateur
-         $id = $bdd->lastInsertId();
+        $id = $bdd->lastInsertId();
         
         //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
         $_SESSION["user"] = [
@@ -97,8 +104,12 @@
 
       } else {
 
-        die("<p>Le formulaire est incomplet</p>"); 
+        die("<p>Il manque des informations>/p>"); 
       }
-    }
+
+    } else {
+
+      die("<p>Le formulaire n'est pas renseigné</p>"); 
+    } 
   }
 ?>

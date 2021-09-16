@@ -75,7 +75,9 @@
             $this->mdp_user = $newMdpUser;
         }
 
-        //role_admin Getter & Setter
+
+        //admin_user Getter & Setter
+
         // public function getAdminUser(){
         //     return $this->admin_user;
         // }
@@ -89,52 +91,6 @@
                             Fonctions :
         -----------------------------------------------------*/
 
-        //méthode pour vérifier si un utilisateur existe dans la bdd
-        // public function isUser($bdd): bool{
-        
-        //     //récupération des valeurs de l'objet       
-        //     $email_user = $this->getEmailUser();
-
-        //     //On vérifie que le format de l'email saisi est correct
-        //     if(!filter_var($email_user, FILTER_VALIDATE_EMAIL)){
-        //         die ("Le format de l'adresse mail saisi n'est pas correct");
-        //     }
-        
-        //     try{      
-
-        //         //requête pour vérifier si l'email est déjà existant
-        //         $sql = "SELECT * FROM `users` WHERE `email_user` = :email_user";
-                
-        //         $reponse = $bdd->prepare($sql);
-
-        //         $reponse->execute(array("email_user" => $email_user));
-
-        //         //parcours du résultat de la requête
-        //         while($donnees = $reponse->fetch()){
-                
-        //             //return $donnees["mdp_user"];
-        //             if($email_user == $donnees["email_user"]){
-                    
-        //                 //retourne true si l'utilisateur existe déjà en bdd
-        //                 return true;
-
-        //             } else {
-
-        //                 //retourne false si l'utilisateur n'existe pas en bdd
-        //                 return false;
-        //             }
-        //         }   
-
-        //     } catch(Exception $e) {
-
-        //         //affichage d'une exception en cas d’erreur
-        //         die('Erreur : '.$e->getMessage());
-        //     }        
-        // }
-
-
-        // //--------------------------------
-        
 
         //méthode ajout d'un utilisateur en bdd
         public function createUser($bdd){
@@ -169,7 +125,6 @@
                 die('Erreur : '.$e->getMessage());
             }        
         }
-
 
 
 
@@ -211,19 +166,46 @@
             }        
         }
 
-        //--------------------------------
+        // //--------------------------------
 
 
         public function logUser($bdd){
+
+            //récupération des valeurs de l'objet
+            $email_user = $this->getEmailUser();
+            $mdp_user = $this->getMdpUser();
+
+            if($email_user->userExists($bdd)==false){
+
+                echo "<p>L'email et/ou le mot de passe sont incorrects</p>";
+            } else {
+        
+                //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
+                if(!password_verify($_POST["mdp_user"], $user["mdp_user"])){
+
+                    die("<p>L'email et/ou le mot de passe sont incorrects</p>");
+                } else {
+
+                    //Ici l'email et le mdp sont OK
+                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                    $_SESSION["user"] = [
+                    "id_user" => $user["id_user"],
+                    "name_user" => $user["name_user"],
+                    "first_name_user" => $user["first_name_user"],
+                    "email_user" => $user["email_user"]/*,
+                    "admin_user" => $user["admin_user"]*/
+                    ];
             
 
-
-        }
+                }
+            }
+        }   
 
 
         //--------------------------------
 
         public function updateUser($bdd){
+            
 
         }
 
@@ -233,4 +215,5 @@
 
         }
     }
+    
 ?>
