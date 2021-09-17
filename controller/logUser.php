@@ -64,11 +64,12 @@
           $userToLog->logUser($bdd);
         }        
         
+        
+        
         //Ici l'email et le mdp sont OK   
-        //Message de connexion
-        // $message = '<p>Vous êtes connecté!</p>';  
-
-        // //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+        
+        
+        //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
         // $_SESSION["user"] = [
         //   "id_user" => $user["id_user"],
         //   "name_user" => $user["name_user"],
@@ -79,37 +80,8 @@
         // ];
 
         //Redirection vers la page profil.php par exemple
-        header("Location: ../view/vueProfil.php");
+        //header("Location: ../view/vueProfil.php");
 
-
-
-
-        
-
-        
-
-        // if($userToLog->userExists($bdd)==false){
-
-        //   echo "<p>L'email et/ou le mot de passe sont incorrects</p>";
-        // } else {
-  
-        //   //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
-        //   if(!password_verify($_POST["mdp_user"], $userToLog["mdp_user"])){
-
-        //       die("<p>L'email et/ou le mot de passe sont incorrects</p>");
-        //   } else {
-
-        //     //Ici l'email et le mdp sont OK. 
-
-        //     //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
-        //     $_SESSION["user"] = [
-        //       "id_user" => $user["id_user"],
-        //       "name_user" => $user["name_user"],
-        //       "first_name_user" => $user["first_name_user"],
-        //       "email_user" => $user["email_user"]/*,
-        //       "admin_user" => $user["admin_user"]*/
-        //     ];
-      
 
       } else {
 

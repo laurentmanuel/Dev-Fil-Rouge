@@ -118,6 +118,28 @@
                     "first_name_user" => $first_name_user,
                     "email_user" => $email_user,
                     "mdp_user" => $mdp_user));
+
+                //On récupère l'id du nouvel utilisateur
+                $id = $bdd->lastInsertId();
+        
+                //Message de confirmation de création du compte
+                $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
+
+                //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                $_SESSION["user"] = [
+                "id_user" => $id, //Récupéré grâce à lastInsertId()
+                "name_user" => $name_user,
+                "first_name_user" => $first_name_user,
+                "email_user" => $email_user,
+                "message" => $message
+                ];
+                
+                
+                //On redirige vers la page profil.php par exemple
+                header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+        
+                
+                
                 
             } catch(Exception $e) {
 
@@ -174,52 +196,109 @@
             $email_user = $this->getEmailUser();
             $mdp_user = $this->getMdpUser();
             
-            //Reqûete Sql
-            $sql = "SELECT * FROM users WHERE email_user = :email_user";
+            try{ 
+                //Reqûete Sql
+                $sql = "SELECT * FROM users WHERE email_user = :email_user";
       
-            $query = $bdd->prepare($sql);
+                $query = $bdd->prepare($sql);
       
-            //$query->bindValue;
-            $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
-            $query->execute();      
-            $user = $query->fetch();
-            
-            //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
-            if(!password_verify($mdp_user, $user["mdp_user"])){
+                //$query->bindValue;
+                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->execute();      
+                $user = $query->fetch();
+
+                //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
+                if(!password_verify($mdp_user, $user["mdp_user"])){
+                
+                  die("<p>L'email et/ou le mot de passe est incorrect</p>");  
+
+                } else {
+                    $message = '<p>Vous êtes connecté!</p>'; 
       
-              die("<p>L'email et/ou le mot de passe est incorrect</p>");      
-            } else {
-                $message = '<p>Vous êtes connecté!</p>'; 
+                    //Ici l'email et le mdp sont OK      
+                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                        $_SESSION["user"] = [
+                            "id_user" => $user["id_user"],
+                            "name_user" => $user["name_user"],
+                            "first_name_user" => $user["first_name_user"],
+                            "email_user" => $user["email_user"],
+                            "message" => $message/*,
+                            "admin_user" => $user["admin_user"]*/
+                        ];
       
-              //Ici l'email et le mdp sont OK      
-              //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
-                $_SESSION["user"] = [
-                    "id_user" => $user["id_user"],
-                    "name_user" => $user["name_user"],
-                    "first_name_user" => $user["first_name_user"],
-                    "email_user" => $user["email_user"],
-                    "message" => $message/*,
-                    "admin_user" => $user["admin_user"]*/
-                ];
-      
-              //Redirection vers la page profil.php par exemple
-              header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+                    //Redirection vers la page profil.php par exemple
+                    header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+                }
+
+            } catch(Exception $e) {
+
+                //affichage d'une mssg en cas d’erreur
+                die('Erreur : '.$e->getMessage());
             }
-
-        }
-
-        //-------------------------------
-
-        public function updateUser($bdd){
-            
-
-        }
+        }   
 
         
+        //-------------------------------
 
+        public function createSession($bdd){
+            
+            //récupération des valeurs de l'objet       
+            $email_user = $this->getEmailUser();        
+            $mdp_user = $this->getMdpUser();  
+            
+            try{
+                
+                //Reqûete Sql
+                $sql = "SELECT * FROM users WHERE email_user = :email_user";
+                
+                $query = $bdd->prepare($sql);
+                
+                //$query->bindValue;
+                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->execute();      
+                $user = $query->fetch();
+                
+                //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
+                if(!password_verify($mdp_user, $user["mdp_user"])){
+                    
+                    die("<p>L'email et/ou le mot de passe est incorrect</p>");      
+                } else {
+                    
+                    //Ici l'email et le mdp sont OK      
+                    $message = '<p>Vous êtes connecté!</p>'; 
+                    
+                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                    $_SESSION["user"] = [
+                        "id_user" => $user["id_user"],
+                        "name_user" => $user["name_user"],
+                        "first_name_user" => $user["first_name_user"],
+                        "email_user" => $user["email_user"],
+                        "message" => $message/*,
+                        "admin_user" => $user["admin_user"]*/
+                    ];
+                }
+                
+            } catch(Exception $e) {
+                
+                //affichage d'une mssg en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }
+        }
+
+
+        //-------------------------------
+    
+        public function updateUser($bdd){
+            
+    
+        }
+    
+        
+    
         public function deleteUser($bdd){
-
+    
+        
         }
     }
-   
-?>
+    
+    ?>

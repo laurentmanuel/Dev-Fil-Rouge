@@ -34,7 +34,7 @@
   <p>Email: <?= $_SESSION["user"]["email_user"]; ?></p>
 
   <!--Affichage message -->
-  <p><?php include "message.php"; ?></p>
+  <p><?= $_SESSION["user"]["message"] ?></p>
 
 
   <!-- footer  -->  

@@ -84,26 +84,25 @@
           $user->createUser($bdd);
         }
       
-        //On récupère l'id du nouvel utilisateur
-        $id = $bdd->lastInsertId();
+        // //On récupère l'id du nouvel utilisateur
+        // $id = $bdd->lastInsertId();
         
-        //Message de confirmation de création du compte
-        $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
+        // //Message de confirmation de création du compte
+        // $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
 
-        //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
-        $_SESSION["user"] = [
-          "id_user" => $id, //Récupéré grâce à lastInsertId()
-          "name_user" => $name_user,
-          "first_name_user" => $first_name_user,
-          "email_user" => $email_user,
-          "message" => $message
-        ];
+        // //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+        // $_SESSION["user"] = [
+        //   "id_user" => $id, //Récupéré grâce à lastInsertId()
+        //   "name_user" => $name_user,
+        //   "first_name_user" => $first_name_user,
+        //   "email_user" => $email_user,
+        //   "message" => $message
+        // ];
         
         
-        //On redirige vers la page profil.php par exemple
-        header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+        // //On redirige vers la page profil.php par exemple
+        // header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
         
-        //echo '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';  
 
       } else {
 
