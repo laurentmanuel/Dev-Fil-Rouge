@@ -175,17 +175,6 @@
             $email_user = $this->getEmailUser();
             $mdp_user = $this->getMdpUser();
 
-            if($email_user->userExists($bdd)==false){
-
-                echo "<p>L'email et/ou le mot de passe sont incorrects</p>";
-            } else {
-        
-                //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
-                if(!password_verify($_POST["mdp_user"], $user["mdp_user"])){
-
-                    die("<p>L'email et/ou le mot de passe sont incorrects</p>");
-                } else {
-
                     //Ici l'email et le mdp sont OK
                     //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
                     $_SESSION["user"] = [
@@ -198,8 +187,8 @@
             
 
                 }
-            }
-        }   
+            
+          
 
 
         //--------------------------------
@@ -214,6 +203,11 @@
         public function deleteUser($bdd){
 
         }
-    }
+
+
+
+        
+    } 
+
     
 ?>

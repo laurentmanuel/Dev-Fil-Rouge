@@ -72,7 +72,7 @@
         require_once "../utils/connexionBdd.php";        
 
         //création d'un objet depuis les valeurs contenues dans le formulaire
-        //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"], "$admin_user");
+        //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"]);
         $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user");
         
         //On teste si l'utilisateur ("email_user") existe déjà (fonction userExists())
