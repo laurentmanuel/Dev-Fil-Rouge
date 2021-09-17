@@ -132,6 +132,7 @@
 
         //méthode pour vérifier si un utilisateur existe dans la bdd
         public function userExists($bdd): bool{
+
             //récupération des valeurs de l'objet       
             $email_user = $this->getEmailUser();  
 
@@ -166,32 +167,51 @@
             }        
         }
 
-        // //--------------------------------
-
+        //--------------------------------
 
         public function logUser($bdd){
 
-            //récupération des valeurs de l'objet
             $email_user = $this->getEmailUser();
-            $mdp_user = $this->getMdpUser();
+            $mdp_user = $this->getMdpUser(); 
 
-                    //Ici l'email et le mdp sont OK
-                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
-                    $_SESSION["user"] = [
-                    "id_user" => $user["id_user"],
-                    "name_user" => $user["name_user"],
-                    "first_name_user" => $user["first_name_user"],
-                    "email_user" => $user["email_user"]/*,
-                    "admin_user" => $user["admin_user"]*/
-                    ];
-            
+            $sql = "SELECT * FROM users WHERE email_user = :email_user";
+      
+            $query = $bdd->prepare($sql);
+      
+            //$query->bindValue;
+            $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+            $query->execute();
+      
+            $user = $query->fetch();
+      
+            //Ici l'utilisateur n'existe pas
+            if(!$user){
+              die("<p>L'utilisateur et/ou le mot de passe est incorrect</p>");
+            }      
+      
+            //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
+            if(!password_verify($mdp_user, $user["mdp_user"])){
+      
+              die("<p>L'utilisateur et/ou le mot de passe est incorrect</p>");      
+            } else {
+      
+              //Ici l'email et le mdp sont OK      
+              //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+              $_SESSION["user"] = [
+                "id_user" => $user["id_user"],
+                "name_user" => $user["name_user"],
+                "first_name_user" => $user["first_name_user"],
+                "email_user" => $user["email_user"]/*,
+                "admin_user" => $user["admin_user"]*/
+              ];
+      
+              //Redirection vers la page profil.php par exemple
+              header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+            }
 
-                }
-            
-          
+        }
 
-
-        //--------------------------------
+        //-------------------------------
 
         public function updateUser($bdd){
             
@@ -203,11 +223,6 @@
         public function deleteUser($bdd){
 
         }
-
-
-
-        
-    } 
-
-    
+    }
+   
 ?>
