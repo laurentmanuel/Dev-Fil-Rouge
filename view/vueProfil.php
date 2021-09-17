@@ -29,9 +29,13 @@
 
   <h2>Votre profil:</h2>
 
-  <p>Nom: <?= $_SESSION["user"]["name_user"] ?></p>
-  <p>Prénom: <?= $_SESSION["user"]["first_name_user"] ?></p>
-  <p>Email: <?= $_SESSION["user"]["email_user"] ?></p>
+  <p>Nom: <?= $_SESSION["user"]["name_user"]; ?></p>
+  <p>Prénom: <?= $_SESSION["user"]["first_name_user"]; ?></p>
+  <p>Email: <?= $_SESSION["user"]["email_user"]; ?></p>
+
+  <!--Affichage message -->
+  <p><?php include "message.php"; ?></p>
+
 
   <!-- footer  -->  
   <?php include("footer.php"); ?>

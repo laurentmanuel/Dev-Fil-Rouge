@@ -36,6 +36,7 @@
       <span>
         <input class="connexionBtn" type="submit" value="créer le compte">
       </span>
+      <!-- <?php include "../view/message.php" ?> -->
     </form>
   </div>
 

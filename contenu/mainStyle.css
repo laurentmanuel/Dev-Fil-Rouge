@@ -35,6 +35,10 @@ header{
     opacity: 1;
 }
 
+h2{
+    color: #FFF;
+}
+
 /*Allonger les champs*/
 input{
     size: 50;

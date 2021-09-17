@@ -181,8 +181,7 @@
       
             //$query->bindValue;
             $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
-            $query->execute();
-      
+            $query->execute();      
             $user = $query->fetch();
             
             //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
@@ -190,16 +189,18 @@
       
               die("<p>L'email et/ou le mot de passe est incorrect</p>");      
             } else {
+                $message = '<p>Vous êtes connecté!</p>'; 
       
               //Ici l'email et le mdp sont OK      
               //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
-              $_SESSION["user"] = [
-                "id_user" => $user["id_user"],
-                "name_user" => $user["name_user"],
-                "first_name_user" => $user["first_name_user"],
-                "email_user" => $user["email_user"]/*,
-                "admin_user" => $user["admin_user"]*/
-              ];
+                $_SESSION["user"] = [
+                    "id_user" => $user["id_user"],
+                    "name_user" => $user["name_user"],
+                    "first_name_user" => $user["first_name_user"],
+                    "email_user" => $user["email_user"],
+                    "message" => $message/*,
+                    "admin_user" => $user["admin_user"]*/
+                ];
       
               //Redirection vers la page profil.php par exemple
               header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
