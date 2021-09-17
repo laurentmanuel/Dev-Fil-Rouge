@@ -1,7 +1,7 @@
 <?php
 
   /*----------------------------------------------------
-                          SESSSION:
+                          SESSION:
   -----------------------------------------------------*/
   
   //On connecte l'utilisateur aprés la création de son compte
@@ -9,7 +9,7 @@
   
 
   /*----------------------------------------------------
-             IMPORTS à effectuer pour ajout en bdd:
+            IMPORTS à effectuer pour ajout en bdd:
   -----------------------------------------------------*/
 
     //appel de la classe UserBean
@@ -78,7 +78,7 @@
         //On teste si l'utilisateur ("email_user") existe déjà (fonction userExists())
         if($user->userExists($bdd)==true){
 
-          die("<p>L'utilisateur existe déjà!");
+          die("<p>Le compte utilisateur existe déjà!");
         } else {
 
           $user->createUser($bdd);
@@ -104,7 +104,7 @@
 
       } else {
 
-        die("<p>Il manque des informations>/p>"); 
+        die("<p>Le formulaire est incomplet</p>"); 
       }
 
     } else {

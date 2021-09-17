@@ -172,8 +172,9 @@
         public function logUser($bdd){
 
             $email_user = $this->getEmailUser();
-            $mdp_user = $this->getMdpUser(); 
-
+            $mdp_user = $this->getMdpUser();
+            
+            //Reqûete Sql
             $sql = "SELECT * FROM users WHERE email_user = :email_user";
       
             $query = $bdd->prepare($sql);
@@ -183,16 +184,11 @@
             $query->execute();
       
             $user = $query->fetch();
-      
-            //Ici l'utilisateur n'existe pas
-            if(!$user){
-              die("<p>L'utilisateur et/ou le mot de passe est incorrect</p>");
-            }      
-      
+            
             //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
             if(!password_verify($mdp_user, $user["mdp_user"])){
       
-              die("<p>L'utilisateur et/ou le mot de passe est incorrect</p>");      
+              die("<p>L'email et/ou le mot de passe est incorrect</p>");      
             } else {
       
               //Ici l'email et le mdp sont OK      

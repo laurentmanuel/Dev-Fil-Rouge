@@ -1,7 +1,7 @@
 <?php
 
   /*----------------------------------------------------
-                          SESSSION:
+                          SESSION:
   -----------------------------------------------------*/
   
   //On connecte l'utilisateur aprés la création de son compte
@@ -9,7 +9,7 @@
   
 
   /*----------------------------------------------------
-             IMPORTS à effectuer pour ajout en bdd:
+            IMPORTS à effectuer pour ajout en bdd:
   -----------------------------------------------------*/
 
     //appel de la classe UserBean
@@ -51,12 +51,18 @@
           $email_user = $_POST["email_user"];
         } 
 
-
         //On créé un objet 
         $userToLog = new UserBean("", "", "$email_user", $_POST["mdp_user"]);
 
-        //On appelle la fonction de login
-        $userToLog->logUser($bdd);
+        //Vérif sur l'utilisateur est existant
+        if($userToLog->userExists($bdd)==false){
+          
+          die("<p>Le compte utilisateur existe déjà!");
+        } else {
+
+          //L'utilisateur existe, on appelle la fonction de login
+          $userToLog->logUser($bdd);
+        }
 
         
 
@@ -91,7 +97,7 @@
 
       } else {
 
-        die("<p>Il manque des informations>/p>");
+        die("<p>Le formulaire est incomplet</p>");
       }
     
 
