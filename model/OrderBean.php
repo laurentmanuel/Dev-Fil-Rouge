@@ -93,34 +93,38 @@
 
 
 
-
-
-
-
-
-        
-
         //méthode affichage de toutes les tâches
-        public function showAllTask($bdd){
-            try
-            {
-                $reponse = $bdd->query('SELECT id_task, name_task, date_task FROM task WHERE validate_task=0');
+        public function showAllOrder($bdd){
+
+            try {
+
+                $sql = "SELECT * FROM orders WHERE id_user = :id_user ORDER BY updatedOn asc";
+
+                $query = $bdd->prepare($sql);
+                
+                $query->fetchAll();
+
+
                 //boucle pour parcourir et afficher le contenu de chaque ligne de la requete
-                while ($donnees = $reponse->fetch())
-                {   //affichage du contenu de la requete
-                    //quand on clique sur un élément du tableau on lance la fonction js openModal2 qui va lancer le popup
-                    //et éxécuter la requéte ajax quand on enregistre
-                    echo '<tr><td><p><input type="checkbox" name="id_task[]" value="'.$donnees['id_task'].'"/>
-                    <a href="#" onclick="openModal('.$donnees['id_task'].')"  
-                    id="'.$donnees['id_task'].'">Nom de la tâche : '.$donnees['name_task'].' , 
-                    date de fin : '.$donnees['date_task'].'</p></a></td></tr>';                    
-                }
-            }
-            catch(Exception $e)
-            {   //affichage d'une exception
+                // while ($donnees = $query->fetch()){   //affichage du contenu de la requete
+                //     //quand on clique sur un élément du tableau on lance la fonction js openModal2 qui va lancer le popup
+                //     //et éxécuter la requéte ajax quand on enregistre
+                    //echo '<tr><td><p><input type="checkbox" name="id_order" value="'.$query["id_order"].''/>;
+                                        
+                //}
+            } catch(Exception $e) {
+
                 die('Erreur : '.$e->getMessage());
             }
         }
+
+
+
+
+
+
+
+
         //méthode update task (valider une tâche)
         public function validateTask($bdd, $value)
         {

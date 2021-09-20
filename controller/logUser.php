@@ -57,7 +57,7 @@
         //Vérif sur l'utilisateur est existant
         if($userToLog->userExists($bdd)==false){
           
-          die("<p>Le compte utilisateur existe déjà!");
+          die("<p>Le compte utilisateur n'existe pas, veuillez créer un compte.");
         } else {
 
           //L'utilisateur existe, on appelle la fonction de login
