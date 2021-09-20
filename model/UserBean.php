@@ -11,18 +11,18 @@
         private $email_user;
         private $mdp_user;
         //Gestion des droits à developper
-        //private $role_admin = false; 
+        //private $admin_user = false; 
 
 
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($name_user, $first_name_user, $email_user, $mdp_user/*, $role_admin*/){   
+        public function __construct($name_user, $first_name_user, $email_user, $mdp_user/*, $admin_user*/){   
             $this->name_user = $name_user;
             $this->first_name_user = $first_name_user;
             $this->email_user = $email_user;
             $this->mdp_user = $mdp_user;
-            //$this->role_admin = $role_admin;
+            //$this->admin_user = $admin_user;
         }
 
 
@@ -75,95 +75,71 @@
             $this->mdp_user = $newMdpUser;
         }
 
-        //role_admin Getter & Setter
-       /*public function getRoleAdmin(){
-            return $this->role_admin;
-        }
 
-        public function setRoleAdmin($newRoleAdmin){
-            $this->role_admin = $newRoleAdmin;
-        }*/
+        //admin_user Getter & Setter
+
+        // public function getAdminUser(){
+        //     return $this->admin_user;
+        // }
+
+        // public function setAdminUser($newAdminUser){
+        //     $this->admin_user = $newAdminUser;
+        // }
 
 
         /*-----------------------------------------------------
                             Fonctions :
         -----------------------------------------------------*/
 
-        //méthode pour vérifier si un utilisateur existe dans la bdd
-        public function isUser($bdd): bool{
-        
-            //récupération des valeurs de l'objet       
-            $email_user = $this->getEmailUser();
-
-            //On vérifie que le format de l'email saisi est correct
-            if(!filter_var($email_user, FILTER_VALIDATE_EMAIL)){
-                die ("Le format de l'adresse mail saisi n'est pas correct");
-            }
-        
-            try{      
-
-                //requête pour vérifier si l'email est déjà existant
-                $sql = "SELECT * FROM `users` WHERE `email_user` = :email_user";
-                
-                $reponse = $bdd->prepare($sql);
-
-                $reponse->execute(array("email_user" => $email_user));
-
-                //parcours du résultat de la requête
-                while($donnees = $reponse->fetch()){
-                
-                    //return $donnees["mdp_user"];
-                    if($email_user == $donnees["email_user"]){
-                    
-                        //retourne true si l'utilisateur existe déjà en bdd
-                        return true;
-
-                    } else {
-
-                        //retourne false si l'utilisateur n'existe pas en bdd
-                        return false;
-                    }
-                }   
-
-            } catch(Exception $e) {
-
-                //affichage d'une exception en cas d’erreur
-                die('Erreur : '.$e->getMessage());
-            }        
-        }
-
-
-        //--------------------------------
-        
 
         //méthode ajout d'un utilisateur en bdd
         public function createUser($bdd){
 
             //récupération des valeurs de l'objet
-            $nameUser = $this->getNameUser();
-            $firstNameUser = $this->getFirstNameUser();
-            $emailUser = $this->getEmailUser();
-            $mdpUser = $this->getMdpUser(); 
+            $name_user = $this->getNameUser();
+            $first_name_user = $this->getFirstNameUser();
+            $email_user = $this->getEmailUser();
+            $mdp_user = $this->getMdpUser(); 
             //Gestion des droits à développer
-            //$role_admin = $this->getRoleAdmin();
+            //$admin_user = $this->getAdminUser();
 
             try{
                
                 //requête sql pour création d'un utilisateur
-                $sql = "INSERT INTO `users` (`name_user`, `first_name_user`, `email_user`, `mdp_user`) 
-                VALUES (:name_user, :first_name_user, :email_user, :mdp_user)"; //ici le mdp est hashé
+                $sql = "INSERT INTO users(name_user, first_name_user, email_user, mdp_user/*, admin_user*/) VALUES
+                (:name_user, :first_name_user, :email_user, :mdp_user/*, :admin_user*/)"; //ici le mdp est hashé //query OK
 
                 //Création de la requête préparée pour protéger des injections SQL (et améliorer les perfs dans le cas de requêtes exécutées plusieurs fois dans la même session)
                 $query = $bdd->prepare($sql);
                 
                 //éxécution de la requête SQL
                 $query->execute(array(
-                "name_user" => $nameUser,
-                "first_name_user" => $firstNameUser,
-                "email_user" => $emailUser,
-                "mdp_user" => $mdpUser
-                //"role_admin" => $role_admin,                                                                
-                ));
+                    "name_user" => $name_user,
+                    "first_name_user" => $first_name_user,
+                    "email_user" => $email_user,
+                    "mdp_user" => $mdp_user));
+
+                //On récupère l'id du nouvel utilisateur
+                $id = $bdd->lastInsertId();
+        
+                //Message de confirmation de création du compte
+                $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
+
+                //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                $_SESSION["user"] = [
+                "id_user" => $id, //Récupéré grâce à lastInsertId()
+                "name_user" => $name_user,
+                "first_name_user" => $first_name_user,
+                "email_user" => $email_user,
+                "message" => $message
+                ];
+                
+                
+                //On redirige vers la page profil.php par exemple
+                header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+        
+                
+                
                 
             } catch(Exception $e) {
 
@@ -174,23 +150,155 @@
 
 
 
-
         //--------------------------------
 
-        public function showUser($bdd){
+        //méthode pour vérifier si un utilisateur existe dans la bdd
+        public function userExists($bdd): bool{
 
+            //récupération des valeurs de l'objet       
+            $email_user = $this->getEmailUser();  
+
+            try{                   
+
+                //requête pour stocker le contenu de toute la table le contenu est stocké dans le tableau $reponse
+                $sql = "SELECT * FROM users WHERE email_user = :email_user";
+
+                $query = $bdd->prepare($sql);
+
+                //$query->bindValue;
+                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->execute();
+                
+                //On stocke dans user le résultat de la requête
+                $user = $query->fetch();
+                
+                if(!$user){
+
+                    //Ici l'utilisateur n'existe pas
+                    return false;
+                } else {
+                    
+                    //Ici l'utilisateur existe
+                    return true;
+                }
+
+            } catch(Exception $e) {
+
+                //affichage d'une mssg en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }        
         }
 
         //--------------------------------
 
-        public function updateUser($bdd){
+        public function logUser($bdd){
 
-        }
+            $email_user = $this->getEmailUser();
+            $mdp_user = $this->getMdpUser();
+            
+            try{ 
+                //Reqûete Sql
+                $sql = "SELECT * FROM users WHERE email_user = :email_user";
+      
+                $query = $bdd->prepare($sql);
+      
+                //$query->bindValue;
+                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->execute();      
+                $user = $query->fetch();
+
+                //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
+                if(!password_verify($mdp_user, $user["mdp_user"])){
+                
+                  die("<p>L'email et/ou le mot de passe est incorrect</p>");  
+
+                } else {
+                    $message = '<p>Vous êtes connecté!</p>'; 
+      
+                    //Ici l'email et le mdp sont OK      
+                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                        $_SESSION["user"] = [
+                            "id_user" => $user["id_user"],
+                            "name_user" => $user["name_user"],
+                            "first_name_user" => $user["first_name_user"],
+                            "email_user" => $user["email_user"],
+                            "message" => $message/*,
+                            "admin_user" => $user["admin_user"]*/
+                        ];
+      
+                    //Redirection vers la page profil.php par exemple
+                    header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+                }
+
+            } catch(Exception $e) {
+
+                //affichage d'une mssg en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }
+        }   
 
         
+        //-------------------------------
 
+        public function createSession($bdd){
+            
+            //récupération des valeurs de l'objet       
+            $email_user = $this->getEmailUser();        
+            $mdp_user = $this->getMdpUser();  
+            
+            try{
+                
+                //Reqûete Sql
+                $sql = "SELECT * FROM users WHERE email_user = :email_user";
+                
+                $query = $bdd->prepare($sql);
+                
+                //$query->bindValue;
+                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->execute();      
+                $user = $query->fetch();
+                
+                //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
+                if(!password_verify($mdp_user, $user["mdp_user"])){
+                    
+                    die("<p>L'email et/ou le mot de passe est incorrect</p>");      
+                } else {
+                    
+                    //Ici l'email et le mdp sont OK      
+                    $message = '<p>Vous êtes connecté!</p>'; 
+                    
+                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                    $_SESSION["user"] = [
+                        "id_user" => $user["id_user"],
+                        "name_user" => $user["name_user"],
+                        "first_name_user" => $user["first_name_user"],
+                        "email_user" => $user["email_user"],
+                        "message" => $message/*,
+                        "admin_user" => $user["admin_user"]*/
+                    ];
+                }
+                
+            } catch(Exception $e) {
+                
+                //affichage d'une mssg en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }
+        }
+
+
+        //-------------------------------
+    
+        public function updateUser($bdd){
+            
+    
+        }
+    
+        
+    
         public function deleteUser($bdd){
-
+    
+        
         }
     }
-?>
+    
+    ?>

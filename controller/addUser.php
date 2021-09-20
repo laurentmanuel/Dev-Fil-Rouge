@@ -1,19 +1,16 @@
 <?php
 
-    /*-----------------------------------------------------
-                          Controler :
-    -----------------------------------------------------*/
+  /*----------------------------------------------------
+                          SESSION:
+  -----------------------------------------------------*/
+  
+  //On connecte l'utilisateur aprés la création de son compte
+  session_start();// on démarre la session php (un cookie se crée à cet instant, la session est un tableau )
+  
 
-    /*-----------------------------------------------------
-                          Session :
-    -----------------------------------------------------*/
-
-    //on démarre la session PHP
-    session_start();
-
-    /*-----------------------------------------------------
-             Imports à effectuer pour ajout en bdd:
-    -----------------------------------------------------*/
+  /*----------------------------------------------------
+            IMPORTS à effectuer pour ajout en bdd:
+  -----------------------------------------------------*/
 
     //appel de la classe UserBean
     require("../model/UserBean.php");
@@ -23,72 +20,98 @@
 
     //appel vue Inscription
     require("../view/vueInscription.php"); 
-    
-    
-    /*-----------------------------------------------------
-                            Filtres:
-    -----------------------------------------------------*/
 
-    //Condition pour protéger addUser si l'utilisateur est déjà connecté, on le renvoie vers sa page vueProfil.php
-    if(isset($_SESSION["user"])){
-        header("Location: ../view/vueProfil.php");
-        exit;
-    }
 
-    //on vérifie si le formulaire a été envoyé (ou n'est pas vide)
+  /*-----------------------------------------------------
+                        CONTROLLER:
+   -----------------------------------------------------*/
+
+
+  //pour interdire l'accés à "addUser.php" si déjà connecté (on renvoie vers page "vueProfil.php")
+  if(isset($_SESSION["user"])){
+    
+    header("Location: ../view/vueProfil.php");
+    exit;
+  } else {
+
+    //On vérifie si le formulaire a été envoyé
     if(!empty($_POST)){
+      //le formulaire a été envoyé
       
-      //Le formulaire a été envoyé, on vérifie maintenant si l'email saisi n'existe pas déjà
-      if($emailUser->isUser() == true){
-        die ("L'utilisateur existe déjà, merci de rectifier");
-      }
-
-      //Ici l'utilisateur n'existe pas 
-      //On vérifie donc que toutes les champs soient bien remplis
-      if(isset($_POST["name_user"]) && isset($_POST["first_name_user"]) && isset($_POST["email_user"]) && isset($_POST["mdp_user"]) && !empty($_POST["name_user"]) && !empty($_POST["first_name_user"]) && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"])){
-        
+      //on vérifie que tous les champs sont remplis
+      if(isset($_POST["name_user"], $_POST["first_name_user"], $_POST["email_user"], $_POST["mdp_user"])
+      && !empty($_POST["name_user"]) && !empty($_POST["first_name_user"]) && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"])){
         //Le formulaire est complet
-        echo "<p>Le formulaire est complet</p>"; 
 
-        //On récupère les données en les protégeant          
-        $nameUser = htmlspecialchars($_POST["name_user"]);
-        $firstNameUser = htmlspecialchars($_POST["first_name_user"]);
+        //On récupère les données en les protégeant
+        $name_user = strip_tags($_POST["name_user"]);
+        $first_name_user = strip_tags($_POST["first_name_user"]);
 
-        //Filtrage Back-end du format d'email plus sûr qu'en JS car peut-être js peut être désactivé)
+        //Filtrage par le Back-end du format email (plus sûr qu'en JS car peut-être js peut être désactivé)
         if(!filter_var($_POST["email_user"], FILTER_VALIDATE_EMAIL)){
-          die ("L'adresse email est incorrecte");
-        }
-      
-        //On hashe le mdp (algo de hashage BCRYPT (60 caractères).
-        $mdpUser = password_hash($_POST["mdp_user"], PASSWORD_BCRYPT);
+          die ("<p>L'adresse email est incorrecte</p>");
+
+        } else {
+
+          //Le format de l'adresse mail est correcte, on peut donc la stocker dans une variable
+          $email_user = $_POST["email_user"];
+        }  
+
+
+        //Ajouter ici tous les contrôles requis
+        // ******
+        // ******
+        // ******      
+        // ******
+        
+
+        //On va hasher le mdp (algo de hashage BCRYPT (60 caractères) et non de chiffrement comme avec du md5 (obsolète et réversible)).
+        $mdp_user = password_hash($_POST["mdp_user"], PASSWORD_BCRYPT);
 
         //On enregistre le mdp hashé en bdd
-        require_once "../utils/connexionBdd.php";
+        require_once "../utils/connexionBdd.php";        
 
-        //création d'un objet user de la classe UserBean à partir des valeurs du formulaire
-        $user = new UserBean([$nameUser], [$firstNameUser], [$emailUser], [$mdpUser]);
+        //création d'un objet depuis les valeurs contenues dans le formulaire
+        //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"]);
+        $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user");
         
-        echo "<p>Objet user: </p>";
-        echo $user;
-        
-        //appel de la méthode de création d'utilisateur
-        $user->createUser($bdd);
-        
-        //on démarre la session php pour éviter à l'utilisateur de devoir se loguer aprés avoir créé son compte
-        session_start();
+        //On teste si l'utilisateur ("email_user") existe déjà (fonction userExists())
+        if($user->userExists($bdd)==true){
 
-        //On stocke dans une super globale $_SESSION les infos de l'utilisateur
-        $_SESSION["user"] = [
-        "id_user" => $user["id_user"],
-        "name_user" => $user["name_user"],
-        "first_name_user" => $user["first_name_user"],
-        "email_user" => $user["email_user"]
-        //"role_user" => $user["role_user"],
-        ];
+          die("<p>Le compte utilisateur existe déjà!");
+        } else {
 
-        //On redirige vers la page profil.php par exemple
-        header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
-    }
-    }
-  
+          $user->createUser($bdd);
+        }
+      
+        // //On récupère l'id du nouvel utilisateur
+        // $id = $bdd->lastInsertId();
+        
+        // //Message de confirmation de création du compte
+        // $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
+
+        // //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+        // $_SESSION["user"] = [
+        //   "id_user" => $id, //Récupéré grâce à lastInsertId()
+        //   "name_user" => $name_user,
+        //   "first_name_user" => $first_name_user,
+        //   "email_user" => $email_user,
+        //   "message" => $message
+        // ];
+        
+        
+        // //On redirige vers la page profil.php par exemple
+        // header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+        
+
+      } else {
+
+        die("<p>Le formulaire est incomplet</p>"); 
+      }
+
+    } else {
+
+      die("<p>Le formulaire n'est pas renseigné</p>"); 
+    } 
+  }
 ?>

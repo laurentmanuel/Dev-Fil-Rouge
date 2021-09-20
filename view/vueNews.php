@@ -1,13 +1,16 @@
-  <!-- head  -->
-  <?php include("head.php"); ?>
+<?php 
+  session_start();
+  //head
+  include("head.php"); 
+?>
   <title>Apollo Space Park News</title>
 </head>
 
 <body>
+  
+  <!-- bordure -->
+  <?php include "bordure.php"; ?>
 
-  <div id="bordure">
-    <span id="vertical_title">Apollo Space Park</span>
-  </div>
   <header>
     <!-- banniere supérieure        -->
     <?php include("header.php"); ?>
