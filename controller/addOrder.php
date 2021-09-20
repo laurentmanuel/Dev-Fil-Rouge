@@ -23,41 +23,37 @@
     -----------------------------------------------------*/
     
     //pour rediriger vers la page login si l'utilisateur n'est pas déjà connecté
-    if(!isset($_SESSION["user"])){
-        
-        
-        echo '<p>id_user:'.$_SESSION["id_user"].'</p>';
+    if(!isset($_SESSION["user"])){    
     
-        header("Location: ../view/vueProfil.php");
-        exit;
+        header("Location: ../view/vueLogin.php");
+    } else {
 
         //On vérifie si le formulaire a été envoyé
         if(!empty($_POST)){
 
             //le formulaire a été envoyé
-            echo 'formulaire envoyé: '.$_POST.'';
+            echo '<p>formulaire envoyé: </p>';
+            var_dump($_POST);
 
-            //Vérifi si tous les champs sont complets
-            if(isset($_POST["date_order"]) && isset($_POST["nb_people"])){
-            
-                $date_order->setDateOrder($_POST["date_order"]);
-                $nb_people->setNbPeople($_POST["nb_people"]);
-                $id_user->getIdUser($_SESSION["user"]);
-
-                //création d'un objet depuis la valeur contenue dans le formulaire
-                $order = new OrderBean($date_order, $nb_people, $id_user);
-
-                echo 'Contenu objet order créé: '.$order.'';
+            //Vérif si tous les champs sont complets
+            if(isset($_POST["date_order"]) && isset($_POST["nb_people"])){            
+             
+                //création d'une instance d'objet OrderBean depuis les valeurs du formulaire
+                $order = new OrderBean("","","","");
+                $order->setDateOrder($_POST["date_order"]);
+                $order->setNbPeople($_POST["nb_people"]);
                 
+                //Récupération de l'id de l'utilisateur
+                $order->setIdUser($_SESSION["user"]["id_user"]);
 
                 //Appel méthode de création d'une réservation
                 $order->createOrder($bdd);
 
-                echo '<p>Réservation confirmée le '.$_POST["date_order"].' pour '.$_POST["nb_people"].' personne(s)</p></div>';    
+                echo '<p>Réservation pour '.$_POST["nb_people"].' personne(s) confirmée pour le '.$_POST["date_order"].' </p></div>';    
             
             } else {
 
-                echo '<p>Veuillez remplir les champs de formulaire nom, contenu et date.</p></div>';
+                echo "<p>Veuillez compléter les informations manquantes SVP.</p>";
             }
 
         } else {

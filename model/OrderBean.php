@@ -24,11 +24,11 @@
         -----------------------------------------------------*/
 
         //id_order Getter & Setter
-        public function getIdOrder(){
+        public function getIdOrder() {
             return $this->id_order;
         }
 
-        public function setIdOrder($newIdOrder){
+        public function setIdOrder($newIdOrder) {
             $this->id_order = $newIdOrder;
         }
 
@@ -42,11 +42,11 @@
         }
 
         //nb_people Getter & Setter
-        public function getNbPeople(){
+        public function getNbPeople():int {
             return $this->nb_people;
         }
 
-        public function setNbPeople($newNbPeople){
+        public function setNbPeople($newNbPeople) {
             $this->nb_people = $newNbPeople;
         }
          
@@ -63,16 +63,17 @@
                                 Fonctions :
         -----------------------------------------------------*/
         //méthode ajout d'une tâche en bdd
-        public function createOrder($bdd){   
-            //récuparation des valeurs de l'objet
+        public function createOrder($bdd){  
+
+            //récupération des valeurs de l'objet
             $date_order = $this->getDateOrder();
             $nb_people = $this->getNbPeople();
             $id_user = $this->getIdUser();
 
                 try{   
                     //requête ajout d'une tâche
-                    $sql = 'INSERT INTO orders(date_order, nb_people, id_user) 
-                    VALUES (:date_order, :nb_people, :id_user]';
+                    $sql = "INSERT INTO orders(date_order, nb_people, id_user) 
+                    VALUES (:date_order, :nb_people, :id_user)";
 
                     $query = $bdd->prepare($sql);
 
@@ -100,8 +101,7 @@
         
 
         //méthode affichage de toutes les tâches
-        public function showAllTask($bdd)
-        {
+        public function showAllTask($bdd){
             try
             {
                 $reponse = $bdd->query('SELECT id_task, name_task, date_task FROM task WHERE validate_task=0');

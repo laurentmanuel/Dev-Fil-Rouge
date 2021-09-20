@@ -120,14 +120,14 @@
                     "mdp_user" => $mdp_user));
 
                 //On récupère l'id du nouvel utilisateur
-                $id = $bdd->lastInsertId();
+                $id_user = $bdd->lastInsertId();
         
                 //Message de confirmation de création du compte
                 $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
 
                 //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
                 $_SESSION["user"] = [
-                "id_user" => $id, //Récupéré grâce à lastInsertId()
+                "id_user" => $id_user, //Récupéré grâce à lastInsertId()
                 "name_user" => $name_user,
                 "first_name_user" => $first_name_user,
                 "email_user" => $email_user,

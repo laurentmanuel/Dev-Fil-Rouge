@@ -28,9 +28,9 @@
   </header>
   <div class="userForm">
     <form action="../controller/addOrder.php" method="post">
-      <h3>Réserver</h3>
+      <h3>Réserver:</h3>
       <p>Selectionner une date: <input type="date" name="date_order"></p>
-      <p>Nombre de personnes <input type="text" name="mdp_user"></p>
+      <p>Nombre de personnes: <input type="number" min="1" step="1" max="20" name="nb_people"></p>
       <span>
         <input class="connexionBtn" type="submit" value="Confirmer">
       </span>
