@@ -23,6 +23,25 @@
 /**************************************************************************/
 /**************************************************************************/
 
+<<<<<<< Updated upstream
+=======
+          //L'utilisateur existe, on appelle la fonction de login
+          $userToLog->logUser($bdd);
+        }               
+        
+        //Ici l'email et le mdp sont OK   
+        
+        
+        //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+        // $_SESSION["user"] = [
+        //   "id_user" => $user["id_user"],
+        //   "name_user" => $user["name_user"],
+        //   "first_name_user" => $user["first_name_user"],
+        //   "email_user" => $user["email_user"],
+        //   "message" => $message/*,
+        //   "admin_user" => $user["admin_user"]*/
+        // ];
+>>>>>>> Stashed changes
 
     //on vérifie si le formulaire a été envoyé
     if(!empty($_POST)){
