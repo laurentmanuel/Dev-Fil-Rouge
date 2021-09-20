@@ -22,7 +22,7 @@
     </div>
     <!-- Menu burger -->
     <?php include("burger.php"); ?>
-    <h1 class="pgTitle">News</h1>>
+    <h1 class="pgTitle">News</h1>
   </header>
 
   <!-- footer  -->

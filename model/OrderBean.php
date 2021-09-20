@@ -8,16 +8,14 @@
         private $id_order;
         private $date_order;
         private $nb_people;
-        private $confirmed_order = false;
         private $id_user;
 
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($date_order, $nb_people, $confirmed_order){   
+        public function __construct($date_order, $nb_people){   
             $this->date_order = $date_order;
             $this->nb_people = $nb_people;
-            $this->confirmed_order = $confirmed_order;
             //l'id_user est récupéré grâce à la session php ($_SESSION["user"])
         }
 
@@ -31,7 +29,16 @@
         }
 
         public function setIdOrder($newIdOrder){
-            $this->date_order = $newIdOrder;
+            $this->id_order = $newIdOrder;
+        }
+
+        //date_order Getter & Setter
+        public function getDateOrder(){
+            return $this->date_order;
+        }
+
+        public function setDateOrder($newDateOrder){
+            $this->date_order = $newDateOrder;
         }
 
         //nb_people Getter & Setter
@@ -42,16 +49,6 @@
         public function setNbPeople($newNbPeople){
             $this->nb_people = $newNbPeople;
         }
-
-        //confirmed_order Getter & Setter
-        public function getConfirmedOrder(){
-            return $this->confirmed_order;
-        }
-
-        public function setConfirmedOrder($newConfirmedOrder){
-            $this->confirmed_order = $newConfirmedOrder;
-        }
-
          
         //id_user Getter & Setter
         public function getIdUser(){
@@ -66,35 +63,42 @@
                                 Fonctions :
         -----------------------------------------------------*/
         //méthode ajout d'une tâche en bdd
-        public function createTask($bdd)
-        {   
+        public function createOrder($bdd){   
             //récuparation des valeurs de l'objet
-            $name_task = $this->getNameTask();
-            $content_task = $this->getContentTask();
-            $date_task = $this->getDateTask();
-            $id_user = $this->getIdUserTask();
-            $id_cat = $this->getIdCat();
-            try
-            {   
-                //requête ajout d'une tâche
-                $req = $bdd->prepare('INSERT INTO task(name_task, content_task, date_task, validate_task, id_user, id_cat) 
-                VALUES (:name_task, :content_task, :date_task, :validate_task, :id_user, :id_cat)');
-                //éxécution de la requête SQL
-                $req->execute(array(
-                'name_task' => $name_task,
-                'content_task' => $content_task,
-                'date_task' => $date_task,
-                'validate_task'=>0,
-                'id_user' => $id_user,
-                'id_cat' => $id_cat,
-            ));
-            }
-            catch(Exception $e)
-            {
-            //affichage d'une exception en cas d’erreur
-            die('Erreur : '.$e->getMessage());
-            }        
+            $date_order = $this->getDateOrder();
+            $nb_people = $this->getNbPeople();
+            $id_user = $this->getIdUser();
+
+                try{   
+                    //requête ajout d'une tâche
+                    $sql = 'INSERT INTO orders(date_order, nb_people, id_user) 
+                    VALUES (:date_order, :nb_people, :id_user]';
+
+                    $query = $bdd->prepare($sql);
+
+                    //éxécution de la requête SQL
+                    $query->execute(array(
+                        "date_order" => $date_order,
+                        "nb_people" => $nb_people,
+                        "id_user" => $id_user
+                    ));
+                    
+                } catch(Exception $e) {
+                    //affichage d'une exception en cas d’erreur
+                    die('Erreur : '.$e->getMessage());
+                }        
         }
+
+
+
+
+
+
+
+
+
+        
+
         //méthode affichage de toutes les tâches
         public function showAllTask($bdd)
         {
@@ -161,39 +165,39 @@
             }
         }
         //méthode mise à jour d'une tâche
-        public function updatetask($bdd)
-        {    
-            //récuparation des valeurs de l'objet
-            $id_task = $this->getIdTask();
-            $name_task = $this->getNameTask();
-            $content_task = $this->getContentTask();
-            $date_task = $this->getDateTask();
-            $id_user = $this->getIdUserTask();
-            $id_cat = $this->getIdCat();            
-            try
-            {   
-                //requête SQL mise àjour d'une tâche (update)
-                $req = $bdd->prepare('UPDATE task SET name_task = :name_task, content_task = :content_task,  date_task = :date_task, validate_task = :validate_task,
-                id_user = :id_user, id_cat = :id_cat WHERE id_task = :id_task');
-                //éxécution de la requête SQL
-                $req->execute(array(
-                'id_task' => $id_task,   
-                'name_task' => $name_task,
-                'content_task' => $content_task,
-                'date_task' => $date_task,
-                'validate_task'=> 0,
-                'id_user' => $id_user,
-                'id_cat' => $id_cat,
-            ));
-                //redirection vers show_task.php
-                header("Location: show_task.php?update_task=true&idtask=$id_task");
-            }
-            catch(Exception $e)
-            {
-            //affichage d'une exception en cas d’erreur
-            die('Erreur : '.$e->getMessage());
-            } 
-        }
+        // public function updatetask($bdd)
+        // {    
+        //     //récuparation des valeurs de l'objet
+        //     $id_task = $this->getIdTask();
+        //     $name_task = $this->getNameTask();
+        //     $content_task = $this->getContentTask();
+        //     $date_task = $this->getDateTask();
+        //     $id_user = $this->getIdUserTask();
+        //     $id_cat = $this->getIdCat();            
+        //     try
+        //     {   
+        //         //requête SQL mise àjour d'une tâche (update)
+        //         $req = $bdd->prepare('UPDATE task SET name_task = :name_task, content_task = :content_task,  date_task = :date_task, validate_task = :validate_task,
+        //         id_user = :id_user, id_cat = :id_cat WHERE id_task = :id_task');
+        //         //éxécution de la requête SQL
+        //         $req->execute(array(
+        //         'id_task' => $id_task,   
+        //         'name_task' => $name_task,
+        //         'content_task' => $content_task,
+        //         'date_task' => $date_task,
+        //         'validate_task'=> 0,
+        //         'id_user' => $id_user,
+        //         'id_cat' => $id_cat,
+        //     ));
+        //         //redirection vers show_task.php
+        //         header("Location: show_task.php?update_task=true&idtask=$id_task");
+        //     }
+        //     catch(Exception $e)
+        //     {
+        //     //affichage d'une exception en cas d’erreur
+        //     die('Erreur : '.$e->getMessage());
+        //     } 
+        // }
 
     }
 
