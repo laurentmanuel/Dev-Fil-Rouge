@@ -15,7 +15,6 @@
     <!-- banniere supérieure        -->
     <?php include("header.php"); ?>
 
-
     <!-- Navigation desktop -->
     <?php include("navbar.php"); ?>
 
@@ -28,7 +27,6 @@
     <!-- Menu burger -->
     <?php include("burger.php"); ?>
     <h1 class="pgTitle">Accueil</h1>
-
 
   </header>
 

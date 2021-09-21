@@ -327,16 +327,6 @@
     
         
         }
-
-        function getCurrentDate() {
-            //date_default_timezone_set("Paris");
-            $tz_object = new DateTimeZone("Paris");
-        
-            $currentDate = new DateTime();
-            $currentDate->setTimezone($tz_object);
-            return $currentDate->format('Y\-m\-d\ h:i:s');
-            var_dump($currentDate);
-        }
     }
     
     ?>

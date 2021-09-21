@@ -9,7 +9,7 @@
       <li><a href="../view/vueLogin.php" class="menu__item">Connexion</a></li>
     <?php else : ?>
       <li><a href="../view/vueProfil.php" class="menu__item">Mon compte</a></li>
-      <li><a href="../utils/deconnexion.php" class="menu__item">Se déconnecter</a></li>
+      <li><a href="../utils/deconnexion.php" class="menu__item">Déconnexion</a></li>
     <?php endif; ?>
   </ul>
 </nav>

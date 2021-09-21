@@ -21,7 +21,7 @@
     </div>
     <!-- Menu burger -->
     <?php include("burger.php"); ?>
-    <h1 class="pgTitle">Mon Compte</h1>>
+    <h1 class="pgTitle">Mon Compte</h1>
   </header>
 
   <?php if (isset($_SESSION["user"])) : ?>
