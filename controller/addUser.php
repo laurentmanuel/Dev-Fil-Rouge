@@ -26,7 +26,6 @@
                         CONTROLLER:
    -----------------------------------------------------*/
 
-
   //pour interdire l'accés à "addUser.php" si déjà connecté (on renvoie vers page "vueProfil.php")
   if(isset($_SESSION["user"])){
     
@@ -73,7 +72,7 @@
 
         //création d'un objet depuis les valeurs contenues dans le formulaire
         //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"]);
-        $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user");
+        $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user", "$is_admin");
         
         //On teste si l'utilisateur ("email_user") existe déjà (fonction userExists())
         if($user->userExists($bdd)==true){

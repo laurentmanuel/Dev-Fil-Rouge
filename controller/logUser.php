@@ -52,7 +52,7 @@
         } 
 
         //On créé un objet 
-        $userToLog = new UserBean("", "", "$email_user", $_POST["mdp_user"]);
+        $userToLog = new UserBean("", "", "$email_user", $_POST["mdp_user"],"");
 
         //Vérif sur l'utilisateur est existant
         if($userToLog->userExists($bdd)==false){

@@ -10,19 +10,18 @@
         private $first_name_user;
         private $email_user;
         private $mdp_user;
-        //Gestion des droits à developper
-        //private $admin_user = false; 
+        private $is_admin = 0; //attribut false par défaut
 
 
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($name_user, $first_name_user, $email_user, $mdp_user/*, $admin_user*/){   
+        public function __construct($name_user, $first_name_user, $email_user, $mdp_user){   
             $this->name_user = $name_user;
             $this->first_name_user = $first_name_user;
             $this->email_user = $email_user;
             $this->mdp_user = $mdp_user;
-            //$this->admin_user = $admin_user;
+            //$is_admin n'est pas dans le constructeur car on garde la paramètre par défaut
         }
 
 
@@ -76,15 +75,15 @@
         }
 
 
-        //admin_user Getter & Setter
+        //is_admin Getter & Setter
 
-        // public function getAdminUser(){
-        //     return $this->admin_user;
-        // }
+        public function getIsAdmin(){
+            return $this->is_admin;
+        }
 
-        // public function setAdminUser($newAdminUser){
-        //     $this->admin_user = $newAdminUser;
-        // }
+        public function setIsAdmin($newIsAdmin){
+            $this->is_admin = $newIsAdmin;
+        }
 
 
         /*-----------------------------------------------------
@@ -99,15 +98,14 @@
             $name_user = $this->getNameUser();
             $first_name_user = $this->getFirstNameUser();
             $email_user = $this->getEmailUser();
-            $mdp_user = $this->getMdpUser(); 
-            //Gestion des droits à développer
-            //$admin_user = $this->getAdminUser();
+            $mdp_user = $this->getMdpUser();
+            $is_admin = $this->getIsAdmin();
 
             try{
                
                 //requête sql pour création d'un utilisateur
-                $sql = "INSERT INTO users(name_user, first_name_user, email_user, mdp_user/*, admin_user*/) VALUES
-                (:name_user, :first_name_user, :email_user, :mdp_user/*, :admin_user*/)"; //ici le mdp est hashé //query OK
+                $sql = "INSERT INTO users(name_user, first_name_user, email_user, mdp_user, is_admin) VALUES
+                (:name_user, :first_name_user, :email_user, :mdp_user, :is_admin)"; 
 
                 //Création de la requête préparée pour protéger des injections SQL (et améliorer les perfs dans le cas de requêtes exécutées plusieurs fois dans la même session)
                 $query = $bdd->prepare($sql);
@@ -117,7 +115,9 @@
                     "name_user" => $name_user,
                     "first_name_user" => $first_name_user,
                     "email_user" => $email_user,
-                    "mdp_user" => $mdp_user));
+                    "mdp_user" => $mdp_user,
+                    "is_admin" => $is_admin
+                ));
 
                 //On récupère l'id du nouvel utilisateur
                 $id_user = $bdd->lastInsertId();
@@ -131,11 +131,12 @@
                 "name_user" => $name_user,
                 "first_name_user" => $first_name_user,
                 "email_user" => $email_user,
+                "is_admin" => $is_admin,
                 "message" => $message
                 ];
                 
                 
-                //On redirige vers la page profil.php par exemple
+                //On redirige vers la page profil.php une fois le compte créé 
                 header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
         
                 
@@ -166,7 +167,7 @@
                 $query = $bdd->prepare($sql);
 
                 //$query->bindValue;
-                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, paramètre String par défaut
                 $query->execute();
                 
                 //On stocke dans user le résultat de la requête
@@ -213,7 +214,7 @@
                   die("<p>L'email et/ou le mot de passe est incorrect</p>");  
 
                 } else {
-                    $message = '<p>Vous êtes connecté!</p>'; 
+                    $message = "<p>Vous êtes connecté!</p>"; 
       
                     //Ici l'email et le mdp sont OK      
                     //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
@@ -222,8 +223,8 @@
                             "name_user" => $user["name_user"],
                             "first_name_user" => $user["first_name_user"],
                             "email_user" => $user["email_user"],
-                            "message" => $message/*,
-                            "admin_user" => $user["admin_user"]*/
+                            "is_admin" => $user["is_admin"],
+                            "message" => $message
                         ];
       
                     //Redirection vers la page profil.php par exemple
@@ -273,8 +274,8 @@
                         "name_user" => $user["name_user"],
                         "first_name_user" => $user["first_name_user"],
                         "email_user" => $user["email_user"],
-                        "message" => $message/*,
-                        "admin_user" => $user["admin_user"]*/
+                        "message" => $message,
+                        "is_admin" => $user["is_admin"]
                     ];
                 }
                 
@@ -289,15 +290,52 @@
         //-------------------------------
     
         public function updateUser($bdd){
+
+            $mdp_user = $this->getMdpUser();
+            $id_user = $this->getIdUser();               
+
+            if(!isset($_SESSION["user"])){
+
+                //Si pas connecté on le renvoie à la page de login
+                header("Location: ../view/vueLogin.php");                    
+            } 
+
+            try{
+
+                $sql = "UPDATE users SET mdp_user = :mdp_user WHERE id_user = :id_user";
+
+                $query = $bdd->query($sql);
+                $query->bindValue(":mdp_user", $mdp_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->execute();      
+                $user = $query->fetch();
+
+            } catch(Exception $e) {
+                                
+                //affichage d'une mssg en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }
+
+        }
+
             
     
-        }
+        
     
         
     
         public function deleteUser($bdd){
     
         
+        }
+
+        function getCurrentDate() {
+            //date_default_timezone_set("Paris");
+            $tz_object = new DateTimeZone("Paris");
+        
+            $currentDate = new DateTime();
+            $currentDate->setTimezone($tz_object);
+            return $currentDate->format('Y\-m\-d\ h:i:s');
+            var_dump($currentDate);
         }
     }
     

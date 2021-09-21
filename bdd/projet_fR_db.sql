@@ -15,8 +15,8 @@ CREATE TABLE users(
         name_user Varchar (50),
         first_name_user Varchar (50),
         email_user Varchar (50),
-        mdp_user Varchar (100),
-        admin_user Bool);
+        mdp_user Varchar (100));/*,
+        admin_user Bool);*/
 
 #------------------------------------------------------------
 # Table: news
@@ -51,8 +51,9 @@ CREATE TABLE orders(
         id_order int auto_increment primary key not null,
         date_order Date,
         nb_people int,
-        confirmed_order Bool,
-        id_user int);
+        id_user int,
+        createdOn timestamp NOT NULL DEFAULT current_timestamp,
+        updatedOn timestamp NOT NULL DEFAULT current_timestamp);
         
 /*ajout foreign key*/
 alter table orders

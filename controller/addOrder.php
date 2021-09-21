@@ -32,8 +32,6 @@
         if(!empty($_POST)){
 
             //le formulaire a été envoyé
-            echo '<p>formulaire envoyé: </p>';
-            var_dump($_POST);
 
             //Vérif si tous les champs sont complets
             if(isset($_POST["date_order"]) && isset($_POST["nb_people"])){            
@@ -48,6 +46,7 @@
 
                 //Appel méthode de création d'une réservation
                 $order->createOrder($bdd);
+                
 
                 echo '<p>Réservation pour '.$_POST["nb_people"].' personne(s) confirmée pour le '.$_POST["date_order"].' </p></div>';    
             
