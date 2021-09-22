@@ -42,7 +42,7 @@
         }
 
         //nb_people Getter & Setter
-        public function getNbPeople():int {
+        public function getNbPeople() {
             return $this->nb_people;
         }
 
@@ -102,15 +102,21 @@
 
 
         //méthode affichage de toutes les tâches
-        public function showAllOrder($bdd){
+        public function showAllOrders($bdd){
+            $id_user = $this->getIdUser();
 
             try {
 
                 $sql = "SELECT * FROM orders WHERE id_user = :id_user ORDER BY updatedOn asc";
 
                 $query = $bdd->prepare($sql);
+                $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
                 
-                $query->fetchAll();
+                $query->execute();
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                echo "<p>var dump de result</p>";
+                var_dump($result);
 
             } catch(Exception $e) {
 

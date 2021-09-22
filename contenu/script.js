@@ -8,6 +8,11 @@ burgerBtn.addEventListener("click", () => {
 });
 
 
+let showOrdersBtn = document.getElementById("showOrders");
+button.onclick = function(){
+    
+}
+
 //ne marche pas pour le moment (pour le trait reste sur les menus séléctionnés)
 // let selected = document.querySelector("menu__item");
 // selected.addEventListener("click", () =>{
