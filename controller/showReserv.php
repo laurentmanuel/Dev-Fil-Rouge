@@ -11,7 +11,7 @@
     -----------------------------------------------------*/ 
     
     //appel de la classe OrderBean
-    require("../model/OrderBean.php");
+    require("../model/ReservBean.php");
 
     //ajout du fichier de connexion 
     include("../utils/connexionBdd.php");
@@ -28,10 +28,12 @@
         header("Location: ../view/vueLogin.php");
 
     } else {    
-
-        $order = new OrderBean("","","", $id_user);
         
-        $order->showAllOrders($bdd);
+        $reserv = new OrderBean();
+        $reserv->set
+
+        
+        $order->showReserv($bdd);
         
     }
 ?>

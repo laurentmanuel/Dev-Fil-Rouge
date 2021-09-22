@@ -11,7 +11,7 @@
     -----------------------------------------------------*/ 
     
     //appel de la classe OrderBean
-    require("../model/OrderBean.php");
+    require("../model/ReservBean.php");
 
     //ajout du fichier de connexion 
     include("../utils/connexionBdd.php");
@@ -34,21 +34,21 @@
             //le formulaire a été envoyé
 
             //Vérif si tous les champs sont complets
-            if(isset($_POST["date_order"]) && isset($_POST["nb_people"])){            
+            if(isset($_POST["date_reserv"]) && isset($_POST["nb_people"])){            
              
                 //création d'une instance d'objet OrderBean depuis les valeurs du formulaire
-                $order = new OrderBean("","","","");
-                $order->setDateOrder($_POST["date_order"]);
-                $order->setNbPeople($_POST["nb_people"]);
+                $reserv = new ReservBean("","","","");
+                $reserv->setDateReserv($_POST["date_reserv"]);
+                $reserv->setNbPeople($_POST["nb_people"]);
                 
                 //Récupération de l'id de l'utilisateur
-                $order->setIdUser($_SESSION["user"]["id_user"]);
+                $reserv->setIdUser($_SESSION["user"]["id_user"]);
 
                 //Appel méthode de création d'une réservation
-                $order->createOrder($bdd);
+                $reserv->createReserv($bdd);
                 
 
-                echo '<p>Réservation pour '.$_POST["nb_people"].' personne(s) confirmée pour le '.$_POST["date_order"].' </p></div>';    
+                echo '<p>Réservation pour '.$_POST["nb_people"].' personne(s) confirmée pour le '.$_POST["date_reserv"].' </p></div>';    
             
             } else {
 

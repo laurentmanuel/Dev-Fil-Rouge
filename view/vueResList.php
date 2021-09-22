@@ -4,25 +4,21 @@ session_start();
 include("head.php");
 
 require("../utils/connexionBdd.php");
+$id_user = $_SESSION["user"]["id_user"];
 
 try {
 
-  $id_user = $_SESSION["user"]["id_user"];
-
-  $sql = "SELECT * FROM orders WHERE id_user = :id_user ORDER BY updatedOn asc";
+  $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY updatedOn asc";
 
   $query = $bdd->prepare($sql);
   $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
-  
   $query->execute();
   $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-} catch(Exception $e) {
+} catch (Exception $e) {
 
-  die('Erreur : '.$e->getMessage());
+    die('Erreur : ' . $e->getMessage());
 }
-
-
 ?>
 
 <title>Apollo Space Park Réservations</title>
@@ -56,35 +52,46 @@ try {
   <main class="container">
     <div class="row">
       <section class="col-8">
-        <h1>Liste des réservations par utilisateur</h1>
+        <h3>Liste des réservations de <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?>:</h3>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Numéro rés</th>
+              <th scope="col">numéro de réservation</th>
               <th scope="col">pour le :</th>
               <th scope="col">Nombre de personnes</th>
-              <th scope="col">créé le:</th>
+              <th scope="col">créé ou mis à jour le:</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <?php foreach ($result as $order) {
+          <?php foreach ($result as $orders) {
           ?>
             <tr>
-              <td><?= $order['id_order'] ?></td>
-              <td><?= $order['date_order'] ?></td>
-              <td><?= $order['nb_people'] ?></td>
-              <td><?= $order['updateOn'] ?></td>
-              <td><a href="details.php?id=<?= $order['id'] ?>">Voir plus</a></td>
+              <td><?= $orders['id_reserv'] ?></td>
+              <td><?= $orders['date_reserv'] ?></td>
+              <td><?= $orders['nb_people'] ?></td>
+              <td><?= $orders['updatedOn'] ?></td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Action
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Voir détails</a></li>
+                    <li><a class="dropdown-item" href="#">Modifier réservation</a></li>
+                    <li><a class="dropdown-item" href="#">Supprimer réservation</a></li>
+                  </ul>
+                </div>
+              </td>
             </tr>
           <?php
           }
           ?>
-          
-          </tbody>
-        </table>
-        <p><a href="vueReserver.php" class="btn btn-primary">Ajouter une réservation</a></p>
-      </section>
-    </div>
+
+  </tbody>
+  </table>
+  <p><a href="vueReserver.php" class="btn btn-primary">Ajouter une réservation</a></p>
+  </section>
+  </div>
   </main>
 
 

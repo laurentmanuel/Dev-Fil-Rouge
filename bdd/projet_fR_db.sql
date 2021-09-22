@@ -15,15 +15,15 @@ CREATE TABLE users(
         name_user Varchar (50),
         first_name_user Varchar (50),
         email_user Varchar (50),
-        mdp_user Varchar (100));/*,
-        admin_user Bool);*/
+        mdp_user Varchar (100),
+        is_admin Int);
 
 #------------------------------------------------------------
 # Table: news
 #------------------------------------------------------------
 
 CREATE TABLE news(
-        id_news int auto_increment primary key not null,
+        id_news Int auto_increment primary key not null,
         text_news Longtext,
         date_news Date,
         id_user Int);
@@ -39,24 +39,24 @@ references users(id_user);
 #------------------------------------------------------------
 
 CREATE TABLE attractions(
-        id_attraction int auto_increment primary key not null,
+        id_attraction Int auto_increment primary key not null,
         age_min_attraction Int,
         max_people_attraction Int);
 
 #------------------------------------------------------------
-# Table: orders
+# Table: reservations
 #------------------------------------------------------------
 
-CREATE TABLE orders(
-        id_order int auto_increment primary key not null,
-        date_order Date,
-        nb_people int,
-        id_user int,
+CREATE TABLE reservations(
+        id_reserv Int auto_increment primary key not null,
+        date_reserv Date,
+        nb_people Int,
+        id_user Int,
         createdOn timestamp NOT NULL DEFAULT current_timestamp,
         updatedOn timestamp NOT NULL DEFAULT current_timestamp);
         
 /*ajout foreign key*/
-alter table orders
+alter table reservations
 add constraint fk_id_user
 foreign key(id_user)
 references users(id_user);
@@ -66,7 +66,7 @@ references users(id_user);
 #------------------------------------------------------------
 
 CREATE TABLE avis(
-        id_avis int auto_increment primary key not null,
+        id_avis Int auto_increment primary key not null,
         note_attraction Int NOT NULL,
         comment_attraction Text NOT NULL,
         id_attraction Int);

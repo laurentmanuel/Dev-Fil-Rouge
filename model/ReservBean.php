@@ -1,20 +1,20 @@
 <?php
 
-    class OrderBean{
+    class ReservBean{
 
         /*----------------------------------------------------
                             Attributs :
         -----------------------------------------------------*/  
-        private $id_order;
-        private $date_order;
+        private $id_reserv;
+        private $date_reserv;
         private $nb_people;
         private $id_user;
 
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($date_order, $nb_people){   
-            $this->date_order = $date_order;
+        public function __construct($date_reserv, $nb_people){   
+            $this->date_reserv = $date_reserv;
             $this->nb_people = $nb_people;
             //l'id_user est récupéré grâce à la session php ($_SESSION["user"])
         }
@@ -24,21 +24,21 @@
         -----------------------------------------------------*/
 
         //id_order Getter & Setter
-        public function getIdOrder() {
-            return $this->id_order;
+        public function getIdReserv() {
+            return $this->id_reserv;
         }
 
-        public function setIdOrder($newIdOrder) {
-            $this->id_order = $newIdOrder;
+        public function setIdReserv($newIdReserv) {
+            $this->id_reserv = $newIdReserv;
         }
 
         //date_order Getter & Setter
-        public function getDateOrder(){
-            return $this->date_order;
+        public function getDateReserv(){
+            return $this->date_reserv;
         }
 
-        public function setDateOrder($newDateOrder){
-            $this->date_order = $newDateOrder;
+        public function setDateReserv($newDateReserv){
+            $this->date_reserv = $newDateReserv;
         }
 
         //nb_people Getter & Setter
@@ -63,30 +63,30 @@
                                 Fonctions :
         -----------------------------------------------------*/
         //méthode ajout d'une tâche en bdd
-        public function createOrder($bdd){  
+        public function createReserv($bdd){  
 
             //récupération des valeurs de l'objet
-            $date_order = $this->getDateOrder();
+            $date_reserv = $this->getDateReserv();
             $nb_people = $this->getNbPeople();
             $id_user = $this->getIdUser();
             $currentDate = date_create("now")->format("Y-m-d H:i:s");
 
             //pour empêcher de sélectionner une date antérieure à la date du jour
-            if($date_order<$currentDate){
+            if($date_reserv<$currentDate){
 
                 die("<p>Date incorrecte</p>");
             } else {
             
                 try{   
                     //requête ajout d'une tâche
-                    $sql = "INSERT INTO orders(date_order, nb_people, id_user) 
-                    VALUES (:date_order, :nb_people, :id_user)";
+                    $sql = "INSERT INTO reservations(date_reserv, nb_people, id_user) 
+                    VALUES (:date_reserv, :nb_people, :id_user)";
 
                     $query = $bdd->prepare($sql);
 
                     //éxécution de la requête SQL
                     $query->execute(array(
-                        "date_order" => $date_order,
+                        "date_reserv" => $date_reserv,
                         "nb_people" => $nb_people,
                         "id_user" => $id_user
                     ));
@@ -102,36 +102,25 @@
 
 
         //méthode affichage de toutes les tâches
-        public function showAllOrders($bdd){
+        public function showReserv($bdd){
             $id_user = $this->getIdUser();
 
+            $id_user = $_SESSION["user"]["id_user"];
+                    
             try {
-
-                $sql = "SELECT * FROM orders WHERE id_user = :id_user ORDER BY updatedOn asc";
-
-                $query = $bdd->prepare($sql);
-                $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
-                
-                $query->execute();
-                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                echo "<p>var dump de result</p>";
-                var_dump($result);
-
-            } catch(Exception $e) {
-
-                die('Erreur : '.$e->getMessage());
+            
+              $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY updatedOn asc";
+            
+              $query = $bdd->prepare($sql);
+              $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
+              $query->execute();
+              $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            
+            } catch (Exception $e) {
+            
+                die('Erreur : ' . $e->getMessage());
             }
         }
         
     }
-
-    
-
-
-
-
-
-
-
 ?>
