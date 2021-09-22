@@ -17,7 +17,7 @@
     include("../utils/connexionBdd.php");
     
     //import de la vue view_add_user.php (formulaire d'insertion d'un utilisateur)
-    include("../view/vueResList.php"); 
+    include("../view/vueReservList.php"); 
     /*-----------------------------------------------------
                             Tests :
     -----------------------------------------------------*/

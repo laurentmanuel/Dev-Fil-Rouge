@@ -1,13 +1,13 @@
 <?php
 session_start();
-//head
+
 include("head.php");
 
 require("../utils/connexionBdd.php");
+
 $id_user = $_SESSION["user"]["id_user"];
 
 try {
-
   $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY updatedOn asc";
 
   $query = $bdd->prepare($sql);
@@ -16,8 +16,7 @@ try {
   $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (Exception $e) {
-
-    die('Erreur : ' . $e->getMessage());
+  die('Erreur : ' . $e->getMessage());
 }
 ?>
 
@@ -63,13 +62,14 @@ try {
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <?php foreach ($result as $orders) {
+          <tbody>
+          <?php foreach ($result as $reserv) {
           ?>
             <tr>
-              <td><?= $orders['id_reserv'] ?></td>
-              <td><?= $orders['date_reserv'] ?></td>
-              <td><?= $orders['nb_people'] ?></td>
-              <td><?= $orders['updatedOn'] ?></td>
+              <td><?= $reserv['id_reserv'] ?></td>
+              <td><?= $reserv['date_reserv'] ?></td>
+              <td><?= $reserv['nb_people'] ?></td>
+              <td><?= $reserv['updatedOn'] ?></td>
               <td>
                 <div class="btn-group">
                   <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,12 +86,11 @@ try {
           <?php
           }
           ?>
-
-  </tbody>
-  </table>
-  <p><a href="vueReserver.php" class="btn btn-primary">Ajouter une réservation</a></p>
-  </section>
-  </div>
+          </tbody>
+        </table>
+        <p><a href="vueReservations.php" class="btn btn-primary">Ajouter une réservation</a></p>
+      </section>
+    </div>
   </main>
 
 

@@ -30,7 +30,7 @@ include("head.php");
     <form action="../controller/addReserv.php" method="post">
       <h3>Réserver:</h3>
       <p><label for="date_reserv">Selectionner une date: </label>
-        <input type="date" name="date_reserv">
+        <input type="date" name="date_reserv" size="15">
       </p>
       <p><label for="nb_people">Nombre de personnes: </label>
         <input type="number" min="1" step="1" max="20" name="nb_people">
@@ -38,7 +38,7 @@ include("head.php");
       <span>
         <input class="btn btn-primary" type="submit" value="Confirmer ">
       </span>
-          <p><a href="../view/vueResList.php" class="btn btn-primary">Voir vos réservations</a></p>
+          <p><a href="../view/vueReservList.php" class="btn btn-primary">Vos réservations</a></p>
     </form>
   </div>
 
