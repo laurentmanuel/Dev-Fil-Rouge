@@ -1,10 +1,7 @@
 <?php
-session_start();
 //head
 include("head.php");
 ?>
-
-
 <title>Apollo Space Park/Avis</title>
 </head>
 
@@ -29,8 +26,8 @@ include("head.php");
 
   <h2>avis</h2>
 
-  <!-- http://localhost:8888/Projet%20Fil%20Rouge/developpement%20fR/view/vueAvis.php?note=4&tile_avis=top%21%21&comments=trop+bien -->
-  <form action="../model/postAvis.php" method="post">
+  <!-- http://localhost:8888/Projet%20Fil%20Rouge/developpement%20fR/view/vueAvisPost.php?note=4&tile_avis=top%21%21&comments=trop+bien -->
+  <form action="../controller/addAvis.php" method="post">
   <div class="stars">
     <!-- ligne 33 doit rester sur une seule ligne (pour affichage étoile sans espace intermédiaires) -->
     <i class="lar la-star" data-value="1"></i><i class="lar la-star" data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" data-value="4"></i><i class="lar la-star" data-value="5"></i>
@@ -38,7 +35,7 @@ include("head.php");
   </div>
   <div>
     <label for="title">Titre</label>
-    <input type="text" name="tile_avis">
+    <input type="text" name="title_avis">
   </div>
   <div>
     <label for="comments">Vos commentaires</label>

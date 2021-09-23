@@ -1,3 +1,4 @@
+/**********************Menu burger ***********************/
 const burgerBtn = document.querySelector(".burgerBtn");
 const invisible = document.querySelector(".invisible");
 
@@ -7,22 +8,20 @@ burgerBtn.addEventListener("click", () => {
     invisible.classList.toggle("visible");    
 });
 
+/*******************************************************/
 
-// let showOrdersBtn = document.getElementById("showOrders");
-// button.onclick = function(){
 
-// }
-
+/******************js pour étoiles***********************/
 
 window.onload = ()=>{
-
+    
     //On va chercher toutes les étoiles
     const stars = document.querySelectorAll(".la-star");
     console.log(stars);
-
+    
     //On va chercher la valeur de la note dans l'input
     const note = document.querySelector("#note");
-
+    
     //On boucle sur les étoiles pour ajouter des écouteurs d'évenements
     for(star of stars){
         //On écoute le survol
@@ -42,7 +41,7 @@ window.onload = ()=>{
                 previousStar = previousStar.previousElementSibling;
             }
         });
-
+        
         //On écoute le click
         star.addEventListener("click", function(){
             note.value = this.dataset.value;
@@ -53,12 +52,12 @@ window.onload = ()=>{
             resetStars(note.value); 
         });
     }  
-
+    
     /**
-    *
-    *Reset des étoile en vérifiant la note dans l'input (caché)
-    *@param{number}note
-    * **/
+     *
+     *Reset des étoile en vérifiant la note dans l'input (caché)
+     *@param{number}note
+     * **/
     function resetStars(note = 0){ //nb=0 si pas d'infos, c'est comme si on avait pas mis de note
         for(star of stars){ 
             if(star.dataset.value>note){
@@ -73,8 +72,5 @@ window.onload = ()=>{
         }
     }
 }
-//ne marche pas pour le moment (pour le trait reste sur les menus séléctionnés)
-// let selected = document.querySelector("menu__item");
-// selected.addEventListener("click", () =>{
-//     selected.classList.remove(".menu__item:hover:before");
-// })
+
+/*******************************************************/

@@ -69,8 +69,41 @@
         public function setIdUserAvis($newIdUser){
             $this->id_user = $newIdUser;
         }
-    }
+    
+    /*-----------------------------------------------------
+                            Fonctions :
+    -----------------------------------------------------*/
 
+        //méthode ajout d'un Avis en en bdd
+        public function createAvis($bdd){  
+
+            //récupération des valeurs de l'objet
+            $note = $this->getNote();
+            $title_avis = $this->getTitleAvis();
+            $comments = $this->getComments();
+            $id_user = $this->getIdUserAvis();
+      
+            try{   
+                //requête ajout d'une tâche
+                $sql = "INSERT INTO avis(note, title_avis, comments, id_user) 
+                VALUES (:note, :title_avis, :comments, :id_user)";
+
+                $query = $bdd->prepare($sql);
+                //éxécution de la requête SQL
+                $query->execute(array(
+                    "note" => $note,
+                    "title_avis" => $title_avis,
+                    "comments" => $comments,
+                    "id_user" => $id_user
+                ));
+                
+            } catch(Exception $e) {
+                //affichage d'une exception en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }  
+        }      
+    }
+    
 
 
 
