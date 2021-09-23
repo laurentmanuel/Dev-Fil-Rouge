@@ -32,7 +32,7 @@ CREATE TABLE news(
 alter table news
 add constraint fk_id_user_users
 foreign key(id_user)
-references users(id_user);
+references users(id_user); 
 
 #------------------------------------------------------------
 # Table: attractions
@@ -67,12 +67,14 @@ references users(id_user);
 
 CREATE TABLE avis(
         id_avis Int auto_increment primary key not null,
-        note_attraction Int NOT NULL,
-        comment_attraction Text NOT NULL,
-        id_attraction Int);
+        note Int,
+        title_avis varchar(100),
+        comments Text NOT NULL,
+        id_user Int,
+        updatedOn timestamp NOT NULL DEFAULT current_timestamp);
         
 /*ajout foreign key*/
 alter table avis
-add constraint fk_id_attraction
-foreign key(id_attraction)
-references attractions(id_attraction);
+add constraint fk_avis_id_user
+foreign key(id_user)
+references users(id_user);

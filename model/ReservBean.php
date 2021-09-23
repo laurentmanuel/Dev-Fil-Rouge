@@ -51,11 +51,11 @@
         }
          
         //id_user Getter & Setter
-        public function getIdUser(){
+        public function getIdUserRes(){
             return $this->id_user;
         }
 
-        public function setIdUser($newIdUser){
+        public function setIdUserRes($newIdUser){
             $this->id_user = $newIdUser;
         }
 
@@ -68,7 +68,7 @@
             //récupération des valeurs de l'objet
             $date_reserv = $this->getDateReserv();
             $nb_people = $this->getNbPeople();
-            $id_user = $this->getIdUser();
+            $id_user = $this->getIdUserRes();
             $currentDate = date_create("now")->format("Y-m-d H:i:s");
 
             //pour empêcher de sélectionner une date antérieure à la date du jour
@@ -103,7 +103,7 @@
 
         //méthode affichage de toutes les tâches
         public function showReserv($bdd){
-            $id_user = $this->getIdUser();
+            $id_user = $this->getIdUserRes();
                     
             try {
             
@@ -129,7 +129,7 @@
             $id_reserv = $this->getIdReserv();
             $date_reserv = $this->getDateReserv();
             $nb_people = $this->getNbPeople();
-            $id_user = $this->getIdUser();
+            $id_user = $this->getIdUserRes();
 
             try{   
 
@@ -164,7 +164,7 @@
 
             //récupération des valeurs de l'objet
             $id_reserv = $this->getIdReserv();
-            $id_user = $this->getIdUser();
+            $id_user = $this->getIdUserRes();
             $date_reserv = $this->getDateReserv();
 
             try{

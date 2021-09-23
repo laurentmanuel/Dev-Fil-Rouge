@@ -26,14 +26,17 @@
     if(!isset($_SESSION["user"])){        
         header("Location: ../view/vueLogin.php");
 
-    } else {    
-        
-        $reserv = new ReservBean("","","","");
-        //$reserv->setDateReserv($_POST["date_reserv"]);
-        //$reserv->setNbPeople($_POST["nb_people"]);
+    } else {           
+             
+        //création d'une instance d'objet ReservBean 
+        $reserv = new ReservBean("","","","");        
         //Récupération de l'id de l'utilisateur
-        $reserv->setIdUser($_SESSION["user"]["id_user"]);
-        echo '<p>objet reserv: '.var_dump($reserv).'</p>';
-        $reserv->showReserv($bdd);
+        $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
+        //Appel méthode de création d'une réservation
+        echo '<p>objet reserv= '.$reserv.'</p>';
+        $result = $reserv->showReserv($bdd);
+        echo '<p>retour du fetch dans le controller= '.$result.'</p>';
+
+
     }
 ?>

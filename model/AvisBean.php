@@ -6,21 +6,23 @@
                             Attributs :
         -----------------------------------------------------*/  
         private $id_avis;
-        private $note_attraction;
-        private $comment_attraction;
-        private $id_attraction;
+        private $note;
+        private $title_avis;
+        private $comments;
+        private $id_user;
 
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($note_attraction, $comment_attraction, $id_attraction){
-            $this->note_attraction = $note_attraction;
-            $this->comment_attraction = $comment_attraction;
-            $this->id_attraction = $id_attraction;
+        public function __construct($note, $title_avis, $comments){
+            $this->note = $note;
+            $this->title_avis = $title_avis;
+            $this->comments = $comments;
+            //l'id_user est récupéré grâce à la session php ($_SESSION["user"])
         }
 
         /*----------------------------------------------------
-                        Getter & Setter :
+                            Getter & Setter :
         -----------------------------------------------------*/
 
         //id_avis Getter & Setter
@@ -32,31 +34,40 @@
             $this->id_avis = $newIdAvis;
         }
 
-        //note_attraction Getter & Setter
-        public function getNoteAttraction(){
-            return $this->note_attraction;
+        //note Getter & Setter
+        public function getNote(){
+            return $this->note;
         }
 
-        public function setNoteAttraction($newNoteAttraction){
-            $this->note_attraction = $newNoteAttraction;
+        public function setNote($newNote){
+            $this->note = $newNote;
         }
 
-        //comment_attraction Getter & Setter
-        public function getCommentAttraction(){
-            return $this->comment_attraction;
+        //title_avis Getter & Setter
+        public function getTitleAvis(){
+            return $this->title_avis;
         }
 
-        public function setCommentAttraction($newCommentAttraction){
-            $this->comment_attraction = $newCommentAttraction;
+        public function setTitleAvis($newTitleAvis){
+            $this->title_avis = $newTitleAvis;
         }
 
-        //id_attraction Getter & Setter
-        public function getIdAttraction(){
-            return $this->id_attraction;
+        //comments Getter & Setter
+        public function getComments(){
+            return $this->comments;
         }
 
-        public function setIdAttraction($newIdAttraction){
-            $this->id_attraction = $newIdAttraction;
+        public function setComments($newComments){
+            $this->comments = $newComments;
+        }
+
+        //id_user Getter & Setter
+        public function getIdUserAvis(){
+            return $this->id_user;
+        }
+
+        public function setIdUserAvis($newIdUser){
+            $this->id_user = $newIdUser;
         }
     }
 

@@ -42,7 +42,7 @@
                 $reserv->setNbPeople($_POST["nb_people"]);
                 
                 //Récupération de l'id de l'utilisateur
-                $reserv->setIdUser($_SESSION["user"]["id_user"]);
+                $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
 
                 //Appel méthode de création d'une réservation
                 $reserv->createReserv($bdd);
