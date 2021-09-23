@@ -38,7 +38,7 @@ include("head.php");
       <span>
         <input class="btn btn-primary" type="submit" value="Confirmer ">
       </span>
-          <p><a href="../view/vueReservList.php" class="btn btn-primary">Vos réservations</a></p>
+          <p><a href="../controller/showReserv.php" class="btn btn-primary">Vos réservations</a></p>
     </form>
   </div>
 

@@ -1,23 +1,22 @@
 <?php
-session_start();
 
 include("head.php");
 
-require("../utils/connexionBdd.php");
+// require("../utils/connexionBdd.php");
 
-$id_user = $_SESSION["user"]["id_user"];
+// $id_user = $_SESSION["user"]["id_user"];
 
-try {
-  $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY updatedOn asc";
+// try {
+//   $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY updatedOn asc";
 
-  $query = $bdd->prepare($sql);
-  $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
-  $query->execute();
-  $result = $query->fetchAll(PDO::FETCH_ASSOC);
+//   $query = $bdd->prepare($sql);
+//   $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
+//   $query->execute();
+//   $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-} catch (Exception $e) {
-  die('Erreur : ' . $e->getMessage());
-}
+// } catch (Exception $e) {
+//   die('Erreur : ' . $e->getMessage());
+// }
 ?>
 
 <title>Apollo Space Park Réservations</title>

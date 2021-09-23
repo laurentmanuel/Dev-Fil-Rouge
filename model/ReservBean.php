@@ -99,13 +99,11 @@
         }
 
 
-
+    /****************************************************************/
 
         //méthode affichage de toutes les tâches
         public function showReserv($bdd){
             $id_user = $this->getIdUser();
-
-            $id_user = $_SESSION["user"]["id_user"];
                     
             try {
             
@@ -115,12 +113,82 @@
               $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
               $query->execute();
               $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+              //echo '<p>Résultats du fecthAll: '.var_dump($result).'</p>';
             
-            } catch (Exception $e) {
-            
+            } catch (Exception $e) {            
                 die('Erreur : ' . $e->getMessage());
             }
         }
-        
+
+    /****************************************************************/
+        //METHODE A TESTER (DOIT FONCTIONNER SAUF REDIRECTION???)
+        public function updateReserv($bdd){    
+
+            //récupération des valeurs de l'objet
+            $id_reserv = $this->getIdReserv();
+            $date_reserv = $this->getDateReserv();
+            $nb_people = $this->getNbPeople();
+            $id_user = $this->getIdUser();
+
+            try{   
+
+                //requête update Réservations
+                $sql = "UPDATE reservations SET date_reserv = :date_reserv, nb_people = :nb_people
+                WHERE id_reserv = :id_reserv AND id_user = :id_user";
+
+                $query = $bdd->prepare($sql);
+
+                //éxécution de la requête SQL
+                $query->execute(array(
+                'id_reserv' => $id_reserv,   
+                'date_reserv' => $date_reserv,
+                'nb_people' => $nb_people,
+                'id_user' => $id_user
+                ));
+
+                //redirection vers show_task.php
+                header("Location: ..view/vueReservList.php");
+                //header("Location: ..view/vueReservList.php?updateReserv=true&id_user=$id_user");  A TESTER
+
+            }catch(Exception $e){
+
+                //affichage d'une exception en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            } 
+        }
+
+    /****************************************************************/
+
+        public function deleteReserv($bdd){
+
+            //récupération des valeurs de l'objet
+            $id_reserv = $this->getIdReserv();
+            $id_user = $this->getIdUser();
+            $date_reserv = $this->getDateReserv();
+
+            try{
+
+                //requête Suppression réservations
+                $sql = "DELETE FROM reservations WHERE id_reserv = :id_reserv AND id_user = :id_user";
+
+                $query = $bdd->prepare($sql);
+
+                //éxécution de la requête SQL
+                $query->execute(array(
+                "id_reserv" => $id_reserv,
+                "id_user" => $id_user
+                ));
+
+                //message confirmation suppression
+                echo '<p>La réservation n°'.$id_reserv.' en date du '.$date_reserv.' a été supprimée</p>';
+
+            }catch(Exception $e){
+
+                    //affichage d'une exception en cas d’erreur
+                    die('Erreur : '.$e->getMessage());
+            } 
+
+        }       
     }
 ?>
