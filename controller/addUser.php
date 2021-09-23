@@ -38,8 +38,8 @@
       //le formulaire a été envoyé
       
       //on vérifie que tous les champs sont remplis
-      if(isset($_POST["name_user"], $_POST["first_name_user"], $_POST["email_user"], $_POST["mdp_user"])
-      && !empty($_POST["name_user"]) && !empty($_POST["first_name_user"]) && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"])){
+      if(isset($_POST["name_user"], $_POST["first_name_user"], $_POST["email_user"], $_POST["mdp_user"], $_POST["confirm_mdp"])
+      && !empty($_POST["name_user"]) && !empty($_POST["first_name_user"]) && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"]) && !empty($_POST["confirm_mdp"])){
         //Le formulaire est complet
 
         //On récupère les données en les protégeant
@@ -56,13 +56,12 @@
           $email_user = $_POST["email_user"];
         }  
 
-
-        //Ajouter ici tous les contrôles requis
-        // ******
-        // ******
-        // ******      
-        // ******
-        
+        //Contrôle mot de passe.
+        if(strlen($_POST["mdp_user"])<8){
+          die ("<p>Veuillez saisir un mot de passe comportant au moins 8 caractères.</p>");
+        } else if($_POST["mdp_user"]!=$_POST["confirm_mdp"]){
+          die("<p>Les mots de passe saisis ne correspondent pas</p>");
+        }
 
         //On va hasher le mdp (algo de hashage BCRYPT (60 caractères) et non de chiffrement comme avec du md5 (obsolète et réversible)).
         $mdp_user = password_hash($_POST["mdp_user"], PASSWORD_BCRYPT);
@@ -72,7 +71,7 @@
 
         //création d'un objet depuis les valeurs contenues dans le formulaire
         //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"]);
-        $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user", "$is_admin");
+        $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user");
         
         //On teste si l'utilisateur ("email_user") existe déjà (fonction userExists())
         if($user->userExists($bdd)==true){

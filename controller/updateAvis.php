@@ -11,18 +11,18 @@
     -----------------------------------------------------*/ 
     
     //appel de la classe OrderBean
-    require("../model/ReservBean.php");
+    require("../model/AvisBean.php");
 
     //ajout du fichier de connexion 
     include("../utils/connexionBdd.php");
     
     //import de la vue view_add_user.php (formulaire d'insertion d'un utilisateur)
-    include("../view/vueReservations.php"); 
+    include("../view/vueAvisPost.php"); 
     /*-----------------------------------------------------
                             Tests :
     -----------------------------------------------------*/
     
-    //pour rediriger vers la page login si l'utilisateur n'est pas déjà connecté
+    //Si utilisateur pas connecté, on le redirige vers la page login
     if(!isset($_SESSION["user"])){    
     
         header("Location: ../view/vueLogin.php");
@@ -31,23 +31,29 @@
         //On vérifie si le formulaire a été envoyé
         if(!empty($_POST)){
 
-            //le formulaire a été envoyé
+            echo "<p>formulaire envoyé</p>";
+            var_dump($_POST);//le formulaire a été envoyé
 
             //Vérif si tous les champs sont complets
-            if(isset($_POST["date_reserv"]) && isset($_POST["nb_people"])){            
+            if(isset($_POST["note"]) && isset($_POST["title_avis"]) && isset($_POST["comments"])
+            && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"])){            
              
                 //création d'une instance d'objet OrderBean depuis les valeurs du formulaire
-                $reserv = new ReservBean("","","","");
-                $reserv->setDateReserv($_POST["date_reserv"]);
-                $reserv->setNbPeople($_POST["nb_people"]);
+                $avis = new AvisBean("","","","");
+                $avis->setNote($_POST["note"]);
+                $avis->setTitleAvis($_POST["title_avis"]);
+                $avis->setComments($_POST["comments"]);
                 
                 //Récupération de l'id de l'utilisateur
-                $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
+                $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
+                echo '<p>contenu obj avis</p>';
+                var_dump($avis);
 
                 //Appel méthode de création d'une réservation
-                $reserv->createReserv($bdd);
+                $avis->createAvis($bdd);
+                
 
-                echo '<p>Réservation pour '.$_POST["nb_people"].' personne(s) confirmée pour le '.$_POST["date_reserv"].' </p></div>';    
+                echo '<p>Merci '.$_SESSION["user"]["name_user"].' pour votre évaluation!</p></div>';    
             
             } else {
 
@@ -56,7 +62,11 @@
 
         } else {
 
-            echo "<p>Veuillez sélectionner une date et le nombre de personnes</p>";
+            echo "<p>Le formulaire est ide</p>";
         }
+
+
+        
+
     }
 ?> 

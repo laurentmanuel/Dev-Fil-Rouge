@@ -121,6 +121,8 @@
             }
         }
 
+    
+
     /****************************************************************/
         //METHODE A TESTER (DOIT FONCTIONNER SAUF REDIRECTION???)
         public function updateReserv($bdd){    
@@ -134,8 +136,8 @@
             try{   
 
                 //requête update Réservations
-                $sql = "UPDATE reservations SET date_reserv = :date_reserv, nb_people = :nb_people
-                WHERE id_reserv = :id_reserv AND id_user = :id_user";
+                $sql = "UPDATE reservations SET date_reserv = :date_reserv, nb_people = :nb_people, id_user = :id_user
+                WHERE id_reserv = :id_reserv";
 
                 $query = $bdd->prepare($sql);
 
@@ -157,6 +159,7 @@
                 die('Erreur : '.$e->getMessage());
             } 
         }
+        
 
     /****************************************************************/
 
@@ -190,5 +193,6 @@
             } 
 
         }       
+    
     }
 ?>

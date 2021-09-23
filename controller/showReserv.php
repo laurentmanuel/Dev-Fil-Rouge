@@ -26,12 +26,12 @@
     if(!isset($_SESSION["user"])){        
         header("Location: ../view/vueLogin.php");
 
-    } else {           
-             
+    } else {      
+
         //création d'une instance d'objet ReservBean 
         $reserv = new ReservBean("","","","");        
         //Récupération de l'id de l'utilisateur
-        $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
+        $reserv->getIdUserRes($_SESSION["user"]["id_user"]);
         //Appel méthode de création d'une réservation
         echo '<p>objet reserv= '.$reserv.'</p>';
         $result = $reserv->showReserv($bdd);

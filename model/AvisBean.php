@@ -74,7 +74,7 @@
                             Fonctions :
     -----------------------------------------------------*/
 
-        //méthode ajout d'un Avis en en bdd
+        //méthode ajout d'un Avis en en bdd 
         public function createAvis($bdd){  
 
             //récupération des valeurs de l'objet
@@ -101,8 +101,40 @@
                 //affichage d'une exception en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             }  
-        }      
+        }
+        
+    /****************************************************************/
+        public function updateAvis($bdd){
+
+            //récupération des valeurs de l'objet
+            $note = $this->getNote();
+            $title_avis = $this->getTitleAvis();
+            $comments = $this->getComments();
+            $id_user = $this->getIdUserAvis();
+
+            try{   
+                //requête ajout d'une tâche
+                $sql = "UPDATE avis SET note = :note, title_avis = :title_avis, comments = :comments, id_user = :id_user
+                WHERE id_avis = :id_avis";
+
+                $query = $bdd->prepare($sql);
+                //éxécution de la requête SQL
+                $query->execute(array(
+                    "note" => $note,
+                    "title_avis" => $title_avis,
+                    "comments" => $comments,
+                    "id_user" => $id_user
+                ));
+                
+            } catch(Exception $e) {
+                //affichage d'une exception en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            } 
+        }
+
     }
+
+
     
 
 

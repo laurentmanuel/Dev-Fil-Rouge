@@ -32,6 +32,7 @@
       <p>Prénom: <input type="text" name="first_name_user"size="25"></p>
       <p>Email: <input type="text" name="email_user" size="35"></p>
       <p>Mot de passe: <input type="password" name="mdp_user"></p>
+      <p>Confirmer mot de passe: <input type="password" name="confirm_mdp"></p>
       <p><a href="../view/vueLogin.php">Déjà un compte?</a></p>
       <span>
         <input class="connexionBtn" type="submit" value="créer le compte">
