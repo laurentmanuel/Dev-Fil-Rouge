@@ -6,7 +6,6 @@
   
   //On connecte l'utilisateur aprés la création de son compte
   session_start();// on démarre la session php (un cookie se crée à cet instant, la session est un tableau )
-  
 
   /*----------------------------------------------------
             IMPORTS à effectuer pour ajout en bdd:
@@ -20,7 +19,6 @@
 
     //appel vue Inscription
     require("../view/vueInscription.php"); 
-
 
   /*-----------------------------------------------------
                         CONTROLLER:

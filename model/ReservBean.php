@@ -104,20 +104,20 @@
         //méthode affichage de toutes les tâches
         public function showReserv($bdd){
             $id_user = $this->getIdUserRes();
-                    
+
             try {
+              //$sql = "SELECT * FROM reservations WHERE id_user = :id_user";              
+              $sql = "SELECT * FROM reservations WHERE id_user = :id_user";              
             
-              $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY updatedOn asc";
-            
-              $query = $bdd->prepare($sql);
+              $query = $bdd->query($sql);
               $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
               $query->execute();
-              $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
-              //echo '<p>Résultats du fecthAll: '.var_dump($result).'</p>';
+              //$query->execute(array("id_user"=>$id_user));
+              $reserv = $query->fetchAll();
+              var_dump($reserv);
             
-            } catch (Exception $e) {            
-                die('Erreur : ' . $e->getMessage());
+            } catch (Exception $e) {
+              die('Erreur: ' . $e->getMessage());
             }
         }
 

@@ -1,8 +1,11 @@
 <?php
-$titre = "Mes réservations";
-include("head.php");
+  if(!isset($_SESSION["user"])){
+    session_start();
+  }
+  $titre = "Mes réservations";
+  include("head.php");
 
-//CODE QUI MARCHE CI_DESSOUS
+// CODE QUI MARCHE CI_DESSOUS
 // require("../utils/connexionBdd.php");
 
 // $id_user = $_SESSION["user"]["id_user"];
@@ -20,34 +23,13 @@ include("head.php");
 // }
 ?>
 
-<title>Apollo Space Park Réservations</title>
-<!-- Voir affichage dynamique des titres d'onglet -->
-<!-- Voir affichage dynamique des titres d'onglet -->
-<!-- Voir affichage dynamique des titres d'onglet -->
-<!-- Voir affichage dynamique des titres d'onglet -->
-</head>
-
 <body>
 
   <!-- bordure -->
   <?php include "bordure.php"; ?>
 
-  <header>
-    <!-- banniere supérieure        -->
-    <?php include("header.php"); ?>
-
-    <!-- Navigation desktop -->
-    <?php include("navbar.php"); ?>
-    <h1 class="pgTitle">Réservations</h1>
-    <!-- bouton burger -->
-    <div class="burgerBtn">
-      <span></span><!-- Balise span vide pour bouton burger -->
-    </div>
-    <!-- Menu burger -->
-    <?php include("burger.php"); ?>
-
-  </header>
-
+  <!-- header -->
+  <?php include("header.php"); ?>
   <main class="container">
     <div class="row">
       <section class="col-8">
@@ -63,15 +45,15 @@ include("head.php");
             </tr>
           </thead>
           <tbody>
-          <?php foreach ($result as $reserv) {
+          <?php foreach ($reserv as $res) {
           ?>
             <tr>
-              <td><?= $reserv['id_reserv'] ?></td>
-              <td><?= $reserv['date_reserv'] ?></td>
-              <td><?= $reserv['nb_people'] ?></td>
-              <td><?= $reserv['updatedOn'] ?></td>
+              <td><?= $reserv["id_reserv"] ?></td>
+              <td><?= $reserv["date_reserv"] ?></td>
+              <td><?= $reserv["nb_people"] ?></td>
+              <td><?= $reserv["updatedOn"] ?></td>
               <td>
-                <div class="btn-group">
+                <!-- <div class="btn-group">
                   <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Action
                   </button>
@@ -80,7 +62,7 @@ include("head.php");
                     <li><a class="dropdown-item" href="#">Modifier réservation</a></li>
                     <li><a class="dropdown-item" href="#">Supprimer réservation</a></li>
                   </ul>
-                </div>
+                </div> -->
               </td>
             </tr>
           <?php

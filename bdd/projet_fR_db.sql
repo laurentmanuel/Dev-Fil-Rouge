@@ -71,6 +71,7 @@ CREATE TABLE avis(
         title_avis varchar(100),
         comments Text NOT NULL,
         id_user Int,
+        createdOn timestamp NOT NULL DEFAULT current_timestamp,
         updatedOn timestamp NOT NULL DEFAULT current_timestamp);
         
 /*ajout foreign key*/

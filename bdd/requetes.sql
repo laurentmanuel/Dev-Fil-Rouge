@@ -17,3 +17,8 @@ WHERE id_reserv = 4 AND id_user = 2;
 
 /*Requête suppression Réservations*/
 DELETE FROM reservations WHERE id_reserv = 3 AND id_user = 2;
+
+/*Requête select toutes les avis d'un utilisateur*/
+SELECT * FROM avis WHERE id_user = 1 ORDER BY updatedOn asc;
+
+

@@ -117,7 +117,7 @@ nav li{
     margin-right:3%;
 }
 #bordure{
-    z-index: 9;
+    z-index: 11;
     display: flex;
     position: fixed;
     width: 100px;
@@ -141,6 +141,7 @@ nav li{
 }
 
 .userForm{
+    margin-left: 50%;
     z-index: -11;
     display: flex;
     justify-content: center;
@@ -161,6 +162,16 @@ nav li{
     padding-top: 3px;
     font-family: 'futura-renner';
     text-align: center;
+}
+
+#erreur{
+    display: none;
+    color: red;
+}
+
+#ok{
+    display: none;
+    color: green;
 }
 
 .connexionBtn{

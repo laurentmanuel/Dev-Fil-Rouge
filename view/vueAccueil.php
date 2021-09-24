@@ -5,28 +5,10 @@
   include("head.php"); 
 ?>
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
-  <header>
-    <!-- banniere supérieure        -->
-    <?php include("header.php"); ?>
-
-    <!-- Navigation desktop -->
-    <?php include("navbar.php"); ?>
-
-    <!-- Navigation small devices -->
-    <!-- bouton burger -->
-    <div class="burgerBtn">
-      <span></span>
-    </div>
-
-    <!-- Menu burger -->
-    <?php include("burger.php"); ?>
-    <h1 class="pgTitle">Accueil</h1>
-
-  </header>
+  <!-- header -->
+  <?php include("header.php"); ?>
 
   <div id="une">
     <article>

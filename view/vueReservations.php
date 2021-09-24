@@ -1,7 +1,9 @@
 <?php
-//head
-$titre = "Réservations";
-include("head.php");
+  if(!isset($_SESSION["user"])){
+    session_start();
+  }
+  $titre = "Réservations";
+  include("head.php");
 ?>
 
 
@@ -10,19 +12,8 @@ include("head.php");
   <!-- bordure -->
   <?php include "bordure.php"; ?>
 
-  <header>
-    <!-- banniere supérieure        -->
-    <?php include("header.php"); ?>
-
-    <!-- Navigation desktop -->
-    <?php include("navbar.php"); ?>
-    <h1 class="pgTitle">Réservations</h1>
-    <!-- bouton burger -->
-    <div class="burgerBtn">
-      <span></span>
-    </div>
-    <!-- Menu burger -->
-    <?php include("burger.php"); ?>
+  <!-- header -->
+  <?php include("header.php"); ?>
 
   </header>
   <div class="userForm">

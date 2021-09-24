@@ -1,44 +1,30 @@
 <?php 
-  session_start();
-  //head
+  if(!isset($_SESSION["user"])){
+    session_start();
+  } 
   $titre = "Mon compte";
   include("head.php"); 
 ?>
 
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
   
-  <header>
-    <!-- banniere supérieure        -->
-    <?php include("header.php"); ?>
-    <!-- Navigation desktop -->
-    <?php include("navbar.php"); ?>
-    <!-- bouton burger -->
-    <div class="burgerBtn">
-      <span></span>
-    </div>
-    <!-- Menu burger -->
-    <?php include("burger.php"); ?>
-    <h1 class="pgTitle">Bonjour <?= $_SESSION["user"]["first_name_user"] ?> !</h1>
-  </header>
-
-  <h2>Votre profil:</h2>
+  <!-- header -->
+  <?php include("header.php"); ?>
+<div class="userForm">
+  <p>Votre profil:</p>
 
   <p>Nom: <?= $_SESSION["user"]["name_user"]; ?></p>
   <p>Prénom: <?= $_SESSION["user"]["first_name_user"]; ?></p>
   <p>Email: <?= $_SESSION["user"]["email_user"]; ?></p>
 
-  <form action="../controller/updateMdp.php">
-  <p><label for="mdp_user">Modifier mot de passe</label></p>
-  <input type="password" name="mdp_user" value="Modifier Mot de passe">
+  <button><a href="../controller/updateUser.php">Modifier profil</a></button>
   </form>
 
   <!--Affichage message -->
   <p><?= $_SESSION["user"]["message"] ?></p>
-
-
+</div>
   <!-- footer  -->  
   <?php include("footer.php"); ?>
 </body>
