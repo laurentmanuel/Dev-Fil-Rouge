@@ -1,9 +1,8 @@
 <?php
   //head
+  $titre = "Inscription";
   include("head.php"); 
 ?>
-  <title>Apollo Space Park créer un compte</title>
-</head>
 
 <body>
 

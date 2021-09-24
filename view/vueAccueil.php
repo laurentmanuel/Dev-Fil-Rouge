@@ -1,11 +1,9 @@
 <?php 
   session_start();
   //head
+  $titre = "Accueil";
   include("head.php"); 
 ?>
-  <title>Apollo Space Park Home</title>
-</head>
-
 <body>
 
   <!-- bordure -->

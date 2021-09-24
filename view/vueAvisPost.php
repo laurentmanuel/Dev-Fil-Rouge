@@ -1,9 +1,9 @@
 <?php
 //head
+$titre = "Déposer un avis";
 include("head.php");
 ?>
-<title>Apollo Space Park/Avis</title>
-</head>
+
 
 <body>
 
@@ -26,7 +26,6 @@ include("head.php");
 
   <h2>avis</h2>
 
-  <!-- http://localhost:8888/Projet%20Fil%20Rouge/developpement%20fR/view/vueAvisPost.php?note=4&tile_avis=top%21%21&comments=trop+bien -->
   <form action="../controller/addAvis.php" method="post">
   <div class="stars">
     <!-- ligne 33 doit rester sur une seule ligne (pour affichage étoile sans espace intermédiaires) -->

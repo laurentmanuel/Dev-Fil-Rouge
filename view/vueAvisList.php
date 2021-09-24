@@ -1,12 +1,29 @@
 <?php
-session_start();
 //head
+session_start();
+$titre = "Avis";
 include("head.php");
+
+//Connexion bdd
+require("../utils/connexionBdd.php");
+
+try {
+  //Requête sql
+  $sql = "SELECT * FROM avis ORDER BY updatedOn asc";
+
+
+  //on éxécute la requête 
+  $query = $bdd->query($sql);
+
+  // $query->execute();
+
+  //on va récupérer les données
+  $allAvis = $query->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+  die('Erreur : ' . $e->getMessage());
+}
+
 ?>
-
-
-<title>Apollo Space Park/Avis</title>
-</head>
 
 <body>
 
@@ -24,14 +41,26 @@ include("head.php");
     </div>
     <!-- Menu burger -->
     <?php include("burger.php"); ?>
-    <h1 class="pgTitle">Bonjour <?= $_SESSION["user"]["first_name_user"] ?> !</h1>
+    <h1 class="pgTitle"><?= $titre?></h1>
   </header>
+  <section>
+    <?php foreach ($allAvis as $avis) : ?>
+      <article>
+        <h2><?= htmlspecialchars($avis["title_avis"]) ?></h2>
+        <p>Publié le <?= $avis["updatedOn"] ?></p>
+        <div>Note: <?= $avis["note"] ?></div>
+        <div>Commentaires: <?= htmlspecialchars($avis["comments"]) ?></div>
+      </article>
+    <?php endforeach; ?>
+  </section>
 
-  <h2>avis</h2>
 
-  <!-- http://localhost:8888/Projet%20Fil%20Rouge/developpement%20fR/view/vueAvis.php?note=4&tile_avis=top%21%21&comments=trop+bien -->
-  
-    <a href="vueAvisPost.php" class="btn btn-primary">Poster un avis</a>
+  <?php if (!isset($_SESSION["user"])) : ?>
+    <a href="../controller/logUser.php" class="btn btn-primary">Poster un avis</a>
+  <?php else : ?>
+    <a href="../controller/addAvis.php" class="btn btn-primary">Poster un avis</a>
+  <?php endif; ?>
+
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

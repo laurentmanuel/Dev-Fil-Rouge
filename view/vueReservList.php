@@ -1,5 +1,5 @@
 <?php
-
+$titre = "Mes réservations";
 include("head.php");
 
 //CODE QUI MARCHE CI_DESSOUS

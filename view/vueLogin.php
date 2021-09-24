@@ -1,9 +1,8 @@
 <?php
   //head
+  $titre = "Connexion";
   include("head.php"); 
 ?>
-  <title>Apollo Space Park Mon compte</title>
-</head>
 
 <body>
 

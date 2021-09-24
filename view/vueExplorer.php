@@ -1,10 +1,9 @@
 <?php 
   session_start();
   //head
+  $titre = "Explorer";
   include("head.php"); 
 ?>
-  <title>Apollo Space Park Explorer</title>
-</head>
 
 <body>
 

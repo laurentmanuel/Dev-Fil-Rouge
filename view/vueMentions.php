@@ -1,10 +1,9 @@
 <?php 
   session_start();
   //head
+  $titre = "Mentions légales";
   include("head.php"); 
 ?>
-  <title>Apollo Space Park Mentions légales</title>
-</head>
 
 <body>
   

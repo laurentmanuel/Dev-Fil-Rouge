@@ -1,12 +1,9 @@
 <?php 
   session_start();
   //head
+  $titre = "Mon compte";
   include("head.php"); 
 ?>
-
- 
-<title>Apollo Space Park Mon Profil</title>
-</head>
 
 <body>
 

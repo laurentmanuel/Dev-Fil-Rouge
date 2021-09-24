@@ -1,10 +1,9 @@
 <?php
 //head
+$titre = "Réservations";
 include("head.php");
 ?>
 
-<title>Apollo Space Park Réservations</title>
-</head>
 
 <body>
 
@@ -35,10 +34,14 @@ include("head.php");
       <p><label for="nb_people">Nombre de personnes: </label>
         <input type="number" min="1" step="1" max="20" name="nb_people">
       </p>
-      <span>
-        <input class="btn btn-primary" type="submit" value="Confirmer ">
-      </span>
-          <p><a href="../controller/showReserv.php" class="btn btn-primary">Vos réservations</a></p>
+      <?php if (isset($_SESSION["user"])) : ?>
+        <input class="btn btn-primary" type="submit" value="Confirmer "></input>
+        <p><a href="../controller/showReserv.php" class="btn btn-primary">Vos réservations</a></p>
+      <?php else : ?>
+        <a href="../controller/logUser.php" class="btn btn-primary">Se connecter</a>
+        <?php endif; ?>
+      
+
     </form>
   </div>
 

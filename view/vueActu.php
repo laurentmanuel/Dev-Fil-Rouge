@@ -1,6 +1,7 @@
 <?php 
   session_start();
   //head
+  $titre = "News";
   include("head.php"); 
 ?>
   <title>Apollo Space Park News</title>
