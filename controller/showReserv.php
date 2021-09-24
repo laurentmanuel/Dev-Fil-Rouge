@@ -35,11 +35,9 @@
         //Récupération de l'id de l'utilisateur
         $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
         //Appel méthode de création d'une réservation
-        var_dump($reserv);
         $reserv->showReserv($bdd);
         echo "<p>retour du fetch dans le controller: </p>";
         var_dump($result);
-
 
     }
 ?>

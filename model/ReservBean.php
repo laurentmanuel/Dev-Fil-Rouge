@@ -107,14 +107,13 @@
 
             try {
               //$sql = "SELECT * FROM reservations WHERE id_user = :id_user";              
-              $sql = "SELECT * FROM reservations WHERE id_user = :id_user";              
+              $sql = "SELECT * FROM reservations";              
             
-              $query = $bdd->query($sql);
-              $query->bindValue(":id_user", $id_user, PDO::PARAM_STR);
-              $query->execute();
+              $query = $bdd->prepare($sql);
+              //$query->bindValue(":id_user", $id_user);
+              //$query->execute();
               //$query->execute(array("id_user"=>$id_user));
-              $reserv = $query->fetchAll();
-              var_dump($reserv);
+              $result = $query->fetchAll();
             
             } catch (Exception $e) {
               die('Erreur: ' . $e->getMessage());

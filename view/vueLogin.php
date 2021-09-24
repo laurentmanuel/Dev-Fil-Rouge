@@ -24,8 +24,9 @@
       <h3>Connexion</h3>
       <label for="email">Votre email: </label>
         <input type="text" name="email_user" size="35">
-      <label for="mdp">Votre Mot de passe: </label>
+      <label for="mdp">Votre Mot de passe: 
         <input type="password" name="mdp_user">
+      </label>
       <p><a href="vueInscription.php">Pas encore de compte?</a></p>
       <span>
         <input class="connexionBtn" type="submit" value="se connecter">

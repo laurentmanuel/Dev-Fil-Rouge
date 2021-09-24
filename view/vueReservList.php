@@ -5,7 +5,7 @@
   $titre = "Mes réservations";
   include("head.php");
 
-// CODE QUI MARCHE CI_DESSOUS
+// //CODE QUI MARCHE CI_DESSOUS
 // require("../utils/connexionBdd.php");
 
 // $id_user = $_SESSION["user"]["id_user"];
@@ -21,6 +21,7 @@
 // } catch (Exception $e) {
 //   die('Erreur : ' . $e->getMessage());
 // }
+
 ?>
 
 <body>
