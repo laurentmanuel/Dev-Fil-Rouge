@@ -22,7 +22,7 @@
                             Tests :
     -----------------------------------------------------*/
     
-    //pour rediriger vers la page login si l'utilisateur n'est pas déjà connecté
+    //Redirection vers la page login si l'utilisateur n'est pas déjà connecté
     if(!isset($_SESSION["user"])){
 
         echo "<p>Veuillez vous connecter</p>";

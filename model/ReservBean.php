@@ -106,7 +106,7 @@
             $id_user = $this->getIdUserRes();
 
             try {
-              //$sql = "SELECT * FROM reservations WHERE id_user = :id_user";              
+
               $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY date_reserv asc;";              
             
               $query = $bdd->prepare($sql);
