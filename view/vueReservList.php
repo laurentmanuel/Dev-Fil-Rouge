@@ -46,29 +46,14 @@
             </tr>
           </thead>
           <tbody>
-          <?php foreach ($reserv as $res) {
-          ?>
-            <tr>
-              <td><?= $reserv["id_reserv"] ?></td>
-              <td><?= $reserv["date_reserv"] ?></td>
-              <td><?= $reserv["nb_people"] ?></td>
-              <td><?= $reserv["updatedOn"] ?></td>
-              <td>
-                <!-- <div class="btn-group">
-                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Action
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Voir détails</a></li>
-                    <li><a class="dropdown-item" href="#">Modifier réservation</a></li>
-                    <li><a class="dropdown-item" href="#">Supprimer réservation</a></li>
-                  </ul>
-                </div> -->
-              </td>
+          <?php foreach ($allResByUser as $reservation): ?>
+              <tr>
+              <td><?= $reservation["id_reserv"] ?></td>
+              <td><?= $reservation["date_reserv"] ?></td>
+              <td><?= $reservation["nb_people"] ?></td>
+              <td><?= $reservation["updatedOn"] ?></td> 
             </tr>
-          <?php
-          }
-          ?>
+          <?php endforeach; ?>
           </tbody>
         </table>
         <p><a href="vueReservations.php" class="btn btn-primary">Ajouter une réservation</a></p>

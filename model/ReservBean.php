@@ -107,13 +107,12 @@
 
             try {
               //$sql = "SELECT * FROM reservations WHERE id_user = :id_user";              
-              $sql = "SELECT * FROM reservations";              
+              $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY date_reserv asc;";              
             
               $query = $bdd->prepare($sql);
-              //$query->bindValue(":id_user", $id_user);
-              //$query->execute();
-              //$query->execute(array("id_user"=>$id_user));
-              $result = $query->fetchAll();
+              $query->bindValue(":id_user", $id_user);
+              $query->execute();
+              $allResByUser = $query->fetchAll();
             
             } catch (Exception $e) {
               die('Erreur: ' . $e->getMessage());
