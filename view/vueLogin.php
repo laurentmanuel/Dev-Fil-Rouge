@@ -27,7 +27,7 @@
       <label for="mdp">Votre Mot de passe: 
         <input type="password" name="mdp_user">
       </label>
-      <p><a href="vueInscription.php">Pas encore de compte?</a></p>
+      <p><a href="../view/vueInscription.php">Pas encore de compte?</a></p>
       <span>
         <input class="connexionBtn" type="submit" value="se connecter">
       </span>

@@ -2,27 +2,8 @@
 if (!isset($_SESSION["user"])) {
   session_start();
 }
-$titre = "Liste des avis";
+$titre = "Tous les avis";
 include("head.php");
-
-//Connexion bdd
-require("../utils/connexionBdd.php");
-
-try {
-  //Requête sql
-  $sql = "SELECT * FROM avis ORDER BY updatedOn asc";
-
-
-  //on éxécute la requête 
-  $query = $bdd->query($sql);
-
-  // $query->execute();
-
-  //on va récupérer les données
-  $avis = $query->fetchAll(PDO::FETCH_ASSOC);
-} catch (Exception $e) {
-  die('Erreur : ' . $e->getMessage());
-}
 ?>
 
 <body>
@@ -34,23 +15,49 @@ try {
   <?php include("header.php"); ?>
 
 
-  <section>
-    <?php foreach ($avis as $value) : ?>
-      <article>
-        <p><?= htmlspecialchars($avis["title_avis"]) ?></p>
-        <p>Publié le <?= $avis["updatedOn"] ?></p>
-        <div>Note: <?= $avis["note"] ?></div>
-        <div>Commentaires: <?= htmlspecialchars($avis["comments"]) ?></div>
-      </article>
-      <?php endforeach; ?>
-    </section>
-    
-    <div class="userForm">
-    <?php if (!isset($_SESSION["user"])) : ?>
-      <a href="../view/vueLogin.php" class="btn btn-primary">Poster un avis</a>
-    <?php else : ?>
-      <a href="../view/vueAvisPost.php" class="btn btn-primary">Poster un avis</a>
-    <?php endif; ?>
+
+  <div class="userForm">
+
+    <section>
+      <h3>Tous les avis publiés: <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?>:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Note</th>
+            <th>Titre : </th>
+            <th>Commentaires</th>
+            <th>Créé/Modifié le:</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($allAvis as $avis) : ?>
+            <tr>
+              <td><?= $avis["id_avis"] ?></td>
+              <td><?= $avis["title_avis"] ?></td>
+              <td><?= $avis["comments"] ?></td>
+              <td><?= $avis["updatedOn"] ?></td>
+              <td>
+                <?php endforeach; ?>
+                <div class="dropdown">
+                  <button class="dropbtn">Actions</button>
+                  <div class="dropdown-content">
+                    <a href="../controller/updateAvis.php">Modifier</a>
+                    <a href="../controller/deleteAvis.php">Supprimer</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+  </div>
+
+  </section>
+  <?php if (!isset($_SESSION["user"])) : ?>
+    <a href="../view/vueLogin.php">Poster un avis</a>
+  <?php else : ?>
+    <a href="../view/vueAvisPost.php">Poster un avis</a>
+  <?php endif; ?>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

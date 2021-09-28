@@ -13,9 +13,7 @@
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($date_reserv, $nb_people){   
-            $this->date_reserv = $date_reserv;
-            $this->nb_people = $nb_people;
+        public function __construct(){   
             //l'id_user est récupéré grâce à la session php ($_SESSION["user"])
         }
 
@@ -69,9 +67,9 @@
             $date_reserv = $this->getDateReserv();
             $nb_people = $this->getNbPeople();
             $id_user = $this->getIdUserRes();
-            $currentDate = date_create("now")->format("Y-m-d H:i:s");
+            $currentDate = date_create("now")->format("Y-m-d H:i:s"); //pour empêcher de sélectionner une date antérieure à la date du jour
 
-            //pour empêcher de sélectionner une date antérieure à la date du jour
+            
             if($date_reserv<$currentDate){
 
                 die("<p>Date incorrecte</p>");
@@ -101,23 +99,25 @@
 
     /****************************************************************/
 
-        //méthode affichage de toutes les tâches
-        public function showReserv($bdd){
-            $id_user = $this->getIdUserRes();
+    //méthode affichage de toutes les tâches
+    public function showReserv($bdd){
+        $id_user = $this->getIdUserRes();
+        
+        try {
+                        
+            $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY date_reserv asc";              
+        
+            $reserv = $bdd->prepare($sql);
+            $reserv->bindValue(":id_user", $id_user);
+            $reserv->execute();
+            $allResByUser = $reserv->fetchAll();
+            return $allResByUser;
 
-            try {
-
-              $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY date_reserv asc;";              
-            
-              $query = $bdd->prepare($sql);
-              $query->bindValue(":id_user", $id_user);
-              $query->execute();
-              $allResByUser = $query->fetchAll();
-            
-            } catch (Exception $e) {
-              die('Erreur: ' . $e->getMessage());
-            }
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
         }
+
+    }
 
     
 

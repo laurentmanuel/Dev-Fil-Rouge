@@ -39,7 +39,7 @@
             && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"])){            
              
                 //création d'une instance d'objet OrderBean depuis les valeurs du formulaire
-                $avis = new AvisBean("","","","");
+                $avis = new AvisBean();
                 $avis->setNote($_POST["note"]);
                 $avis->setTitleAvis($_POST["title_avis"]);
                 $avis->setComments($_POST["comments"]);

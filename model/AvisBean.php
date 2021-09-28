@@ -14,10 +14,7 @@
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($note, $title_avis, $comments){
-            $this->note = $note;
-            $this->title_avis = $title_avis;
-            $this->comments = $comments;
+        public function __construct(){
             //l'id_user est récupéré grâce à la session php ($_SESSION["user"])
         }
 
@@ -104,42 +101,49 @@
         }
         
     /****************************************************************/
-        public function updateAvis($bdd){
+    public function updateAvis($bdd){
+        
+        //récupération des valeurs de l'objet
+        $note = $this->getNote();
+        $title_avis = $this->getTitleAvis();
+        $comments = $this->getComments();
+        $id_user = $this->getIdUserAvis();
+        
+        try{   
+            //requête ajout d'une tâche
+            $sql = "UPDATE avis SET note = :note, title_avis = :title_avis, comments = :comments, id_user = :id_user
+            WHERE id_avis = :id_avis";
 
-            //récupération des valeurs de l'objet
-            $note = $this->getNote();
-            $title_avis = $this->getTitleAvis();
-            $comments = $this->getComments();
-            $id_user = $this->getIdUserAvis();
+            $query = $bdd->prepare($sql);
+            //éxécution de la requête SQL
+            $query->execute(array(
+                "note" => $note,
+                "title_avis" => $title_avis,
+                "comments" => $comments,
+                "id_user" => $id_user
+            ));
+        
+        } catch(Exception $e) {
+            //affichage d'une exception en cas d’erreur
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
 
-            try{   
-                //requête ajout d'une tâche
-                $sql = "UPDATE avis SET note = :note, title_avis = :title_avis, comments = :comments, id_user = :id_user
-                WHERE id_avis = :id_avis";
+    /****************************************************************/
+        public function showAllAvis($bdd){
+                        
+            try{
+                $sql = "SELECT * FROM avis";
 
-                $query = $bdd->prepare($sql);
-                //éxécution de la requête SQL
-                $query->execute(array(
-                    "note" => $note,
-                    "title_avis" => $title_avis,
-                    "comments" => $comments,
-                    "id_user" => $id_user
-                ));
-                
+                $avis = $bdd->query($sql);
+                $avis->execute();
+                $allAvis = $avis->fetchAll();
+                return $allAvis;
+            
             } catch(Exception $e) {
                 //affichage d'une exception en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             } 
         }
-
     }
-
-
-    
-
-
-
-
-
-
 ?>

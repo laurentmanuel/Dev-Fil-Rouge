@@ -1,48 +1,54 @@
 <?php
-  if(!isset($_SESSION["user"])){
-    session_start();
-  }
-  $titre = "Mes réservations";
-  include("head.php");
+if (!isset($_SESSION["user"])) {
+  session_start();
+}
+$titre = "Mes réservations";
+include("head.php");
 ?>
 
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
 
   <!-- header -->
   <?php include("header.php"); ?>
-  <main class="container">
-    <div>
-      <section>
-        <h3>Liste des réservations de <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?>:</h3>
-        <table>
-          <thead>
+
+  <div>
+    <section>
+      <h3>Liste des réservations de <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?>:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>numéro de réservation</th>
+            <th>pour le :</th>
+            <th>Nombre de personnes</th>
+            <th>Créé/Modifié le:</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($allResByUser as $reserv) : ?>
             <tr>
-              <th>numéro de réservation</th>
-              <th>pour le :</th>
-              <th>Nombre de personnes</th>
-              <th>créé ou mis à jour le:</th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php foreach ($allResByUser as $res): ?>
-            <tr>
-              <td><?= $res["id_reserv"] ?></td>
-              <td><?= $res["date_reserv"] ?></td>
-              <td><?= $res["nb_people"] ?></td>
-              <td><?= $res["updatedOn"] ?></td>
+              <td><?= $reserv["id_reserv"] ?></td>
+              <td><?= $reserv["date_reserv"] ?></td>
+              <td><?= $reserv["nb_people"] ?></td>
+              <td><?= $reserv["updatedOn"] ?></td>
+              <td>
+                <div class="dropdown">
+                  <button class="dropbtn">Actions</button>
+                  <div class="dropdown-content">
+                    <a href="../controller/updateRes">Modifier</a>
+                    <a href="../controller/deleteRes">Supprimer</a>
+                  </div>
+                </div>
+              </td>
             </tr>
           <?php endforeach; ?>
-          </tbody>
-        </table>
-        <p><a href="vueReservations.php" class="btn btn-primary">Ajouter une réservation</a></p>
-      </section>
-    </div>
-    <?php var_dump($allResByUser); ?>
-  </main>
-
+        </tbody>
+      </table>
+  </div>
+  <p><a href="../view/vueReservations.php">Ajouter une réservation</a></p>
+  </section>
 
   <!-- footer  -->
   <?php include("footer.php"); ?>

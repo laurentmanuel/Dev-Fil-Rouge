@@ -37,7 +37,7 @@
             if(isset($_POST["date_reserv"]) && isset($_POST["nb_people"])){            
              
                 //création d'une instance d'objet OrderBean depuis les valeurs du formulaire
-                $reserv = new ReservBean("","","","");
+                $reserv = new ReservBean();
                 $reserv->setDateReserv($_POST["date_reserv"]);
                 $reserv->setNbPeople($_POST["nb_people"]);
                 

@@ -27,11 +27,10 @@
       </p>
       <?php if (isset($_SESSION["user"])) : ?>
         <input class="btn btn-primary" type="submit" value="Confirmer "></input>
-        <p><a href="../controller/showReserv.php" class="btn btn-primary">Vos réservations</a></p>
+        <p><a href="../controller/showReserv.php" class="favorite styled">Vos réservations</a></p>
       <?php else : ?>
-        <a href="../controller/logUser.php" class="btn btn-primary">Se connecter</a>
+        <a href="../controller/logUser.php" class="favorite styled">Se connecter</a>
         <?php endif; ?>
-      
 
     </form>
   </div>
