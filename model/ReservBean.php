@@ -68,7 +68,6 @@
             $nb_people = $this->getNbPeople();
             $id_user = $this->getIdUserRes();
             $currentDate = date_create("now")->format("Y-m-d H:i:s"); //pour empêcher de sélectionner une date antérieure à la date du jour
-
             
             if($date_reserv<$currentDate){
 
@@ -116,14 +115,12 @@
         } catch (Exception $e) {
             die('Erreur: ' . $e->getMessage());
         }
-
     }
-
     
 
     /****************************************************************/
         //METHODE A TESTER (DOIT FONCTIONNER SAUF REDIRECTION???)
-        public function updateReserv($bdd){    
+        public function updateRes($bdd){    
 
             //récupération des valeurs de l'objet
             $id_reserv = $this->getIdReserv();
@@ -147,9 +144,8 @@
                 'id_user' => $id_user
                 ));
 
-                //redirection vers show_task.php
-                header("Location: ..view/vueReservList.php");
-                //header("Location: ..view/vueReservList.php?updateReserv=true&id_user=$id_user");  A TESTER
+                //redirection vers showReserv
+                header("Location: ../controller/showReserv.php");
 
             }catch(Exception $e){
 

@@ -101,49 +101,63 @@
         }
         
     /****************************************************************/
-    public function updateAvis($bdd){
-        
-        //récupération des valeurs de l'objet
-        $note = $this->getNote();
-        $title_avis = $this->getTitleAvis();
-        $comments = $this->getComments();
-        $id_user = $this->getIdUserAvis();
-        
-        try{   
-            //requête ajout d'une tâche
-            $sql = "UPDATE avis SET note = :note, title_avis = :title_avis, comments = :comments, id_user = :id_user
-            WHERE id_avis = :id_avis";
+        public function updateAvis($bdd){
 
-            $query = $bdd->prepare($sql);
-            //éxécution de la requête SQL
-            $query->execute(array(
-                "note" => $note,
-                "title_avis" => $title_avis,
-                "comments" => $comments,
-                "id_user" => $id_user
-            ));
-        
-        } catch(Exception $e) {
-            //affichage d'une exception en cas d’erreur
-            die('Erreur : '.$e->getMessage());
-        } 
-    }
+            //récupération des valeurs de l'objet
+            $note = $this->getNote();
+            $title_avis = $this->getTitleAvis();
+            $comments = $this->getComments();
+            $id_user = $this->getIdUserAvis();
 
-    /****************************************************************/
-        public function showAllAvis($bdd){
-                        
-            try{
-                $sql = "SELECT * FROM avis";
+            try{   
+                //requête ajout d'une tâche
+                $sql = "UPDATE avis SET note = :note, title_avis = :title_avis, comments = :comments, id_user = :id_user
+                WHERE id_avis = :id_avis";
 
-                $avis = $bdd->query($sql);
-                $avis->execute();
-                $allAvis = $avis->fetchAll();
-                return $allAvis;
+                $query = $bdd->prepare($sql);
+                //éxécution de la requête SQL
+                $query->execute(array(
+                    "note" => $note,
+                    "title_avis" => $title_avis,
+                    "comments" => $comments,
+                    "id_user" => $id_user
+                ));
             
             } catch(Exception $e) {
                 //affichage d'une exception en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             } 
+        }
+
+        /****************************************************************/
+        public function showAllAvis($bdd){
+
+            try{
+                $sql = "SELECT * FROM avis";
+
+                $avis = $bdd->query($sql);
+                $allAvis = $avis->fetchAll();
+                return $allAvis;
+
+            } catch(Exception $e) {
+                //affichage d'une exception en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            } 
+        }
+
+    /****************************************************************/
+        public function showUserAvis($bdd){
+            $id_user = $this->getIdUserAvis();
+            try{
+                $sql = "SELECT * FROM avis WHERE id_user = :id_user ORDER BY updatedOn ASC";
+                $avis = $bdd->prepare($sql);
+                $avis->bindValue(":id_user", $id_user);
+                $avis->execute();
+                $userAvis = $avis->fetchAll();
+                return $userAvis;
+            } catch(Exception $e) {
+                die('Erreur : '.$e->getMessage());
+            }
         }
     }
 ?>

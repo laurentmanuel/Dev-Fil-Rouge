@@ -62,11 +62,7 @@
 
         } else {
 
-            echo "<p>Le formulaire est ide</p>";
+            echo "<p>Le formulaire est vide</p>";
         }
-
-
-        
-
     }
 ?> 

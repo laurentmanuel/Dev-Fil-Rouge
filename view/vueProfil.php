@@ -2,7 +2,7 @@
   if(!isset($_SESSION["user"])){
     session_start();
   } 
-  $titre = "Mon compte";
+  $titre = "Votre compte";
   include("head.php"); 
 ?>
 

@@ -2,7 +2,7 @@
 if (!isset($_SESSION["user"])) {
   session_start();
 }
-$titre = "Mes réservations";
+$titre = "Vos réservations";
 include("head.php");
 ?>
 
@@ -37,8 +37,8 @@ include("head.php");
                 <div class="dropdown">
                   <button class="dropbtn">Actions</button>
                   <div class="dropdown-content">
-                    <a href="../controller/updateRes">Modifier</a>
-                    <a href="../controller/deleteRes">Supprimer</a>
+                    <a href="../controller/updateRes.php">Modifier</a>
+                    <a href="../controller/deleteRes.php">Supprimer</a>
                   </div>
                 </div>
               </td>

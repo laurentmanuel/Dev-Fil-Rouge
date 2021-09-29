@@ -31,39 +31,31 @@
         //On vérifie si le formulaire a été envoyé
         if(!empty($_POST)){
 
-            echo "<p>formulaire envoyé</p>";
-            var_dump($_POST);//le formulaire a été envoyé
-
             //Vérif si tous les champs sont complets
             if(isset($_POST["note"]) && isset($_POST["title_avis"]) && isset($_POST["comments"])
             && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"])){            
              
                 //création d'une instance d'objet OrderBean depuis les valeurs du formulaire
-                $avis = new AvisBean("","","","");
+                $avis = new AvisBean();
                 $avis->setNote($_POST["note"]);
                 $avis->setTitleAvis($_POST["title_avis"]);
                 $avis->setComments($_POST["comments"]);
                 
                 //Récupération de l'id de l'utilisateur
                 $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
-                echo '<p>contenu obj avis</p>';
-                var_dump($avis);
 
                 //Appel méthode de création d'une réservation
                 $avis->createAvis($bdd);
                 
 
-                echo '<p>Merci '.$_SESSION["user"]["name_user"].' pour votre évaluation!</p></div>';    
+                echo '<p>Merci '.$_SESSION["user"]["first_name_user"].' pour votre évaluation!</p></div>';    
             
             } else {
 
                 echo "<p>Veuillez compléter les informations manquantes SVP.</p>";
             }
 
-        } else {
-
-            echo "<p>Le formulaire est vide</p>";
-        }
+        } 
 
 
         
