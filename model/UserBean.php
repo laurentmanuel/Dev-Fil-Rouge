@@ -1,6 +1,8 @@
 <?php
 
-    class UserBean{ 
+use JetBrains\PhpStorm\Internal\ReturnTypeContract;
+
+class UserBean{ 
          
         /*----------------------------------------------------
                             Attributs :
@@ -216,11 +218,9 @@
                             "first_name_user" => $user["first_name_user"],
                             "email_user" => $user["email_user"],
                             "is_admin" => $user["is_admin"],
-                            "message" => $message
+                            "message" => $user["message"]
                         ];
       
-                    //Redirection vers la page profil.php par exemple
-                    header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
                 }
 
             } catch(Exception $e) {
@@ -229,7 +229,6 @@
                 die('Erreur : '.$e->getMessage());
             }
         }   
-
         
     /****************************************************************/
 
@@ -282,24 +281,23 @@
     /****************************************************************/
     
         public function updateUser($bdd){
-
+            $name_user = $this->getNameUser();
+            $first_name_user = $this->getFirstNameUser();
+            $email_user = $this->getEmailUser();
             $mdp_user = $this->getMdpUser();
             $id_user = $this->getIdUser();               
 
-            if(!isset($_SESSION["user"])){
-
-                //Si pas connecté on le renvoie à la page de login
-                header("Location: ../view/vueLogin.php");                    
-            } 
-
             try{
+                $sql = "UPDATE users SET name_user = :name_user, first_name_user = :first_name_user, mdp_user = :mdp_user WHERE email_user = :email_user AND id_user = :id_user";
 
-                $sql = "UPDATE users SET mdp_user = :mdp_user WHERE id_user = :id_user";
-
-                $query = $bdd->query($sql);
-                $query->bindValue(":mdp_user", $mdp_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
-                $query->execute();      
-                $user = $query->fetch();
+                $query = $bdd->prepare($sql);
+                $query->execute(array(
+                    "id_user" => $id_user,
+                    "name_user" => $name_user,
+                    "first_name_user" => $first_name_user,
+                    "email_user" => $email_user,
+                    "mdp_user" => $mdp_user
+                    ));
 
             } catch(Exception $e) {
                                 
@@ -308,12 +306,6 @@
             }
 
         }
-
-            
-    
-        
-    
-        
     
         public function deleteUser($bdd){
     

@@ -6,7 +6,6 @@ $titre = "Modifer Réservation";
 include("head.php");
 ?>
 
-
 <body>
 
   <!-- bordure -->
@@ -28,10 +27,8 @@ include("head.php");
       <input type="hidden" name="id_reserv" value="<?= $reserv["id_reserv"] ?>">
       <input type="submit" value="Modifier" class="favorite styled"></input>
       <p><a href="../controller/showReserv.php" class="favorite styled">Toutes vos réservations</a></p>
-
     </form>
   </div>
-
 
   <!-- footer  -->
   <?php include("footer.php"); ?>

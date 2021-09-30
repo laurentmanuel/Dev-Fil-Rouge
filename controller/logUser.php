@@ -67,6 +67,9 @@
         }        
           
           //Ici l'email et le mdp sont OK   
+
+          //Redirection vers la page profil.php par exemple
+          header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
         
       } else {
 
