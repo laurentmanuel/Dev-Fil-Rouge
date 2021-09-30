@@ -13,18 +13,17 @@
 
     //on retire les caractères non souhaités
     $id_avis = strip_tags($_GET["id_avis"]);
-    $avis = new AvisBean();
-    $avis->setIdAvis($id_avis);
-    $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
-    $avis->deleteAvis($bdd);
+    $avisDetail = new AvisBean();
+    $avisDetail->setIdAvis($id_avis);
+    $detailsAvis = $avisDetail->getAvis($bdd);
 
-    $_SESSION["message"] = "Avis supprimé";
+  } else {
+    $_SESSION["erreur"] = "URL invalide";
+    header("Location: ../controller/showAvis.php");
+  }
 
-    //appel de la vue
-    //redirection vers liste d'avis
-    $location = "../controller/showAvis.php";
-    echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
+  //appel de la vue
+  include ("../view/vueDetailsAvis.php");
 
-  } 
 
 ?>

@@ -40,5 +40,5 @@
         require("../view/vueAvisList.php");
     }
     
-    
-    ?>
+
+?>

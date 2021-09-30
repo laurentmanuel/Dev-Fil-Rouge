@@ -54,10 +54,13 @@
           $email_user = $_POST["email_user"];
         }  
 
-        //Contrôle mot de passe.
+        //Contrôle longueur mot de passe
         if(strlen($_POST["mdp_user"])<8){
+
           die ("<p>Veuillez saisir un mot de passe comportant au moins 8 caractères.</p>");
+
         } else if($_POST["mdp_user"]!=$_POST["confirm_mdp"]){
+
           die("<p>Les mots de passe saisis ne correspondent pas</p>");
         }
 
@@ -69,7 +72,12 @@
 
         //création d'un objet depuis les valeurs contenues dans le formulaire
         //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"]);
-        $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user");
+        $user = new UserBean();
+        $user->setNameUser($name_user);
+        $user->setFirstNameUser($first_name_user);
+        $user->setEmailUser($email_user);
+        $user->setMdpUser($mdp_user);
+
         
         //On teste si l'utilisateur ("email_user") existe déjà (fonction userExists())
         if($user->userExists($bdd)==true){

@@ -1,68 +1,50 @@
-<?php
+<?php 
 
-    /*-----------------------------------------------------
-                        Session :
-    -----------------------------------------------------*/
-    //création de la session
-    session_start();
+  session_start();
 
-    /*-----------------------------------------------------
-                        Imports :
-    -----------------------------------------------------*/ 
-    
-    //appel de la classe OrderBean
-    require("../model/AvisBean.php");
+  //appel de la classe AvisBean
+  require("../model/AvisBean.php");
+  
+  //ajout du fichier de connexion 
+  require("../utils/connexionBdd.php");
+  
+  //Vérif si "id_user" existe bien dans l'url
+  if(isset($_GET["id_avis"]) && !empty($_GET["id_avis"])){
 
-    //ajout du fichier de connexion 
-    include("../utils/connexionBdd.php");
-    
-    //import de la vue view_add_user.php (formulaire d'insertion d'un utilisateur)
-    include("../view/vueAvisPost.php"); 
-    /*-----------------------------------------------------
-                            Tests :
-    -----------------------------------------------------*/
-    
-    //Si utilisateur pas connecté, on le redirige vers la page login
-    if(!isset($_SESSION["user"])){    
-    
-        header("Location: ../view/vueLogin.php");
-    } else {
+    //on retire les caractères non souhaités
+    $id_avis = strip_tags($_GET["id_avis"]);
+    $avisDetail = new AvisBean();
+    $avisDetail->setIdAvis($id_avis);
+    $detailsAvis = $avisDetail->getAvis($bdd);
 
-        //On vérifie si le formulaire a été envoyé
-        if(!empty($_POST)){
+    //appel de la vue
+    require("../view/vueAvisUpdate.php");
 
-            echo "<p>formulaire envoyé</p>";
-            var_dump($_POST);//le formulaire a été envoyé
+  } else {
 
-            //Vérif si tous les champs sont complets
-            if(isset($_POST["note"]) && isset($_POST["title_avis"]) && isset($_POST["comments"])
-            && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"])){            
+      $_SESSION["message"] = "URL invalide";
+  }
+  //Vérif si tous les champs sont complets
+  if(isset($_POST["id_avis"]) && isset($_POST["note"]) && isset($_POST["title_avis"]) && isset($_POST["comments"])
+  && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"]) && !empty($_POST["id_avis"])){  
              
-                //création d'une instance d'objet OrderBean depuis les valeurs du formulaire
-                $avis = new AvisBean();
-                $avis->setNote($_POST["note"]);
-                $avis->setTitleAvis($_POST["title_avis"]);
-                $avis->setComments($_POST["comments"]);
-                
-                //Récupération de l'id de l'utilisateur
-                $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
-                echo '<p>contenu obj avis</p>';
-                var_dump($avis);
+      $id_avis = htmlspecialchars($_POST["id_avis"]);
+      $updatedAvis = new AvisBean();
+      $updatedAvis->setIdAvis($id_avis);
+      $updatedAvis->setNote($_POST["note"]);
+      $updatedAvis->setTitleAvis($_POST["title_avis"]);
+      $updatedAvis->setComments($_POST["comments"]);
+      $updatedAvis->setIdUserAvis($_SESSION["user"]["id_user"]);
+      
+      //Appel méthode updateAvis
+      $updatedAvis->updateAvis($bdd);
+      //Rechargement de la page
+      header('Location: ../controller/updateAvis.php?id_avis='. $updatedAvis->getIdAvis() .'');
 
-                //Appel méthode de création d'une réservation
-                $avis->createAvis($bdd);
-                
+      echo '<p>'.$_SESSION["user"]["first_name_user"].', votre avis a bien été modifié!</p></div>';
+        
+  } else {
+    echo "<p>Le formulaire est incomplet</p>";
+  }
 
-                echo '<p>Merci '.$_SESSION["user"]["name_user"].' pour votre évaluation!</p></div>';    
-            
-            } else {
-
-                echo "<p>Veuillez compléter les informations manquantes SVP.</p>";
-            }
-
-        } else {
-
-            echo "<p>Le formulaire est vide</p>";
-        }
-    }
-?> 
+?>

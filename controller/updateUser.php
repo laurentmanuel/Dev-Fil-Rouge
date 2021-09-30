@@ -19,7 +19,7 @@
     require("../utils/connexionBdd.php");
 
     //appel vue Inscription
-    require("../view/vueLogin.php"); 
+    require("../view/vueUpdateUser.php"); 
 
 
   /*-----------------------------------------------------
@@ -42,7 +42,7 @@
         //Le formulaire est complet
 
         //On créé un objet 
-        $user = new UserBean("", "", "", "","");
+        //$user = new UserBean();
         $user->updateUser($bdd);
           
         //Ici l'email et le mdp sont OK   

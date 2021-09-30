@@ -17,7 +17,6 @@ window.onload = ()=>{
     
     //On va chercher toutes les étoiles
     const stars = document.querySelectorAll(".la-star");
-    console.log(stars);
     
     //On va chercher la valeur de la note dans l'input
     const note = document.querySelector("#note");

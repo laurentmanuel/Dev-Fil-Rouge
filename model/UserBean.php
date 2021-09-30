@@ -16,11 +16,7 @@
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($name_user, $first_name_user, $email_user, $mdp_user){   
-            $this->name_user = $name_user;
-            $this->first_name_user = $first_name_user;
-            $this->email_user = $email_user;
-            $this->mdp_user = $mdp_user;
+        public function __construct(){
             //$is_admin n'est pas dans le constructeur car on garde la paramètre par défaut
         }
 
@@ -135,13 +131,9 @@
                 "message" => $message
                 ];
                 
-                
                 //On redirige vers la page profil.php une fois le compte créé 
                 header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
-        
-                
-                
-                
+                        
             } catch(Exception $e) {
 
                 //affichage d'une mssg en cas d’erreur
@@ -151,7 +143,7 @@
 
 
 
-        //--------------------------------
+        /****************************************************************/
 
         //méthode pour vérifier si un utilisateur existe dans la bdd
         public function userExists($bdd): bool{
@@ -190,7 +182,7 @@
             }        
         }
 
-        //--------------------------------
+    /****************************************************************/
 
         public function logUser($bdd){
 
@@ -211,7 +203,7 @@
                 //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
                 if(!password_verify($mdp_user, $user["mdp_user"])){
                 
-                  die("<p>L'email et/ou le mot de passe est incorrect</p>");  
+                    die("<p>L'email et/ou le mot de passe est incorrect</p>");  
 
                 } else {
                     $message = "<p>Vous êtes connecté!</p>"; 
@@ -239,7 +231,7 @@
         }   
 
         
-        //-------------------------------
+    /****************************************************************/
 
         public function createSession($bdd){
             
@@ -287,7 +279,7 @@
         }
 
 
-        //-------------------------------
+    /****************************************************************/
     
         public function updateUser($bdd){
 

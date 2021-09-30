@@ -60,6 +60,7 @@
         /*-----------------------------------------------------
                                 Fonctions :
         -----------------------------------------------------*/
+        
         //méthode ajout d'une tâche en bdd
         public function createReserv($bdd){  
 
@@ -71,7 +72,13 @@
             
             if($date_reserv<$currentDate){
 
+                //pour empêcher saisie date incorrecte
                 die("<p>Date incorrecte</p>");
+            } else if ($nb_people<1){
+
+                //pour empêcher mauvaise saisie du nombre de personnes
+                die("<p>Nombre de personnes incorrect</p>");
+
             } else {
             
                 try{   
@@ -98,7 +105,7 @@
 
     /****************************************************************/
 
-    //méthode affichage de toutes les tâches
+    //méthode affichage de toutes les tâches (méthode testée OK)
     public function showReserv($bdd){
         $id_user = $this->getIdUserRes();
         
@@ -119,7 +126,6 @@
     
 
     /****************************************************************/
-        //METHODE A TESTER (DOIT FONCTIONNER SAUF REDIRECTION???)
         public function updateRes($bdd){    
 
             //récupération des valeurs de l'objet
@@ -131,21 +137,18 @@
             try{   
 
                 //requête update Réservations
-                $sql = "UPDATE reservations SET date_reserv = :date_reserv, nb_people = :nb_people, id_user = :id_user
-                WHERE id_reserv = :id_reserv";
+                $sql = "UPDATE reservations SET date_reserv = :date_reserv, nb_people = :nb_people
+                WHERE id_reserv = :id_reserv AND id_user = :id_user";
 
                 $query = $bdd->prepare($sql);
 
                 //éxécution de la requête SQL
                 $query->execute(array(
-                'id_reserv' => $id_reserv,   
-                'date_reserv' => $date_reserv,
-                'nb_people' => $nb_people,
-                'id_user' => $id_user
+                "id_reserv" => $id_reserv,   
+                "date_reserv" => $date_reserv,
+                "nb_people" => $nb_people,
+                "id_user" => $id_user
                 ));
-
-                //redirection vers showReserv
-                header("Location: ../controller/showReserv.php");
 
             }catch(Exception $e){
 
@@ -157,12 +160,12 @@
 
     /****************************************************************/
 
-        public function deleteReserv($bdd){
+        public function deleteRes($bdd){
 
             //récupération des valeurs de l'objet
             $id_reserv = $this->getIdReserv();
             $id_user = $this->getIdUserRes();
-            $date_reserv = $this->getDateReserv();
+            $date_reserv = $this->getDateReserv();//pour affichage du message d'erreur
 
             try{
 
@@ -186,7 +189,33 @@
                     die('Erreur : '.$e->getMessage());
             } 
 
-        }       
+        } 
+        
+    /****************************************************************/    
+        public function getReserv($bdd){
+            $id_reserv = $this->getIdReserv();
+            
+            try {
+                            
+                $sql = "SELECT * FROM reservations WHERE id_reserv = :id_reserv ORDER BY date_reserv asc";              
+            
+                $reserv = $bdd->prepare($sql);
+                $reserv->bindValue(":id_reserv", $id_reserv);
+                $reserv->execute();
+                $allResByUser = $reserv->fetch();
+
+                if(!$allResByUser){
+                    $_SESSION["message"] = "Cet id_reserv n'existe pas";
+                    header("Location: ../controller/showReserv.php" );
+
+                } else {
+
+                    return $allResByUser;
+                }
     
+            } catch (Exception $e) {
+                die('Erreur: ' . $e->getMessage());
+            }
+        }    
     }
 ?>

@@ -13,7 +13,7 @@ include("head.php");
   <!-- header -->
   <?php include("header.php"); ?>
 
-  <div>
+  <div class="wrapper">
     <section>
       <h3>Liste des réservations de <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?>:</h3>
       <table>
@@ -37,8 +37,8 @@ include("head.php");
                 <div class="dropdown">
                   <button class="dropbtn">Actions</button>
                   <div class="dropdown-content">
-                    <a href="../controller/updateRes.php">Modifier</a>
-                    <a href="../controller/deleteRes.php">Supprimer</a>
+                    <a href="../controller/updateRes.php?id_reserv=<?= $reserv["id_reserv"] ?>">Modifier</a>
+                    <a href="../controller/deleteRes.php?id_reserv=<?= $reserv["id_reserv"] ?>">Supprimer</a>
                   </div>
                 </div>
               </td>

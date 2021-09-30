@@ -70,7 +70,9 @@
     /*-----------------------------------------------------
                             Fonctions :
     -----------------------------------------------------*/
-
+        
+    
+    /****************************************************************/
         //méthode ajout d'un Avis en en bdd 
         public function createAvis($bdd){  
 
@@ -107,29 +109,32 @@
             $note = $this->getNote();
             $title_avis = $this->getTitleAvis();
             $comments = $this->getComments();
+            $id_avis = $this->getIdAvis();
             $id_user = $this->getIdUserAvis();
 
             try{   
                 //requête ajout d'une tâche
-                $sql = "UPDATE avis SET note = :note, title_avis = :title_avis, comments = :comments, id_user = :id_user
-                WHERE id_avis = :id_avis";
+                $sql = "UPDATE avis SET note = :note, title_avis = :title_avis, comments = :comments WHERE id_avis = :id_avis AND id_user = :id_user";
 
                 $query = $bdd->prepare($sql);
+
                 //éxécution de la requête SQL
-                $query->execute(array(
+                $updatedAvis = $query->execute(array(
+                    "id_avis" => $id_avis,
                     "note" => $note,
                     "title_avis" => $title_avis,
                     "comments" => $comments,
                     "id_user" => $id_user
                 ));
-            
+                
             } catch(Exception $e) {
                 //affichage d'une exception en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             } 
         }
 
-        /****************************************************************/
+    /****************************************************************/
+
         public function showAllAvis($bdd){
 
             try{
@@ -146,6 +151,7 @@
         }
 
     /****************************************************************/
+
         public function showUserAvis($bdd){
             $id_user = $this->getIdUserAvis();
             try{
@@ -155,6 +161,54 @@
                 $avis->execute();
                 $userAvis = $avis->fetchAll();
                 return $userAvis;
+            } catch(Exception $e) {
+                die('Erreur : '.$e->getMessage());
+            }
+        }
+    
+    /****************************************************************/
+
+        public function getAvis($bdd){
+            $id_avis = $this->getIdAvis();
+
+            try{
+                $sql = "SELECT * FROM avis WHERE id_avis = :id_avis";
+
+                $avis = $bdd->prepare($sql);
+                $avis->bindValue("id_avis", $id_avis);
+                $avis->execute();
+                $detailsAvis = $avis->fetch();
+
+                if(!$detailsAvis){
+                    $_SESSION["erreur"] = "Cet id_user n'existe pas";
+                    header("Location: ../controller/showAvis.php" );
+
+                } else {
+
+                    return $detailsAvis;
+                }
+                
+            } catch(Exception $e) {
+                die('Erreur : '.$e->getMessage());
+            }
+        }
+
+    /****************************************************************/
+    
+        public function deleteAvis($bdd){
+            $id_avis = $this->getIdAvis();
+            $id_user = $this->getIdUserAvis();
+
+            try{
+                $sql = "DELETE FROM avis WHERE id_avis = :id_avis AND id_user  = :id_user";
+                
+                $avis = $bdd->prepare($sql);
+                $avis->bindValue("id_avis", $id_avis);
+                $avis->bindValue("id_user", $id_user);
+                $avis->execute();
+
+                $_SESSION["message"] = "Avis supprimé";
+
             } catch(Exception $e) {
                 die('Erreur : '.$e->getMessage());
             }

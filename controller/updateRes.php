@@ -1,66 +1,53 @@
-<?php
+<?php 
 
-    /*-----------------------------------------------------
-                        Session :
-    -----------------------------------------------------*/
-    //création de la session
-    session_start();
+  session_start();
 
-    /*-----------------------------------------------------
-                        Imports :
-    -----------------------------------------------------*/ 
-    
-    //appel de la classe OrderBean
-    require("../model/ReservBean.php");
+  //appel de la classe AvisBean
+  require("../model/ReservBean.php");
+  
+  //ajout du fichier de connexion 
+  require("../utils/connexionBdd.php");
+  
+  //Vérif si "id_user" existe bien dans l'url
+  if(isset($_GET["id_reserv"]) && !empty($_GET["id_reserv"])){
 
-    //ajout du fichier de connexion 
-    include("../utils/connexionBdd.php");
-    
-    //import de la vue view_add_user.php (formulaire d'insertion d'un utilisateur)
-    include("../view/vueReservations.php"); 
-    /*-----------------------------------------------------
-                            Tests :
-    -----------------------------------------------------*/
-    
-    //pour rediriger vers la page login si l'utilisateur n'est pas déjà connecté
-    if(!isset($_SESSION["user"])){    
-    
-        header("Location: ../view/vueLogin.php");
-    } else {
+    //on retire les caractères non souhaités
+    $id_reserv = strip_tags($_GET["id_reserv"]);
+    $reserv = new ReservBean();
+    $reserv->setIdReserv($id_reserv);
+    $reserv = $reserv->getReserv($bdd);
 
-        //On vérifie si le formulaire a été envoyé
-        if(!empty($_POST)){
+    //appel de la vue
+    require("../view/vueUpdateRes.php");
 
-            //le formulaire a été envoyé
+  } else {
 
-            //Vérif si tous les champs sont complets
-            if(isset($_POST["date_reserv"]) && isset($_POST["nb_people"])){            
-             
-                //création d'une instance d'objet OrderBean depuis les valeurs du formulaire
-                $reserv = new ReservBean();
-                $reserv->setDateReserv($_POST["date_reserv"]);
-                $reserv->setNbPeople($_POST["nb_people"]);
-                
-                //Récupération de l'id de l'utilisateur
-                $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
+      $_SESSION["message"] = "URL invalide";
+  }
 
-                //Récupération de l'id de la réservation
-                $reserv->setIdReserv($_SESSION["user"]["id_reserv"]);
-                var_dump($reserv);
+  //Vérif si tous les champs sont complets
+  if(isset($_POST["id_reserv"]) && isset($_POST["date_reserv"]) && isset($_POST["nb_people"])
+  && !empty($_POST["id_reserv"]) && !empty($_POST["date_reserv"]) && !empty($_POST["nb_people"])){
+      
+        $id_reserv = htmlspecialchars($_POST["id_reserv"]);
+        $updatedRes = new ReservBean();
+        $updatedRes->setIdReserv($id_reserv);
+        $updatedRes->setDateReserv($_POST["date_reserv"]);
+        $updatedRes->setNbPeople($_POST["nb_people"]);
+        $updatedRes->setIdUserRes($_SESSION["user"]["id_user"]);
 
-                //Appel méthode de création d'une réservation
-                $reserv->updateRes($bdd);
+        //Appel méthode updateAvis
+        $reserv = $updatedRes->updateRes($bdd);
+        //Redirection vers la liste des réservations aprés modif
+        
+        header('Location: ../controller/showReserv.php?id_reserv='. $updatedRes->getIdReserv() .'');
 
-                echo '<p>Réservation pour '.$_POST["nb_people"].' personne(s) confirmée pour le '.$_POST["date_reserv"].' </p></div>';    
-            
-            } else {
+        
+        echo '<p>'.$_SESSION["user"]["first_name_user"].', votre réservation a bien été modifiée!</p></div>';
+        
+  } else {
 
-                echo "<p>Veuillez compléter les informations manquantes SVP.</p>";
-            }
+        echo "<p>Le formulaire est incomplet</p>";
+  }
 
-        } else {
-
-            echo "<p>Veuillez sélectionner une date et le nombre de personnes</p>";
-        }
-    }
-?> 
+?>
