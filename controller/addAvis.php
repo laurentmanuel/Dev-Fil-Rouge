@@ -47,7 +47,7 @@
                 //Appel méthode de création d'une réservation
                 $avis->createAvis($bdd);
                 
-
+                
                 echo '<p>Merci '.$_SESSION["user"]["first_name_user"].' pour votre évaluation!</p></div>';    
             
             } else {

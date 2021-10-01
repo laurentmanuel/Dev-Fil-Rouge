@@ -14,29 +14,31 @@ include("head.php");
   <?php include("header.php"); ?>
 
   <div class="userForm">
-    <h3>Votre profil:</h3>
-    <div>
-    <p>Nom: <?= $_SESSION["user"]["name_user"]; ?></p>
-    </div>
-    <div>
-      <p>Prénom: <?= $_SESSION["user"]["first_name_user"]; ?></p>
-    </div>
-    <div>
-      <p>Email: <?= $_SESSION["user"]["email_user"]; ?></p>
-    </div>
-    <div>
-      <p>Mot de passe: <?= $_SESSION["user"]["mdp_user"]; ?></p>
-    </div>
-
-
-
-
-    <button><a href="../controller/updateUser.php">Modifier profil</a></button>
-   
-
-
-
-    
+    <form action="../controller/updateUser.php" method="post">
+      <h3>Mon Compte</h3>
+      <div>
+        <label for="name">Nom:</label>
+        <input type="text" name="name_user" value="<?= $_SESSION["user"]["name_user"] ?>" size="25">
+      </div>
+      <div>
+        <label for="first_name">Prénom: </label>
+        <input type="text" name="first_name_user" value="<?= $_SESSION["user"]["first_name_user"] ?>" size="25">
+      </div>
+      <div>
+        <label for="email">Email: </label>
+        <input type="text" name="email_user" value="<?= $_SESSION["user"]["email_user"] ?>" size="35">
+      </div>
+      <span>
+        <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
+        <input class="connexionBtn" type="submit" value="Modifier mon profil">
+      </span>
+      <span> 
+        <button><a href="../controller/updateMdp.php">Modifier mot de passe</a></button>
+      </span>
+      <span> 
+        <button><a href="../controller/deleteUser.php">Supprimer mon compte</a></button>
+      </span>
+    </form>
     <!--Affichage message -->
     <p><?= $_SESSION["user"]["message"] ?></p>
   </div>

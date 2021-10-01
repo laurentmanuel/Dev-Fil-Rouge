@@ -15,7 +15,10 @@
   <?php include("header.php"); ?>
 
   <!-- footer  -->
-  <?php include("footer.php"); ?>z
+  <?php include("footer.php"); ?>
+
+<h1>Work In progress</h1>
+
 </body>
 
 </html>

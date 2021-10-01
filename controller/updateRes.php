@@ -38,11 +38,11 @@
 
         //Appel méthode updateAvis
         $reserv = $updatedRes->updateRes($bdd);
+
         //Redirection vers la liste des réservations aprés modif
-        
         header('Location: ../controller/showReserv.php?id_reserv='. $updatedRes->getIdReserv() .'');
 
-        
+        //message de confirmation de la modification
         echo '<p>'.$_SESSION["user"]["first_name_user"].', votre réservation a bien été modifiée!</p></div>';
         
   } else {

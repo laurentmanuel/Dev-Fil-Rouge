@@ -45,15 +45,11 @@
         if(!filter_var($_POST["email_user"], FILTER_VALIDATE_EMAIL)){
           die ("<p>L'adresse email est incorrecte</p>");
 
-        } else {
-
-          //Le format de l'adresse mail est correcte, on peut donc la stocker dans une variable
-          $email_user = $_POST["email_user"];
         } 
 
         //On créé un objet 
         $userToLog = new UserBean();
-        $userToLog->setEmailUser($email_user);
+        $userToLog->setEmailUser($_POST["email_user"]);
         $userToLog->setMdpUser($_POST["mdp_user"]);
 
         //Vérif sur l'utilisateur est existant
@@ -66,10 +62,9 @@
           $userToLog->logUser($bdd);
         }        
           
-          //Ici l'email et le mdp sont OK   
-
-          //Redirection vers la page profil.php par exemple
-          header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+          //Ici l'email et le mdp sont OK  
+          header("Location: ../view/vueProfil.php"); 
+          
         
       } else {
 
