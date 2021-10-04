@@ -7,7 +7,6 @@
     //On connecte l'utilisateur aprés la création de son compte
     session_start();// on démarre la session php (un cookie se crée à cet instant, la session est un tableau )
     
-
     /*----------------------------------------------------
               IMPORTS à effectuer pour ajout en bdd:
     -----------------------------------------------------*/
@@ -18,7 +17,6 @@
     require("../utils/connexionBdd.php");   
     //appel vue Inscription
     require("../view/vueUpdateMdp.php"); 
-
 
     /*-----------------------------------------------------
                           CONTROLLER:
@@ -35,11 +33,12 @@
         //On vérifie si le formulaire a été envoyé
         if(!empty($_POST)){
 
+            
             //on vérifie que tous les champs sont remplis
             if(isset($_POST["email_user"]) && isset($_POST["mdp_user"]) && isset($_POST["new_mdp"]) && isset($_POST["confirm_mdp"])
             && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"]) && !empty($_POST["new_mdp"]) && !empty($_POST["confirm_mdp"])){
                 //Le formulaire est complet
-                
+                var_dump($_SESSION["user"]);
                 //On contrôle l'ancien mdp avec le hash
                 if(!password_verify($_POST["mdp_user"], $_SESSION["user"]["mdp_user"])){
                     

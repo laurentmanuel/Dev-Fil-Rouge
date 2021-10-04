@@ -1,11 +1,11 @@
 /**********************Menu burger ***********************/
 const burgerBtn = document.querySelector(".burgerBtn");
-const invisible = document.querySelector(".invisible");
+const invisible = document.querySelector(".invisiblex");
 
 // Ouverture fermeture menu burger
 burgerBtn.addEventListener("click", () => {
     burgerBtn.classList.toggle("active");
-    invisible.classList.toggle("visible");    
+    invisible.classList.toggle("visiblex");    
 });
 
 /*******************************************************/

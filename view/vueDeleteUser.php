@@ -29,13 +29,12 @@ include("head.php");
         <label for="confirm_mdp">Confirmer mot de passe:</label>
         <input type="password" name="confirm_mdp" size="35">
       </div>
-      <div>
+      <span>
         <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
-        <input type="submit" value="Confirmer suppression">
-      </div>
+        <input class="dangerBtn" type="submit" value="Confirmer suppression">
+      </span>
     </form>
   </div>
-
 
   <!-- footer  -->
   <?php include("footer.php"); ?>

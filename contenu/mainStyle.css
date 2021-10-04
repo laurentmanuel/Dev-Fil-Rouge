@@ -87,14 +87,21 @@ nav{
     height:auto;
     width: auto;
     font-style: italic;
-    margin-top: 1.5em;
+    margin-top: 2em;
     margin-right: 3%;
+}
+
+
+article{
+    margin-top: 5em;                             
 }
 
 nav a, article a{
     text-decoration: none; /*liens non soulignés*/
     color: #FFFFFF;
 }
+
+
 
 nav ul{
     list-style-type: none;  /*puces supprimées */
@@ -116,6 +123,7 @@ nav li{
     margin-left: 10%;
     margin-right:3%;
 }
+
 #bordure{
     z-index: 5;
     display: flex;
@@ -130,27 +138,28 @@ nav li{
 #vertical_title{
     vertical-align: middle;
     color: #5c5b5b;
-    font-size: 3em;
+    font-size: 2.3em;
     font-style: italic;
     position: absolute;
-    left: 0px; top: 40%;
+    left: 0px; top: 35%;
     width: 400px;
     margin-left: -150px;
     transform: rotate(-90deg);
 }
 
 .userForm{
-    margin-left: 50%;
+    z-index: 1;
     display: flex;
     justify-content: center;
     background-color: white;
     border: 1px solid #707070;
-    border-radius: 70px;
-    width: 55%;
+    border-radius: 10px;
+    width: 60%;
     height: 30em;
     margin: auto;
+    padding-top: 40px;
     margin-top: 4em;
-    padding-top: 30px;
+    
 }
 
 .userForm p, .userForm h3, .connexionBtn{
@@ -166,18 +175,6 @@ nav li{
     text-decoration: none;
 }
 
-
-
-#erreur{
-    display: none;
-    color: red;
-}
-
-#ok{
-    display: none;
-    color: green;
-}
-
 .connexionBtn{
     font-size: 25px;
     margin-top: 10px;
@@ -188,14 +185,12 @@ nav li{
     justify-content: center;
 }
 
-
-
 article{
     z-index: 1; 
     position: absolute;
     text-align: center;
-    width: 380px;
-    margin-left: 19%;
+    width: 40%;
+    margin-left: 10%;
     text-shadow: 1px 1px 0 #000,
     -1px 1px 0 #000,
     1px -1px 0 #000,
@@ -255,9 +250,9 @@ footer{
     display: flex;
     justify-content: center;
     position: absolute;
-    margin-top: 2500px;
+    margin-top: 140vh;
     height: 75px;
-    width: 100%;
+    width: 130%;
     background-color:#030A8C;
     border-top: 3px solid #b3daf2;
     box-shadow: 0px 0px 20px 0px black;
@@ -340,9 +335,9 @@ footer a{
 
 /******Contenu Menu déployant burger*****/
 .menuBg{
-    height: 350px;
+    height: 310px;
     background-color:#030A8C;
-    width: 200px;
+    width: 170px;
     border-radius: 0 0 0px 10px;
     border: 1px solid #b3daf2;
     box-shadow: 0 0 2px 2px;
@@ -364,12 +359,11 @@ footer a{
     font-size: 1em;
     display: block;
     text-align: left;
-    padding-top: 12px; 
     font-family: sans-serif;
 }
 
 /* menu déployant fermé */
-.invisible{
+.invisiblex{
     z-index: 2;
     margin-top: -355px;
     transition-duration: 0.3s;
@@ -378,20 +372,66 @@ footer a{
 } 
   
 /* ouverture menu déployant */
-.invisible.visible{
+.invisiblex.visiblex{
     margin-top: -10px;
     transition-duration: 0.3s;
 }
 
+
+/*********Boutons Rouge **********/
+.dangerBtn {
+    margin-top: 10px;
+    border: 0;
+    line-height: 2;
+    padding: 0 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    font-family: 'futura-renner', sans-serif;  
+    color: #fff;
+    border-radius: 10px;
+    background-color: #d03030;
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+
+.dangerBtn a{
+    color: #fff;
+}
+
+.dangerBtn:hover {
+    background-color: #e85555;
+}
+
+
+.dangerBtn a{
+    text-decoration: none;
+}
+
+.dangerBtn:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+          
+    inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+/*****************************/
+
+
 /*********Boutons**********/
 .styled {
+    margin-left: 5px;
+    margin-top: 5px;
     border: 0;
-    line-height: 2.5;
+    line-height: 2;
     padding: 0 20px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: center;
+    font-family: 'futura-renner', sans-serif;  
     color: #fff;
-    text-shadow: 1px 1px 1px #000;
     border-radius: 10px;
     background-color: #0361cc;
     background-image: linear-gradient(to top left,
@@ -402,13 +442,24 @@ footer a{
                 inset -2px -2px 3px rgba(0, 0, 0, .6);
 }
 
+
+.styled a{
+    color: #fff;
+}
+
 .styled:hover {
-    background-color: #0168d9;
+    background-color: #0c49a5;
+}
+
+
+.styled a{
+    text-decoration: none;
 }
 
 .styled:active {
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-                inset 2px 2px 3px rgba(0, 0, 0, .6);
+          
+    inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 /*****************************/
 
@@ -419,21 +470,44 @@ nav a {
   display: inline-block;
 }
 
-.menu__item:before {
- content: "";
- display: block;
- height: 0.17em;
- width: 0%;
- margin-bottom: -3px;
- background-color: #FFF;
- transition: width 0.4s;
+.menu__itemx:before {
+    content: "";
+    display: block;
+    height: 0.17em;
+    width: 0%;
+    margin-bottom: -3px;
+    background-color: #FFF;
+    color: #fff;
+    text-decoration: none;
+    transition: width 0.4s;
 }
 
-.menu__item:hover:before {
- width: 100%;
+.menu__itemx:hover:before {
+    width: 100%;
 }
 
+/*****************************/
+/*effets surlignés au survol burger*/
 
+.menuBg{
+    display: inline-block;
+}
+  
+.menu__itemy:before {
+    content: "";
+    display: block;
+    height: 0.17em;
+    width: 0%;
+    margin-bottom: -3px;
+    background-color: #FFF;
+    transition: width 0.4s;
+}
+
+.menu__itemy:hover:before {
+    width: 73%;
+    text-decoration: none;
+    color: #fff;
+}
 /*****************************/
 
 
@@ -451,6 +525,7 @@ nav a {
         left: 0px;
         margin-left: 25px;
         margin-top: 5px;
+        margin-left: 3%;
     }
     
     .burgerBtn{
@@ -494,9 +569,9 @@ nav a {
     .pgTitle{
         display: block;
         position: absolute;
-        top: 0.2em;
-        left: 85px;
-        margin-left: 5%;
+        top: 0.7em;
+        left: 3.3em;
+        margin-left: 3%;
         font-size: 1.5em;
         font-style: italic;
         text-shadow: 1px 1px 0 #000,
@@ -540,47 +615,49 @@ nav a {
 
 /* Style The Dropdown Button */
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #0361cc;    
+    font-family: 'futura-renner', sans-serif; 
     color: white;
     padding: 16px;
-    font-size: 16px;
+    line-height: 0.2;
+    font-size: 1.2em;
     border: none;
     cursor: pointer;
-  }
+    border-radius: 7px;
+}
   
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
+/* The container (pour afficher le contenu du menu déroulant) */
+.dropdown {
+    margin-top: 10px;
     position: relative;
     display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+}
+
+/* Dropdown Contenu (caché par défaut) */
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
     display: block;
-  }
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-  }
+}
+
+.dropdown:hover .dropbtn {
+      background-color: #0c49a5;
+}

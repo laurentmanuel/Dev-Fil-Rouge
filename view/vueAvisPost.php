@@ -31,7 +31,9 @@ include("head.php");
         <label for="comments">Vos commentaires: </label>
         <textarea name="comments" id="" cols="30" rows="10"></textarea>
       </div>
-      <button type="submit">Envoyer</button>
+      <button class="styled" type="submit">Valider</button>
+      <button class="styled"><a href="../controller/showAvis.php">Revenir aux avis</a></button>
+
     </form>
   </div>
   <!-- footer  -->
