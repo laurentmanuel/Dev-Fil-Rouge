@@ -1,6 +1,5 @@
 <?php
 
-
     class UserBean{ 
 
         /*----------------------------------------------------
@@ -81,7 +80,6 @@
         public function setIsAdmin($newIsAdmin){
             $this->is_admin = $newIsAdmin;
         }
-    
     
         /*-----------------------------------------------------
                             Fonctions :
@@ -261,13 +259,13 @@
                     //Ici l'email et le mdp sont OK      
                     $message = '<p>Vous êtes connecté!</p>'; 
                     
-                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp pour des raisons de sécurité)
+                    //On stocke dans $session les infos de l'utilisateur
                     $_SESSION["user"] = [
                         "id_user" => $user["id_user"],
                         "name_user" => $user["name_user"],
                         "first_name_user" => $user["first_name_user"],
                         "email_user" => $user["email_user"],
-                        "mdp_user" => $user["mdp_user"],
+                        "mdp_user" => $user["mdp_user"],//il s'agit ici du hash du mdp et non du mdp
                         "is_admin" => $user["is_admin"],
                         "message" => $message
                     ];
@@ -307,59 +305,54 @@
             }
         
         }
-    
+
         /***************************************************************/
     
-        public function deleteUser($bdd){
-        
-            //récupération des valeurs de l'objet
-            $id_user = $this->getIdUser();
+        public function updateMdp($bdd){
             $mdp_user = $this->getMdpUser();
-            //pour affichage message
-            $name_user = $this->getNameUser();
-            $first_name_user = $this->getFirstNameUser();
+            $email_user = $this->getEmailUser();           
         
-            try{ 
+            try{
+                $sql = "UPDATE users SET mdp_user = :mdp_user WHERE email_user = :email_user";
             
-                //Reqûete Sql
-                $sql = "SELECT * FROM users WHERE id_user = :id_user";
-            
-                $query = $bdd->prepare($sql);
-            
-                //$query->bindValue;
-                $query->bindValue(":id_user", $id_user);
-                $query->execute();      
-                $user = $query->fetch();
-            
-                //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
-                if(!password_verify($mdp_user, $user["mdp_user"])){
-
-                    die("<p>L'email et/ou le mot de passe est incorrect</p>");  
-                }
-            
-                try{
-                //requête Suppression réservations
-                $sql = "DELETE FROM users WHERE id_user = :id_user";
-                
-                $query = $bdd->prepare($sql);
-                $query->bindValue(":id_user", $id_user);
-                $query->execute();
-            
-                //message confirmation suppression
-                echo '<p>Le compte utilisateur de '.$name_user.' '.$first_name_user.' a bien été supprimée.</p>';
-            
-                }catch(Exception $e){
-                
-                //affichage d'une exception en cas d’erreur
-                die('Erreur : '.$e->getMessage());
-                }
-
-            }catch(Exception $e){
-                
-                //affichage d'une exception en cas d’erreur
+                $user = $bdd->prepare($sql);
+                $user->execute(array(
+                    "mdp_user" => $mdp_user,
+                    "email_user" => $email_user
+                ));
+                            
+            } catch(Exception $e) {
+                                
+                //affichage d'une mssg en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             }
+        }
+    
+        /***************************************************************/
+        public function deleteUser($bdd){
+        
+        //récupération id
+        $id_user = $this->getIdUser();
+        //pour affichage message
+        $name_user = $this->getNameUser();
+        $first_name_user = $this->getFirstNameUser();
+        
+            try{
+            //requête Suppression réservations
+            $sql = "DELETE FROM users WHERE id_user = :id_user";
             
+            $query = $bdd->prepare($sql);
+            $query->bindValue(":id_user", $id_user);
+            $query->execute();
+        
+            //message confirmation suppression
+            echo '<p>Le compte utilisateur de '.$name_user.' '.$first_name_user.' a bien été supprimée.</p>';
+
+            } catch(Exception $e) {
+            
+            //affichage d'une exception en cas d’erreur
+            die('Erreur : '.$e->getMessage());
+            }
             
         } 
     }

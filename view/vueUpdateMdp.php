@@ -19,7 +19,7 @@ include("head.php");
       <h3>Modification du mot de passe</h3>
       <div>
         <label for="old_mdp">Ancien mot de passe:</label>
-        <input type="password" name="old_mdp" value="" size="25">
+        <input type="password" name="mdp_user" value="" size="25">
       </div>
       <div>
         <label for="new_mdp">Nouveau mot de passe: </label>
@@ -30,6 +30,7 @@ include("head.php");
         <input type="password" name="confirm_mdp" value="" size="35">
       </div>
       <span>
+        <input type="hidden" name="email_user" value="<?= $_SESSION["user"]["email_user"] ?>">
         <input class="connexionBtn" type="submit" value="Confirmer">
       </span>
     </form>
