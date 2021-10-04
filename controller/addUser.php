@@ -6,7 +6,6 @@
   
   //On connecte l'utilisateur aprés la création de son compte
   session_start();// on démarre la session php (un cookie se crée à cet instant, la session est un tableau )
-  
 
   /*----------------------------------------------------
             IMPORTS à effectuer pour ajout en bdd:
@@ -21,11 +20,9 @@
     //appel vue Inscription
     require("../view/vueInscription.php"); 
 
-
   /*-----------------------------------------------------
                         CONTROLLER:
    -----------------------------------------------------*/
-
 
   //pour interdire l'accés à "addUser.php" si déjà connecté (on renvoie vers page "vueProfil.php")
   if(isset($_SESSION["user"])){
@@ -39,8 +36,8 @@
       //le formulaire a été envoyé
       
       //on vérifie que tous les champs sont remplis
-      if(isset($_POST["name_user"], $_POST["first_name_user"], $_POST["email_user"], $_POST["mdp_user"])
-      && !empty($_POST["name_user"]) && !empty($_POST["first_name_user"]) && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"])){
+      if(isset($_POST["name_user"], $_POST["first_name_user"], $_POST["email_user"], $_POST["mdp_user"], $_POST["confirm_mdp"])
+      && !empty($_POST["name_user"]) && !empty($_POST["first_name_user"]) && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"]) && !empty($_POST["confirm_mdp"])){
         //Le formulaire est complet
 
         //On récupère les données en les protégeant
@@ -57,13 +54,15 @@
           $email_user = $_POST["email_user"];
         }  
 
+        //Contrôle longueur mot de passe
+        if(strlen($_POST["mdp_user"])<8){
 
-        //Ajouter ici tous les contrôles requis
-        // ******
-        // ******
-        // ******      
-        // ******
-        
+          die ("<p>Veuillez saisir un mot de passe comportant au moins 8 caractères.</p>");
+
+        } else if($_POST["mdp_user"]!=$_POST["confirm_mdp"]){
+
+          die("<p>Les mots de passe saisis ne correspondent pas</p>");
+        }
 
         //On va hasher le mdp (algo de hashage BCRYPT (60 caractères) et non de chiffrement comme avec du md5 (obsolète et réversible)).
         $mdp_user = password_hash($_POST["mdp_user"], PASSWORD_BCRYPT);
@@ -72,8 +71,12 @@
         require_once "../utils/connexionBdd.php";        
 
         //création d'un objet depuis les valeurs contenues dans le formulaire
-        //$user = new UserBean($_POST["name_user"], $_POST["first_name_user"], $_POST["admin_user"], $_POST["mdp_user"]);
-        $user = new UserBean("$name_user", "$first_name_user", "$email_user", "$mdp_user");
+        $user = new UserBean();
+        $user->setNameUser($name_user);
+        $user->setFirstNameUser($first_name_user);
+        $user->setEmailUser($email_user);
+        $user->setMdpUser($mdp_user);
+
         
         //On teste si l'utilisateur ("email_user") existe déjà (fonction userExists())
         if($user->userExists($bdd)==true){
@@ -84,26 +87,6 @@
           $user->createUser($bdd);
         }
       
-        // //On récupère l'id du nouvel utilisateur
-        // $id = $bdd->lastInsertId();
-        
-        // //Message de confirmation de création du compte
-        // $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
-
-        // //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
-        // $_SESSION["user"] = [
-        //   "id_user" => $id, //Récupéré grâce à lastInsertId()
-        //   "name_user" => $name_user,
-        //   "first_name_user" => $first_name_user,
-        //   "email_user" => $email_user,
-        //   "message" => $message
-        // ];
-        
-        
-        // //On redirige vers la page profil.php par exemple
-        // header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
-        
-
       } else {
 
         die("<p>Le formulaire est incomplet</p>"); 

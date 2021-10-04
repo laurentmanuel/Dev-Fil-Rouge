@@ -1,29 +1,19 @@
 <?php 
-  session_start();
-  //head
+  if(!isset($_SESSION["user"])){
+    session_start();
+  }
+  $titre = "Mentions légales";
   include("head.php"); 
 ?>
-  <title>Apollo Space Park Mentions légales</title>
-</head>
 
 <body>
   
   <!-- bordure -->
   <?php include "bordure.php"; ?>
 
-  <header>
-    <!-- banniere supérieure        -->
-    <?php include("header.php"); ?>
-    <!-- Navigation desktop -->
-    <?php include("navbar.php"); ?>
-    <!-- bouton burger -->
-    <div class="burgerBtn">
-      <span></span>
-    </div>
-    <!-- Menu burger -->
-    <?php include("burger.php"); ?>
-    <h1 class="pgTitle">Mentions légales</h1>
-  </header>
+  <!-- header -->
+  <?php include("header.php"); ?>
+
   <div class="container">
   <h2>Mentions légales</h2>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus porta libero, et congue nisl efficitur vel. Duis at eleifend purus, eu dapibus elit. Praesent non congue dolor. Integer lacinia felis ligula, non pharetra sem volutpat non. Sed aliquet, lacus eget bibendum tincidunt, nibh lorem semper justo, id imperdiet erat quam eu leo. Donec a pharetra massa, bibendum scelerisque dolor. Maecenas pharetra libero et posuere vulputate. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ex turpis, suscipit iaculis viverra varius, tempor non odio. In pharetra urna nec felis mattis, id posuere massa vestibulum. Proin hendrerit a sapien vel aliquam.

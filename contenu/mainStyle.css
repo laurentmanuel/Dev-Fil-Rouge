@@ -24,7 +24,7 @@ body{
 }
 
 header{
-    z-index: 10;
+    z-index: 4;
     display: flex;
     margin: 0;
     height: 75px;
@@ -46,7 +46,7 @@ input{
 
 
 #logo{
-    z-index: 9;
+    z-index: 4;
     width: 130px;
     height: 130px;
     position: absolute;
@@ -109,7 +109,7 @@ nav li{
 
 
 .container{
-    z-index: -1;
+    /* z-index: -1; */
     position: absolute;
     color: #FFF;
     margin-top: 5%;
@@ -117,7 +117,7 @@ nav li{
     margin-right:3%;
 }
 #bordure{
-    z-index: 9;
+    z-index: 5;
     display: flex;
     position: fixed;
     width: 100px;
@@ -128,7 +128,6 @@ nav li{
 }
 
 #vertical_title{
-    z-index: -1;
     vertical-align: middle;
     color: #5c5b5b;
     font-size: 3em;
@@ -141,7 +140,7 @@ nav li{
 }
 
 .userForm{
-    z-index: -11;
+    margin-left: 50%;
     display: flex;
     justify-content: center;
     background-color: white;
@@ -163,6 +162,22 @@ nav li{
     text-align: center;
 }
 
+.userForm a{
+    text-decoration: none;
+}
+
+
+
+#erreur{
+    display: none;
+    color: red;
+}
+
+#ok{
+    display: none;
+    color: green;
+}
+
 .connexionBtn{
     font-size: 25px;
     margin-top: 10px;
@@ -173,8 +188,10 @@ nav li{
     justify-content: center;
 }
 
+
+
 article{
-    z-index: -2;
+    z-index: 1; 
     position: absolute;
     text-align: center;
     width: 380px;
@@ -214,11 +231,11 @@ article{
     right: 0px;
     margin-top: 40px;
     margin-right: 3%;
-    z-index: -3;
+    /* z-index: -3; */
 }
 
 #decollage{
-    z-index: -4;
+    /* z-index: -4; */
     position: absolute;
     right: 0px;
     margin-right: 30%;
@@ -273,7 +290,7 @@ footer a{
 
 /* Bouton burger et animation */
 .burgerBtn{
-    z-index: 10;
+    z-index: 5;
     width: 21px;
     height: 12px;   
     cursor: pointer;
@@ -330,7 +347,6 @@ footer a{
     border: 1px solid #b3daf2;
     box-shadow: 0 0 2px 2px;
     margin-right: -5px;
-    /*display: inline-block;test pour faire marcher effet surligné*/
 }
 
 .menuBg ul{
@@ -338,7 +354,7 @@ footer a{
 }
 
 .menuBg li{
-    list-style-type: none;
+    list-style-type: none;/*pour masquer les puces*/
     margin-top: 14px;
 }
 
@@ -354,23 +370,50 @@ footer a{
 
 /* menu déployant fermé */
 .invisible{
-    z-index: -1;
-    margin-top: -300px;
+    z-index: 2;
+    margin-top: -355px;
     transition-duration: 0.3s;
     position: absolute;
     right: 0px; 
-  } 
+} 
   
 /* ouverture menu déployant */
 .invisible.visible{
-    z-index: -1;
     margin-top: -10px;
     transition-duration: 0.3s;
 }
 
+/*********Boutons**********/
+.styled {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: #0361cc;
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.styled:hover {
+    background-color: #0168d9;
+}
+
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+/*****************************/
 
 /*****************************/
-/*effect surligné*/
+/*effets surlignés au survol navbar*/
 
 nav a {
   display: inline-block;
@@ -394,14 +437,6 @@ nav a {
 /*****************************/
 
 
-
-
-
-
-
-
-
-
 /*Responsive (media queries)*/
 @media all and (max-width: 1024px){
     
@@ -422,9 +457,10 @@ nav a {
         position: absolute;
         right: 25px;
         top: 20px;
+
     }
     
-    /****masquer la nav desktop******/
+    /****masquer la navbar desktop******/
     nav{
         display: none;
     }
@@ -497,3 +533,54 @@ nav a {
     }
 
 }
+
+
+
+/*****************************/
+
+/* Style The Dropdown Button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  }

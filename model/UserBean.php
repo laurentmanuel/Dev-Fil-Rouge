@@ -1,7 +1,7 @@
 <?php
 
     class UserBean{ 
-         
+
         /*----------------------------------------------------
                             Attributs :
         -----------------------------------------------------*/  
@@ -10,104 +10,97 @@
         private $first_name_user;
         private $email_user;
         private $mdp_user;
-        //Gestion des droits à developper
-        //private $admin_user = false; 
+        private $is_admin = 0; //attribut false par défaut
 
 
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($name_user, $first_name_user, $email_user, $mdp_user/*, $admin_user*/){   
-            $this->name_user = $name_user;
-            $this->first_name_user = $first_name_user;
-            $this->email_user = $email_user;
-            $this->mdp_user = $mdp_user;
-            //$this->admin_user = $admin_user;
+        public function __construct(){
+            //$is_admin n'est pas dans le constructeur car on garde la paramètre par défaut
         }
-
-
+    
+    
         /*-----------------------------------------------------
                         Getter & Setter : (pour respect du principe d'encapsulation)
         -----------------------------------------------------*/
-
+    
         //id_user Getter & Setter
         public function getIdUser(){
             return $this->id_user;
         }
-
+    
         public function setIdUser($newIdUser){
             $this->id_user = $newIdUser;
         }
-
+    
         //name_user Getter & Setter
         public function getNameUser(){
             return $this->name_user;
         }
-
+    
         public function setNameUser($newNameUser){
             $this->name_user = $newNameUser;
         }
-
+    
         //first_name_user Getter & Setter
         public function getFirstNameUser(){
             return $this->first_name_user;
         }
-
+    
         public function setFirstNameUser($newFirstNameUser){
             $this->first_name_user = $newFirstNameUser;
         }
-
+    
         //login_user Getter & Setter
         public function getEmailUser(){
             return $this->email_user;
         }
-
+    
         public function setEmailUser($newEmailUser){
             $this->email_user = $newEmailUser;
         }
-
+    
         //mdp_user Getter & Setter
         public function getMdpUser(){
             return $this->mdp_user;
         }
-
+    
         public function setMdpUser($newMdpUser){
             $this->mdp_user = $newMdpUser;
         }
-
-
-        //admin_user Getter & Setter
-
-        // public function getAdminUser(){
-        //     return $this->admin_user;
-        // }
-
-        // public function setAdminUser($newAdminUser){
-        //     $this->admin_user = $newAdminUser;
-        // }
-
-
+    
+    
+        //is_admin Getter & Setter
+    
+        public function getIsAdmin(){
+            return $this->is_admin;
+        }
+    
+        public function setIsAdmin($newIsAdmin){
+            $this->is_admin = $newIsAdmin;
+        }
+    
         /*-----------------------------------------------------
                             Fonctions :
         -----------------------------------------------------*/
-
-
+    
+    
         //méthode ajout d'un utilisateur en bdd
         public function createUser($bdd){
-
+        
             //récupération des valeurs de l'objet
             $name_user = $this->getNameUser();
             $first_name_user = $this->getFirstNameUser();
             $email_user = $this->getEmailUser();
-            $mdp_user = $this->getMdpUser(); 
-            //Gestion des droits à développer
-            //$admin_user = $this->getAdminUser();
-
+            $mdp_user = $this->getMdpUser();
+            $is_admin = $this->getIsAdmin();
+        
             try{
-               
+            
                 //requête sql pour création d'un utilisateur
-                $sql = "INSERT INTO users(name_user, first_name_user, email_user, mdp_user/*, admin_user*/) VALUES
-                (:name_user, :first_name_user, :email_user, :mdp_user/*, :admin_user*/)"; //ici le mdp est hashé //query OK
+                $sql = "INSERT INTO users(name_user, first_name_user, email_user, mdp_user, is_admin) VALUES
+                (:name_user, :first_name_user, :email_user, :mdp_user, :is_admin)"; 
 
                 //Création de la requête préparée pour protéger des injections SQL (et améliorer les perfs dans le cas de requêtes exécutées plusieurs fois dans la même session)
                 $query = $bdd->prepare($sql);
@@ -117,63 +110,63 @@
                     "name_user" => $name_user,
                     "first_name_user" => $first_name_user,
                     "email_user" => $email_user,
-                    "mdp_user" => $mdp_user));
-
+                    "mdp_user" => $mdp_user,
+                    "is_admin" => $is_admin
+                ));
+            
                 //On récupère l'id du nouvel utilisateur
-                $id = $bdd->lastInsertId();
-        
+                $id_user = $bdd->lastInsertId();
+            
                 //Message de confirmation de création du compte
                 $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
-
+            
                 //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
                 $_SESSION["user"] = [
-                "id_user" => $id, //Récupéré grâce à lastInsertId()
+                "id_user" => $id_user, //Récupéré grâce à lastInsertId()
                 "name_user" => $name_user,
                 "first_name_user" => $first_name_user,
                 "email_user" => $email_user,
+                "mdp_user" => $mdp_user,
+                "is_admin" => $is_admin,
                 "message" => $message
                 ];
                 
-                
-                //On redirige vers la page profil.php par exemple
+                //On redirige vers la page profil.php une fois le compte créé 
                 header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
-        
-                
-                
-                
+                        
             } catch(Exception $e) {
-
+            
                 //affichage d'une mssg en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             }        
         }
-
-
-
-        //--------------------------------
-
+    
+    
+    
+        /****************************************************************/
+    
         //méthode pour vérifier si un utilisateur existe dans la bdd
         public function userExists($bdd): bool{
-
+        
             //récupération des valeurs de l'objet       
             $email_user = $this->getEmailUser();  
-
+        
             try{                   
-
+            
                 //requête pour stocker le contenu de toute la table le contenu est stocké dans le tableau $reponse
                 $sql = "SELECT * FROM users WHERE email_user = :email_user";
-
+            
                 $query = $bdd->prepare($sql);
-
+            
                 //$query->bindValue;
-                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, paramètre String par défaut
                 $query->execute();
                 
                 //On stocke dans user le résultat de la requête
                 $user = $query->fetch();
                 
                 if(!$user){
-
+                
                     //Ici l'utilisateur n'existe pas
                     return false;
                 } else {
@@ -181,65 +174,64 @@
                     //Ici l'utilisateur existe
                     return true;
                 }
-
+            
             } catch(Exception $e) {
-
+            
                 //affichage d'une mssg en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             }        
         }
-
-        //--------------------------------
-
+    
+        /***************************************************************/
+    
         public function logUser($bdd){
-
+        
             $email_user = $this->getEmailUser();
             $mdp_user = $this->getMdpUser();
             
             try{ 
                 //Reqûete Sql
                 $sql = "SELECT * FROM users WHERE email_user = :email_user";
-      
+            
                 $query = $bdd->prepare($sql);
-      
+            
                 //$query->bindValue;
                 $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
                 $query->execute();      
                 $user = $query->fetch();
-
+            
                 //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
                 if(!password_verify($mdp_user, $user["mdp_user"])){
                 
-                  die("<p>L'email et/ou le mot de passe est incorrect</p>");  
-
+                    die("<p>L'email et/ou le mot de passe est incorrect</p>");  
+                
                 } else {
-                    $message = '<p>Vous êtes connecté!</p>'; 
-      
+                
+                    $message = "<p>Vous êtes connecté!</p>"; 
+                
                     //Ici l'email et le mdp sont OK      
-                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                    //On stocke dans $session les infos de l'utilisateur 
                         $_SESSION["user"] = [
                             "id_user" => $user["id_user"],
                             "name_user" => $user["name_user"],
                             "first_name_user" => $user["first_name_user"],
                             "email_user" => $user["email_user"],
-                            "message" => $message/*,
-                            "admin_user" => $user["admin_user"]*/
+                            "mdp_user" => $user["mdp_user"],
+                            "is_admin" => $user["is_admin"],
+                            "message" => $user["message"]
                         ];
-      
-                    //Redirection vers la page profil.php par exemple
-                    header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+                    
                 }
-
+            
             } catch(Exception $e) {
-
+            
                 //affichage d'une mssg en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             }
         }   
-
         
-        //-------------------------------
-
+        /***************************************************************/
+    
         public function createSession($bdd){
             
             //récupération des valeurs de l'objet       
@@ -254,7 +246,7 @@
                 $query = $bdd->prepare($sql);
                 
                 //$query->bindValue;
-                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//falcultatif, il s'agit d'un paramètre par défaut
+                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//facultatif, il s'agit d'un paramètre par défaut
                 $query->execute();      
                 $user = $query->fetch();
                 
@@ -267,14 +259,15 @@
                     //Ici l'email et le mdp sont OK      
                     $message = '<p>Vous êtes connecté!</p>'; 
                     
-                    //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
+                    //On stocke dans $session les infos de l'utilisateur
                     $_SESSION["user"] = [
                         "id_user" => $user["id_user"],
                         "name_user" => $user["name_user"],
                         "first_name_user" => $user["first_name_user"],
                         "email_user" => $user["email_user"],
-                        "message" => $message/*,
-                        "admin_user" => $user["admin_user"]*/
+                        "mdp_user" => $user["mdp_user"],//il s'agit ici du hash du mdp et non du mdp
+                        "is_admin" => $user["is_admin"],
+                        "message" => $message
                     ];
                 }
                 
@@ -284,21 +277,84 @@
                 die('Erreur : '.$e->getMessage());
             }
         }
-
-
-        //-------------------------------
+    
+    
+        /***************************************************************/
     
         public function updateUser($bdd){
+            $name_user = $this->getNameUser();
+            $first_name_user = $this->getFirstNameUser();
+            $email_user = $this->getEmailUser();
+            $id_user = $this->getIdUser();               
+        
+            try{
+                $sql = "UPDATE users SET name_user = :name_user, first_name_user = :first_name_user, email_user = :email_user WHERE id_user = :id_user";
             
+                $user = $bdd->prepare($sql);
+                $user->execute(array(
+                    "id_user" => $id_user,
+                    "name_user" => $name_user,
+                    "first_name_user" => $first_name_user,
+                    "email_user" => $email_user
+                ));
+            
+            } catch(Exception $e) {
+                                
+                //affichage d'une mssg en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }
+        
+        }
+
+        /***************************************************************/
     
+        public function updateMdp($bdd){
+            $mdp_user = $this->getMdpUser();
+            $email_user = $this->getEmailUser();           
+        
+            try{
+                $sql = "UPDATE users SET mdp_user = :mdp_user WHERE email_user = :email_user";
+            
+                $user = $bdd->prepare($sql);
+                $user->execute(array(
+                    "mdp_user" => $mdp_user,
+                    "email_user" => $email_user
+                ));
+                            
+            } catch(Exception $e) {
+                                
+                //affichage d'une mssg en cas d’erreur
+                die('Erreur : '.$e->getMessage());
+            }
         }
     
-        
-    
+        /***************************************************************/
         public function deleteUser($bdd){
-    
         
-        }
+        //récupération id
+        $id_user = $this->getIdUser();
+        //pour affichage message
+        $name_user = $this->getNameUser();
+        $first_name_user = $this->getFirstNameUser();
+        
+            try{
+            //requête Suppression réservations
+            $sql = "DELETE FROM users WHERE id_user = :id_user";
+            
+            $query = $bdd->prepare($sql);
+            $query->bindValue(":id_user", $id_user);
+            $query->execute();
+        
+            //message confirmation suppression
+            echo '<p>Le compte utilisateur de '.$name_user.' '.$first_name_user.' a bien été supprimée.</p>';
+
+            } catch(Exception $e) {
+            
+            //affichage d'une exception en cas d’erreur
+            die('Erreur : '.$e->getMessage());
+            }
+            
+        } 
     }
     
-    ?>
+?>

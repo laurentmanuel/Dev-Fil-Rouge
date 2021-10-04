@@ -32,7 +32,16 @@ CREATE TABLE news(
 alter table news
 add constraint fk_id_user_users
 foreign key(id_user)
-references users(id_user) on delete cascade; 
+references users(id_user); 
+
+#------------------------------------------------------------
+# Table: attractions
+#------------------------------------------------------------
+
+CREATE TABLE attractions(
+        id_attraction Int auto_increment primary key not null,
+        age_min_attraction Int,
+        max_people_attraction Int);
 
 #------------------------------------------------------------
 # Table: reservations
@@ -50,7 +59,7 @@ CREATE TABLE reservations(
 alter table reservations
 add constraint fk_id_user
 foreign key(id_user)
-references users(id_user) on delete cascade;
+references users(id_user);
 	
 #------------------------------------------------------------
 # Table: avis
@@ -69,4 +78,4 @@ CREATE TABLE avis(
 alter table avis
 add constraint fk_avis_id_user
 foreign key(id_user)
-references users(id_user) on delete cascade;
+references users(id_user);

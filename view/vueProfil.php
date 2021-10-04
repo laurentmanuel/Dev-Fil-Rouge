@@ -1,43 +1,48 @@
-<?php 
+<?php
+if (!isset($_SESSION["user"])) {
   session_start();
-  //head
-  include("head.php"); 
+}
+$titre = "Votre compte";
+include("head.php");
 ?>
 
- 
-<title>Apollo Space Park Mon Profil</title>
-</head>
-
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-  
-  <header>
-    <!-- banniere supérieure        -->
-    <?php include("header.php"); ?>
-    <!-- Navigation desktop -->
-    <?php include("navbar.php"); ?>
-    <!-- bouton burger -->
-    <div class="burgerBtn">
-      <span></span>
-    </div>
-    <!-- Menu burger -->
-    <?php include("burger.php"); ?>
-    <h1 class="pgTitle">Bonjour <?= $_SESSION["user"]["first_name_user"] ?> !</h1>
-  </header>
 
-  <h2>Votre profil:</h2>
+  <!-- header -->
+  <?php include("header.php"); ?>
 
-  <p>Nom: <?= $_SESSION["user"]["name_user"]; ?></p>
-  <p>Prénom: <?= $_SESSION["user"]["first_name_user"]; ?></p>
-  <p>Email: <?= $_SESSION["user"]["email_user"]; ?></p>
-
-  <!--Affichage message -->
-  <p><?= $_SESSION["user"]["message"] ?></p>
-
-
-  <!-- footer  -->  
+  <div class="userForm">
+    <form action="../controller/updateUser.php" method="post">
+      <h3>Mon Compte</h3>
+      <div>
+        <label for="name">Nom:</label>
+        <input type="text" name="name_user" value="<?= $_SESSION["user"]["name_user"] ?>" size="25">
+      </div>
+      <div>
+        <label for="first_name">Prénom: </label>
+        <input type="text" name="first_name_user" value="<?= $_SESSION["user"]["first_name_user"] ?>" size="25">
+      </div>
+      <div>
+        <label for="email">Email: </label>
+        <input type="text" name="email_user" value="<?= $_SESSION["user"]["email_user"] ?>" size="35">
+      </div>
+      <span>
+        <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
+        <input class="connexionBtn" type="submit" value="Modifier mon profil">
+      </span>
+      <span> 
+        <button><a href="../controller/updateMdp.php">Modifier mot de passe</a></button>
+      </span>
+      <span> 
+        <button><a href="../controller/deleteUser.php">Supprimer mon compte</a></button>
+      </span>
+    </form>
+    <!--Affichage message -->
+    <p><?= $_SESSION["user"]["message"] ?></p>
+  </div>
+  <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>
 
