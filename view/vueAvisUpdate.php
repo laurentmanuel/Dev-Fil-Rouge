@@ -34,7 +34,8 @@ include("head.php");
         <textarea name="comments" id="" cols="30" rows="10"><?= $detailsAvis["comments"] ?></textarea>
       </div>
       <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis">
-      <button type="submit" class="favorite styled">Valider</button>
+      <input class="styled"type="submit" value="Valider"></input>
+      <button class="styled"><a href="../controller/showUserAvis.php">Revenir aux avis</a></button>
     </form>
   </div>
   <!-- footer  -->

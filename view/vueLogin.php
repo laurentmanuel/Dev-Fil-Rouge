@@ -26,8 +26,8 @@ include("head.php");
           <input type="text" name="email_user" size="35" placeholder="votre email">
         </div>
         <div>
-          <label for="mdp">Mot de passe:
-            <input type="password" name="mdp_user" placeholder="8 caractères minimum">
+          <label for="mdp">Mot de passe: </label>
+          <input type="password" name="mdp_user" placeholder="8 caractères minimum">
         </div>
         <div>
           </label>

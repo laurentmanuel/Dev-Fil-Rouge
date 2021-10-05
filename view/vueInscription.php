@@ -20,27 +20,27 @@ include("head.php");
       <p>Merci de bien vouloir remplir les champs suivants:</p>
       <div>
         <label for="name">Nom:</label>
-        <input type="text" name="name_user" size="25">
+        <input type="text" name="name_user" size="25" placeholder="nom">
       </div>
       <div>
         <label for="first_name">Prénom: </label>
-        <input type="text" name="first_name_user" size="25">
+        <input type="text" name="first_name_user" size="25" placeholder="prénom">
       </div>
       <div>
         <label for="email">Email: </label>
-        <input type="text" name="email_user" size="35">
+        <input type="text" name="email_user" size="35" placeholder="email">
       </div>
       <div>
         <label for="mdp">Mot de passe: </label>
-        <input type="password" name="mdp_user"></p>
+        <input type="password" name="mdp_user" placeholder="8 caractères minimum"></p>
       </div>
       <div>
         <label for="confirm_mdp">Confirmer mot de passe: </label>
-        <input type="password" name="confirm_mdp">
+        <input type="password" name="confirm_mdp" placeholder="8 caractères minimum">
         <div>
           <p><a href="../view/vueLogin.php">Déjà un compte?</a></p>
           <span>
-            <input class="connexionBtn" type="submit" value="créer le compte">
+            <input class="styled" type="submit" value="Créer mon compte">
           </span>
     </form>
     <!--Affichage message -->

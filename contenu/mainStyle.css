@@ -177,13 +177,55 @@ article{
     text-align: center;
 }
 
-.userForm a{
-    text-decoration: none;
+
+/**************Tableaux************/
+
+section{
+    margin: auto;
 }
 
-.connexionBtn{
-    font-size: 25px;
-    margin-top: 10px;
+table{
+    border-collapse: collapse;
+    width: auto;
+    cursor: pointer;
+    margin: 30px auto;
+    background-color: #fff;
+    color: #5c5b5b;
+    font-size: 1.5em;
+}
+
+table caption{
+    color: #fff;
+    font-family: 'futura-renner', sans-serif;
+    font-style: italic;
+    margin-bottom: 1.1em;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+thead tr{
+    background-color: #5c5b5b;
+    color: #fff;
+    text-align: left;
+}
+
+th, td{
+    padding: 15px 20px;
+    border: 2px solid #fff;
+}
+
+tbody tr, td{
+    border: 2px solid #ddd;
+}
+
+tbody tr:nth-child(even){
+    background-color: #f3f3f3;
+}
+
+/**************************************/
+
+.userForm a{
+    text-decoration: none;
 }
 
 .userForm span{
@@ -468,9 +510,6 @@ footer a{
     inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
-.table td{
-    color: #FFF;
-}
 /*****************************/
 
 /*****************************/
@@ -545,6 +584,27 @@ footer a{
 
     }
     
+    section{
+        margin-left: -20px;
+    }
+
+
+    table{
+        font-size: 1em;
+    }
+
+    table caption{
+        text-align: left;
+    }
+
+    .col_1, .col_5{
+        display: none;
+    }
+
+    th, td{
+        padding: 5px 5px;
+    }
+
     /****masquer la navbar desktop******/
     #navbar{
         display: none;

@@ -154,6 +154,7 @@
 
         public function showUserAvis($bdd){
             $id_user = $this->getIdUserAvis();
+
             try{
                 $sql = "SELECT * FROM avis WHERE id_user = :id_user ORDER BY updatedOn ASC";
                 $avis = $bdd->prepare($sql);
@@ -161,6 +162,7 @@
                 $avis->execute();
                 $userAvis = $avis->fetchAll();
                 return $userAvis;
+                
             } catch(Exception $e) {
                 die('Erreur : '.$e->getMessage());
             }

@@ -20,64 +20,47 @@ include("head.php");
   <!-- header -->
   <?php include("header.php"); ?>
 
-  <div>
-    <main class="container">
-      <div class="row">
-        <section class="col-10">
-          <?php if (!isset($_SESSION["user"])) : ?>
-            <h3>Tous les avis publiés: </h3>
-          <?php else : ?>
-            <h3><?= $_SESSION["user"]["first_name_user"] ?>, tous vos avis publiés:</h3>
-          <?php endif; ?>
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th>#</th>
-                <th>Note attribuée:</th>
-                <th>Titre:</th>
-                <th>Commentaires:</th>
-                <th>Créé/Modifié le:</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($allAvis as $avis) : ?>
-                <tr>
-                  <td><?= $avis["id_avis"] ?></td>
-                  <td><?= $avis["note"] ?></td>
-                  <td><?= $avis["title_avis"] ?></td>
-                  <td><?= $avis["comments"] ?></td>
-                  <td><?= $avis["updatedOn"] ?></td>
-                  <td>
-                    <?php if (isset($_SESSION["user"])) : ?>
-                      <div class="dropdown">
-                        <button class="dropbtn">Actions</button>
-                        <div class="dropdown-content">
-                          <a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a>
-                          <a href="../controller/updateAvis.php?id_avis=<?= $avis["id_avis"] ?>">Modifier</a>
-                          <a href="../controller/deleteAvis.php?id_avis=<?= $avis["id_avis"] ?>">Supprimer</a>
-                        <?php else : ?>
-                          <button class="styled"><a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a></button>
-                        <?php endif; ?>
-                        </div>
-                      </div>
-                    <?php endforeach; ?>
-                  </td>
-                </tr>
-            </tbody>
-          </table>
-          <?php if (!isset($_SESSION["user"])) : ?>
-            <button class="styled"><a href="../view/vueLogin.php">Ajouter un avis</a></button>
-            <button class="styled"><a href="../view/vueLogin.php">Voir mes avis</a></button>
-          <?php else : ?>
-            <button class="styled"><a href="../controller/addAvis.php">Ajouter un avis</a></button>
-            <button class="styled"><a href="../controller/showAvis.php">Voir tous les avis</a></button>
-          <?php endif; ?>
-        </section>
-      </div>
-    </main>
+  <div class="container">
+    <section>
+      <table>
+      <?php if (!isset($_SESSION["user"])) : ?>     
+        <caption>Tous les avis publiés:</caption>
+        <?php else: ?>
+        <caption><?= $_SESSION["user"]["first_name_user"] ?>, voir tous vos avis:</caption>
+        <?php endif; ?>
+        <thead>
+          <tr>
+            <th class="col_1">#</th>
+            <th class="col_2">Note attribuée:</th>
+            <th class="col_3">Titre:</th>
+            <th class="col_4">Commentaires:</th>
+            <th class="col_5">Créé/Modifié le:</th>
+            <th class="col_6">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($allAvis as $avis) : ?>
+            <tr>
+              <td class="col_1"><?= $avis["id_avis"] ?></td>
+              <td class="col_2"><?= $avis["note"] ?></td>
+              <td class="col_3"><?= $avis["title_avis"] ?></td>
+              <td class="col_4"><?= $avis["comments"] ?></td>
+              <td class="col_5"><?= $avis["updatedOn"] ?></td>
+              <td class="col_6"><button class="styled"><a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a></button></td>
+            <?php endforeach; ?>
+            </tr>
+        </tbody>
+      </table>
+      <?php if (!isset($_SESSION["user"])) : ?>
+        <button class="styled"><a href="../view/vueLogin.php" class="favorite styled">Ajouter un avis</a></button>
+        <button class="styled"><a href="../view/vueLogin.php" class="favorite styled">Voir mes avis</a></button>
+      <?php else : ?>
+        <button class="styled"><a href="../controller/addAvis.php">Ajouter un avis</a></button>
+      <?php endif; ?>
+    </section>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>
+
 </html>

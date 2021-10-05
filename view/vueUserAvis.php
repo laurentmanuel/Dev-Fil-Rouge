@@ -14,22 +14,24 @@ include("head.php");
   <!-- header -->
   <?php include("header.php"); ?>
 
-  <div class="userForm">
+  <div class="container">
     <section>
-    <h3><?= $_SESSION["user"]["first_name_user"] ?>, vos avis publiés:</h3>
+      <h3><?= $_SESSION["user"]["first_name_user"] ?>, voici vos avis: </h3>
       <table>
         <thead>
           <tr>
-            <th>Note:</th>
-            <th>Titre : </th>
+            <th>#</th>
+            <th>Note attribuée:</th>
+            <th>Titre:</th>
             <th>Commentaires:</th>
             <th>Créé/Modifié le:</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($userAvis as $avis) : ?>
+          <?php foreach ($allAvis as $avis) : ?>
             <tr>
+              <td><?= $avis["id_avis"] ?></td>
               <td><?= $avis["note"] ?></td>
               <td><?= $avis["title_avis"] ?></td>
               <td><?= $avis["comments"] ?></td>
@@ -39,11 +41,11 @@ include("head.php");
                   <div class="dropdown">
                     <button class="dropbtn">Actions</button>
                     <div class="dropdown-content">
-                      <a href="../controller/detailsAvis.php">Voir plus</a>
-                      <a href="../controller/updateAvis.php">Modifier</a>
-                      <a href="../controller/deleteAvis.php">Supprimer</a>
+                      <a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a>
+                      <a href="../controller/updateAvis.php?id_avis=<?= $avis["id_avis"] ?>">Modifier</a>
+                      <a href="../controller/deleteAvis.php?id_avis=<?= $avis["id_avis"] ?>">Supprimer</a>
                     <?php else : ?>
-                      <a href="../controller/detailsAvis.php">Voir plus</a>
+                      <button class="styled"><a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a></button>
                     <?php endif; ?>
                     </div>
                   </div>
@@ -53,14 +55,13 @@ include("head.php");
         </tbody>
       </table>
       <?php if (!isset($_SESSION["user"])) : ?>
-        <button class="styled"><a href="../view/vueLogin.php" class="favorite styled">Ajouter un avis</a></button>
-        <button class="styled"><a href="../view/vueLogin.php" class="favorite styled">Voir mes avis</a></button>
+        <button class="styled"><a href="../view/vueLogin.php">Ajouter un avis</a></button>
+        <button class="styled"><a href="../view/vueLogin.php">Voir mes avis</a></button>
       <?php else : ?>
         <button class="styled"><a href="../controller/addAvis.php">Ajouter un avis</a></button>
-        <button class="styled"><a href="../controller/showUserAvis.php">Voir mes avis</a></button>
+        <button class="styled"><a href="../controller/showAvis.php">Voir tous les avis</a></button>
       <?php endif; ?>
-  </div>
-  </section>
+    </section>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

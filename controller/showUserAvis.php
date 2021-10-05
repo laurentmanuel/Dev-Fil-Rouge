@@ -9,15 +9,24 @@
     //ajout du fichier de connexion 
     require("../utils/connexionBdd.php");
     
-    //création d'une instance d'objet ReservBean 
-    $avis = new AvisBean();       
+    //création d'une instance d'objet 
+    if(!isset($_SESSION["user"])){
+        header("Location: ../controller/logUser.php");
+    } 
 
-    $id_user = $this->setIdUserAvis($_SESSION["user"]["id_user"]); 
-    var_dump($id_user);       
-    $userAvis = $avis->showUserAvis($bdd);  
-    var_dump($userAvis);  
+    $avis = new AvisBean();
     
-    //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur)
-    require("../view/vueUserAvis.php"); 
+    //On mets dans l'instance d'objet avis la valeur de l'id_user
+    $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
+        
+    //Appel méthode 
+    $allAvis = $avis->showUserAvis($bdd);
+
+    if($allAvis==null){
+        echo ("<p>Aucun avis n'a été publié.</p>");
+    }
+    
+    //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur
+    require("../view/vueUserAvis.php");
     
     ?>
