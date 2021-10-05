@@ -21,7 +21,6 @@ include("head.php");
     <p>Créé/modifié le : <?= $detailsAvis["updatedOn"] ?></p>
     <p>Titre: <?= $detailsAvis["title_avis"] ?></p>
     <textarea>Commentaires: <?= $detailsAvis["comments"] ?></textarea>
-    <button class="styled"><a href="../controller/showAvis.php">Revenir aux avis</a></button>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

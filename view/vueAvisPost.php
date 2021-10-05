@@ -6,9 +6,7 @@ $titre = "Votre avis";
 include("head.php");
 ?>
 
-
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
 
@@ -23,12 +21,12 @@ include("head.php");
         <i class="lar la-star" data-value="1"></i><i class="lar la-star" data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" data-value="4"></i><i class="lar la-star" data-value="5"></i>
         <input type="hidden" name="note" id="note" value="0">
       </div>
-      <div>
+      <div class="innerInputs">
         <label for="title">Titre: </label>
-        <input type="text" name="title_avis">
+        <input type="text" name="title_avis" size="30">
       </div>
-      <div>
-        <label for="comments">Vos commentaires: </label>
+      <div class="innerInputs">
+        <label for="comments">Vos commentaires: </label><br>
         <textarea name="comments" id="" cols="30" rows="10"></textarea>
       </div>
       <button class="styled" type="submit">Valider</button>

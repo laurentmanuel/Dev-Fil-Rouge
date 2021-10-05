@@ -91,7 +91,6 @@ p{
     margin-right: 3%;
 }
 
-
 article{
     margin-top: 5em;                             
 }
@@ -156,25 +155,30 @@ article{
     background-color: white;
     border: 1px solid #707070;
     border-radius: 10px;
-    width: 60%;
-    height: 30em;
+    width: 62%;
+    height: 25em;
     margin: auto;
-    padding-top: 40px;
+    padding-top: 30px;
     margin-top: 4em;
-}
-
-.userForm label{
-    margin-top: 1em;
-    
+    font-size: 1.3em;
+    font-family: 'futura-renner';
+    font-style: italic;
 }
 
 .userForm p, .userForm h3{
     margin-top: auto;
     color: #000;
-    font-style: italic;
     padding-top: 3px;
-    font-family: 'futura-renner';
     text-align: center;
+}
+
+textarea{
+    width: 600px;
+    height: 200px;
+}
+
+.innerInputs{
+    margin-top: 10px;
 }
 
 
@@ -398,7 +402,7 @@ footer a{
 
 .menuBg li{
     list-style-type: none;/*pour masquer les puces*/
-    margin-top: 22px;
+    margin-top: 15px;
 }
 
 .menuBg a{
@@ -547,7 +551,7 @@ footer a{
     display: block;
     height: 0.17em;
     width: 0%;
-    margin-bottom: -3px;
+    margin-bottom: 2px;
     background-color: #FFF;
     transition: width 0.4s;
 }
@@ -588,7 +592,15 @@ footer a{
         margin-left: -20px;
     }
 
+    .userForm{
+        font-size: 1em;
+    }
 
+    textarea{
+        width: min-content;
+        height: max-content;
+    }
+    
     table{
         font-size: 1em;
     }
@@ -597,12 +609,8 @@ footer a{
         text-align: left;
     }
 
-    .col_1, .col_5{
-        display: none;
-    }
-
     th, td{
-        padding: 5px 5px;
+        padding: 0px 0px;
     }
 
     /****masquer la navbar desktop******/

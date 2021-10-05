@@ -12,7 +12,7 @@
 
   <div id="une">
     <article>
-      <h1>Apollo Space Park vous souhaite la Bienvenue!</h1>
+      <h1>Apollo Space Park, prêt pour la conquête spatiale?</h1>
       <h3>Une expérience mémorable!</h3>
       <h3><a href="../view/vueReservations.php">Réservez maintenant!</a></h3>
       <p>
