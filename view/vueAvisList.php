@@ -30,9 +30,9 @@ include("head.php");
             <h3><?= $_SESSION["user"]["first_name_user"] ?>, tous vos avis publiés:</h3>
           <?php endif; ?>
           <table class="table">
-            <thead>
+            <thead class="thead-dark">
               <tr>
-                <th>id Avis:</th>
+                <th>#</th>
                 <th>Note attribuée:</th>
                 <th>Titre:</th>
                 <th>Commentaires:</th>
@@ -57,7 +57,7 @@ include("head.php");
                           <a href="../controller/updateAvis.php?id_avis=<?= $avis["id_avis"] ?>">Modifier</a>
                           <a href="../controller/deleteAvis.php?id_avis=<?= $avis["id_avis"] ?>">Supprimer</a>
                         <?php else : ?>
-                          <a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a>
+                          <button class="styled"><a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a></button>
                         <?php endif; ?>
                         </div>
                       </div>

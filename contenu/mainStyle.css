@@ -80,14 +80,14 @@ p{
     font-size: 1.2em;
 }
 
-nav{
+#navbar{
     position: absolute;
     right: 0px;
     display: flex;
     height:auto;
     width: auto;
     font-style: italic;
-    margin-top: 2em;
+    margin-top: 1.5em;
     margin-right: 3%;
 }
 
@@ -96,24 +96,21 @@ article{
     margin-top: 5em;                             
 }
 
-nav a, article a{
+#navbar a, article a{
     text-decoration: none; /*liens non soulignés*/
     color: #FFFFFF;
 }
 
-
-
-nav ul{
-    list-style-type: none;  /*puces supprimées */
-    display: flex;
-    color: #FFFFFF;
-}
-
-nav li{
+#navbar li{
     margin-right: 25px;
     font-size: 1.5em;
 }
 
+#navbar ul{
+    list-style-type: none;  /*puces supprimées */
+    display: flex;
+    color: #FFFFFF;
+}
 
 .container{
     /* z-index: -1; */
@@ -147,6 +144,11 @@ nav li{
     transform: rotate(-90deg);
 }
 
+.actu{
+    display: flex;
+    justify-content: center;
+}
+
 .userForm{
     z-index: 1;
     display: flex;
@@ -159,10 +161,14 @@ nav li{
     margin: auto;
     padding-top: 40px;
     margin-top: 4em;
+}
+
+.userForm label{
+    margin-top: 1em;
     
 }
 
-.userForm p, .userForm h3, .connexionBtn{
+.userForm p, .userForm h3{
     margin-top: auto;
     color: #000;
     font-style: italic;
@@ -350,7 +356,7 @@ footer a{
 
 .menuBg li{
     list-style-type: none;/*pour masquer les puces*/
-    margin-top: 14px;
+    margin-top: 22px;
 }
 
 .menuBg a{
@@ -461,12 +467,16 @@ footer a{
           
     inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
+
+.table td{
+    color: #FFF;
+}
 /*****************************/
 
 /*****************************/
 /*effets surlignés au survol navbar*/
 
-nav a {
+#navbar a {
   display: inline-block;
 }
 
@@ -536,7 +546,7 @@ nav a {
     }
     
     /****masquer la navbar desktop******/
-    nav{
+    #navbar{
         display: none;
     }
     
@@ -569,9 +579,9 @@ nav a {
     .pgTitle{
         display: block;
         position: absolute;
-        top: 0.7em;
-        left: 3.3em;
-        margin-left: 3%;
+        top: 0.2em;
+        left: 85px;
+        margin-left: 5%;
         font-size: 1.5em;
         font-style: italic;
         text-shadow: 1px 1px 0 #000,
@@ -609,6 +619,7 @@ nav a {
 
 }
 
+/*************boutons******************/
 
 
 /*****************************/

@@ -16,8 +16,10 @@
 
   <!-- footer  -->
   <?php include("footer.php"); ?>
+<div class="actu">
+  <img id="travaux" src="../contenu/images_fR/travaux.png" alt="travaux">
+</div>
 
-<h1>Work In progress</h1>
 
 </body>
 

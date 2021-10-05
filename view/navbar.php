@@ -1,5 +1,5 @@
 <!-- menu Navigation -->
-<nav>
+<nav id="navbar">
   <ul>
     <li><a href="../view/vueActu.php" class="menu__itemx">Actualité</a></li>
     <li><a href="../controller/showAvis.php" class="menu__itemx">Avis</a></li>

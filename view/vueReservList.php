@@ -15,7 +15,7 @@ include("head.php");
   <div>
     <main class="container">
       <div class="row">
-        <section class="col-10">
+        <section>
           <h3>Liste des réservations de <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?>:</h3>
           <table class="table">
             <thead>
