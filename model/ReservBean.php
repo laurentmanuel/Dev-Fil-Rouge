@@ -111,8 +111,7 @@
         
         try {
                         
-            $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY date_reserv asc";              
-        
+            $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY date_reserv asc";
             $reserv = $bdd->prepare($sql);
             $reserv->bindValue(":id_user", $id_user);
             $reserv->execute();
@@ -123,7 +122,6 @@
             die('Erreur: ' . $e->getMessage());
         }
     }
-    
 
     /****************************************************************/
         public function updateRes($bdd){    

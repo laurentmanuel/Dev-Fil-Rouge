@@ -41,12 +41,12 @@
         $user->setIdUser($_POST["id_user"]);
         $user->setMdpUser($_POST["mdp_user"]);
         $user->deleteUser($bdd);
+        header("Location: ../utils/deconnexion.php");
       }
     
 
       
       
-      header("Location: ../utils/deconnexion.php");
 
     } else {
 

@@ -16,16 +16,16 @@ include("head.php");
 
   <div class="userForm">
     <form action="../controller/updateMdp.php" method="post">
-      <h3>Modification du mot de passe:</h3>
+      <h3 class="connexTitle">Modification du mot de passe:</h3>
       <div>
         <label for="old_mdp">Ancien mot de passe:</label>
         <input type="password" name="mdp_user" value="" size="25" placeholder="8 caratères minimum">
       </div>
-      <div>
+      <div class="innerInputs">
         <label for="new_mdp">Nouveau mot de passe: </label>
         <input type="password" name="new_mdp" value="" size="25" placeholder="8 caratères minimum">
       </div>
-      <div>
+      <div class="innerInputs">
         <label for="confirm_mdp">Confirmer nouveau mot de passe: </label>
         <input type="password" name="confirm_mdp" value="" size="35" placeholder="8 caratères minimum">
       </div>

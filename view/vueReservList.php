@@ -18,21 +18,21 @@ include("head.php");
         <caption>Liste des réservations de <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?>:</caption>
         <thead>
           <tr>
-            <th>numéro de réservation</th>
-            <th>pour le :</th>
-            <th>Nombre de personnes</th>
-            <th>Créé/Modifié le:</th>
-            <th>Actions</th>
+            <th class="col_res_1">#</th>
+            <th class="col_res_2">Pour le :</th>
+            <th class="col_res_3">Nombre:</th>
+            <th class="col_res_4">Créé/Modifié le:</th>
+            <th class="col_res_5">Actions</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($allResByUser as $reserv) : ?>
             <tr>
-              <td><?= $reserv["id_reserv"] ?></td>
-              <td><?= $reserv["date_reserv"] ?></td>
-              <td><?= $reserv["nb_people"] ?></td>
-              <td><?= $reserv["updatedOn"] ?></td>
-              <td>
+              <td class="col_res_1"><?= $reserv["id_reserv"] ?></td>
+              <td class="col_res_2"><?= $reserv["date_reserv"] ?></td>
+              <td class="col_res_3"><?= $reserv["nb_people"] ?></td>
+              <td class="col_res_4"><?= $reserv["updatedOn"] ?></td>
+              <td class="col_res_5">
                 <div class="dropdown">
                   <button class="dropbtn">Actions</button>
                   <div class="dropdown-content">

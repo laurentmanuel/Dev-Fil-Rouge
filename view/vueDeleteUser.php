@@ -20,19 +20,20 @@ include("head.php");
 
   <div class="userForm">
     <form action="../controller/deleteUser.php" method="post">
-      <h3>Supprimer compte <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?></h3>
+      <h3 class="connexTitle">Supprimer compte <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?></h3>
       <div>
         <label for="mdp_user">Mot de passe:</label>
-        <input type="password" name="mdp_user" size="35">
+        <input type="password" name="mdp_user" size="35" placeholder="8 caractères">
       </div>
-      <div>
+      <div class="innerInputs">
         <label for="confirm_mdp">Confirmer mot de passe:</label>
-        <input type="password" name="confirm_mdp" size="35">
+        <input type="password" name="confirm_mdp" size="35" placeholder="8 caractères">
       </div>
-      <span>
+      <div class="btnContainer">
         <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
         <input class="dangerBtn" type="submit" value="Confirmer suppression">
-      </span>
+        <button class="styled"><a href="../view/vueProfil.php">Retour</a></button>
+      </div>
     </form>
   </div>
 
