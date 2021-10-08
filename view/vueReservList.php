@@ -5,11 +5,9 @@ if (!isset($_SESSION["user"])) {
 $titre = "Vos réservations";
 include("head.php");
 ?>
-
 <body>
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
   <!-- header -->
   <?php include("header.php"); ?>
   <div class="container">
@@ -48,7 +46,6 @@ include("head.php");
       <button type="button" class="styled"><a href="../view/vueReservations.php">Ajouter une réservation</a></button>
     </section>
   </div>
-
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

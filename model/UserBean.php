@@ -283,12 +283,9 @@
             //requête Suppression réservations
             $sql = "DELETE FROM users WHERE id_user = :id_user";
             
-            $query = $bdd->prepare($sql);
+            $query = $bdd->prepare($sql);            
             $query->bindValue(":id_user", $id_user);
             $query->execute();
-        
-            //message confirmation suppression
-            echo '<p>Le compte utilisateur de '.$name_user.' '.$first_name_user.' a bien été supprimée.</p>';
 
             } catch(Exception $e) {
             

@@ -62,8 +62,7 @@
         -----------------------------------------------------*/
         
         //méthode ajout d'une tâche en bdd
-        public function createReserv($bdd){  
-
+        public function createReserv($bdd){
             //récupération des valeurs de l'objet
             $date_reserv = $this->getDateReserv();
             $nb_people = $this->getNbPeople();
@@ -178,7 +177,7 @@
         } 
         
     /****************************************************************/ 
-       
+
         public function getReserv($bdd){
             $id_reserv = $this->getIdReserv();
             
@@ -201,6 +200,7 @@
                 }
     
             } catch (Exception $e) {
+                
                 die('Erreur: ' . $e->getMessage());
             }
         }    

@@ -1,16 +1,14 @@
 <?php 
-
+  
   session_start();
 
   //appel de la classe AvisBean
   require("../model/UserBean.php");
-  
-  //ajout du fichier de connexion 
+    //ajout du fichier de connexion 
   require("../utils/connexionBdd.php");
-  
+  //Ajout de la vue
   require ("../view/vueDeleteUser.php");
 
-  
   //pour interdire l'accés à "addUser.php" si déjà connecté (on renvoie vers page "vueProfil.php")
   if(!isset($_SESSION["user"])){
 
@@ -30,10 +28,12 @@
         
         if(!password_verify($_POST["mdp_user"], $_SESSION["user"]["mdp_user"])){
 
-          die("<p>Mot de passe incorrect</p>");
+          echo '<script>let message = document.querySelector(".errMssg");';
+          echo 'message.innerHTML = "Mot de passe incorrect";</script>';
         } else if($_POST["mdp_user"]!=$_POST["confirm_mdp"]){
 
-          die("<p>Les mots de passe saisis ne correspondent pas</p>");
+          echo '<script>let message = document.querySelector(".errMssg");';
+          echo 'message.innerHTML = "Les mots de passe ne correspondent pas";</script>';
         }
 
         //création d'un objet depuis les valeurs contenues dans le formulaire
@@ -41,16 +41,18 @@
         $user->setIdUser($_POST["id_user"]);
         $user->setMdpUser($_POST["mdp_user"]);
         $user->deleteUser($bdd);
+
+        //Affichage temporaire à gérer
+        echo '<script>let message = document.querySelector(".okMssg");';///NE SE VOIT CAR REDIREC, A CORRIGER
+        echo 'message.innerHTML = "L\'utilisateur '.$_SESSION["user"]["first_name_user"].' '.$_SESSION["user"]["name_user"].' a bien été supprimé";</script>';
+          
+        //message confirmation suppression
+        //echo '<p>Le compte utilisateur de '.$name_user.' '.$first_name_user.' a bien été supprimée.</p>';
+        //Redirection
         header("Location: ../utils/deconnexion.php");
       }
-    
-
-      
-      
-
     } else {
-
-        die("<p>Le formulaire est incomplet</p>"); 
+      echo '<script>let message = document.querySelector(".errMssg");';
+      echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
     }
   }
-?>

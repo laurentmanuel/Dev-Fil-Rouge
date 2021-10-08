@@ -5,15 +5,11 @@ if (isset($_SESSION["user"])) {
 $titre = "Connexion";
 include("head.php");
 ?>
-
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
   <!-- header -->
   <?php include("header.php"); ?>
-
   <?php if (isset($_SESSION["user"])) : ?>
     <h2>Bonjour <?= $_SESSION["user"]["first_name_user"] ?> !</h2>
   <?php else : ?>
@@ -40,8 +36,6 @@ include("head.php");
     <div class="errMssg"></div>
     <div class="okMssg"></div>
   </div>
-
-
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

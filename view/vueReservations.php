@@ -5,16 +5,11 @@ if (!isset($_SESSION["user"])) {
 $titre = "Réservations";
 include("head.php");
 ?>
-
-
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
   <!-- header -->
   <?php include("header.php"); ?>
-
   </header>
   <div class="userForm">
     <form action="../controller/addReserv.php" method="post">
@@ -39,8 +34,6 @@ include("head.php");
     <div class="errMssg"></div>
     <div class="okMssg"></div>
   </div>
-
-
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

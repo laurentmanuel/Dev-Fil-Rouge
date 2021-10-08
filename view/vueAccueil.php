@@ -9,7 +9,6 @@
   <?php include "bordure.php"; ?>
   <!-- header -->
   <?php include("header.php"); ?>
-
   <main>
     <article>
       <h1>Apollo Space Park, la conquête spatiale enfin à votre portée!</h1>
@@ -26,4 +25,5 @@
   </main>
   <?php include("footer.php"); ?>
 </body>
+
 </html>

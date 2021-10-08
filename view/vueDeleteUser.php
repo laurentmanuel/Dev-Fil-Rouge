@@ -7,17 +7,12 @@ include("head.php");
 ?>
 
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
   <!-- header -->
   <?php include("header.php"); ?>
-
   <?php if (isset($_SESSION["user"])) : ?>
-
   <?php endif ?>
-
   <div class="userForm">
     <form action="../controller/deleteUser.php" method="post">
       <h3 class="connexTitle">Supprimer compte <?= $_SESSION["user"]["first_name_user"] ?> <?= $_SESSION["user"]["name_user"] ?></h3>
@@ -35,8 +30,9 @@ include("head.php");
         <button class="styled"><a href="../view/vueProfil.php">Retour</a></button>
       </div>
     </form>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
-
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

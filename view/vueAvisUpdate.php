@@ -5,12 +5,9 @@ if (!isset($_SESSION["user"])) {
 $titre = "Modifier l'avis";
 include("head.php");
 ?>
-
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
   <!-- header -->
   <?php include("header.php"); ?>
 
@@ -39,6 +36,8 @@ include("head.php");
       <input class="styled"type="submit" value="Valider"></input>
       <button class="styled"><a href="../controller/showUserAvis.php">Revenir aux avis</a></button>
     </form>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

@@ -50,8 +50,8 @@
                 //Affichage message
                 echo '<script>let message = document.querySelector(".okMssg");';
                 echo 'message.innerHTML = "Merci '.$_SESSION["user"]["first_name_user"].' pour votre avis!";</script>';
-            
             } else {
+                
                 //Affichage message erreur formulaire incomplet
                 echo '<script>let message = document.querySelector(".errMssg");';
                 echo 'message.innerHTML = "Le formulaire est incomplet";</script>';

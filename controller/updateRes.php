@@ -22,7 +22,8 @@
 
   } else {
 
-      $_SESSION["message"] = "URL invalide";
+    echo '<script>let message = document.querySelector(".errMssg");';
+    echo 'message.innerHTML = "URL invalide";</script>';
   }
 
   //Vérif si tous les champs sont complets
@@ -39,15 +40,14 @@
         //Appel méthode updateAvis
         $reserv = $updatedRes->updateRes($bdd);
 
+        //Affichage et redirection à gérermessage de confirmation de la modification
+        echo '<p>'.$_SESSION["user"]["first_name_user"].', votre réservation a bien été modifiée!</p></div>';
+        
         //Redirection vers la liste des réservations aprés modif
         header('Location: ../controller/showReserv.php?id_reserv='. $updatedRes->getIdReserv() .'');
-
-        //message de confirmation de la modification
-        echo '<p>'.$_SESSION["user"]["first_name_user"].', votre réservation a bien été modifiée!</p></div>';
         
   } else {
 
-        echo "<p>Le formulaire est incomplet</p>";
+    echo '<script>let message = document.querySelector(".errMssg");';
+    echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
   }
-
-?>

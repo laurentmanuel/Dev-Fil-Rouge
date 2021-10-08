@@ -28,5 +28,3 @@
     
     //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur
     require("../view/vueUserAvis.php");
-    
-    ?>

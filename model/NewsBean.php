@@ -59,14 +59,4 @@
             $this->id_user = $newIdUser;
         }
 
-
-
     }
-
-
-
-
-
-
-
-?>

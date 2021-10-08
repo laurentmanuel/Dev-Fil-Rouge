@@ -5,7 +5,6 @@ if (!isset($_SESSION["user"])) {
 $titre = "Mentions légales";
 include("head.php");
 ?>
-
 <body>
   <!-- bordure -->
   <?php include "bordure.php"; ?>
@@ -54,8 +53,8 @@ include("head.php");
 
       Donec in egestas erat, eu scelerisque risus. Etiam pellentesque, tellus eget aliquet suscipit, arcu ipsum mattis ipsum, quis tempus nunc nunc a lorem. Etiam malesuada felis mi, feugiat pellentesque augue tincidunt et. Nunc tempor sapien metus, at facilisis dolor euismod eu. In hac habitasse platea dictumst. Vivamus quis erat bibendum, vehicula tellus nec, porttitor eros. Nulla lectus lorem, gravida non sagittis a, feugiat ac augue. Curabitur scelerisque a lectus non scelerisque. Suspendisse turpis elit, vulputate quis tincidunt ut, faucibus luctus augue. Duis fermentum, ex sed pretium convallis, arcu nunc tincidunt ex, a consectetur neque metus ac sapien. Proin at velit elit. Sed eu elit a neque lobortis vestibulum. Praesent sagittis ipsum eu bibendum venenatis. Maecenas purus arcu, ornare eget massa non, blandit feugiat urna. Donec vulputate risus eget consectetur suscipit.</p>
   </div>
-
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>
+
 </html>

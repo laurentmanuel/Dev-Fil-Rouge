@@ -21,9 +21,10 @@
     require("../view/vueAvisUpdate.php");
 
   } else {
-
-      $_SESSION["message"] = "URL invalide";
+    echo '<script>let message = document.querySelector(".errMssg");';
+    echo 'message.innerHTML = "L\'ancien mot de passe est incorrect";</script>';
   }
+  
   //Vérif si tous les champs sont complets
   if(isset($_POST["id_avis"]) && isset($_POST["note"]) && isset($_POST["title_avis"]) && isset($_POST["comments"])
   && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"]) && !empty($_POST["id_avis"])){  
@@ -45,8 +46,5 @@
       //Rechargement de la page
       header('Location: ../controller/updateAvis.php?id_avis='. $updatedAvis->getIdAvis() .'');
 
-      echo '<p>'.$_SESSION["user"]["first_name_user"].', votre avis a bien été modifié!</p></div>';
-        
+      echo '<p>'.$_SESSION["user"]["first_name_user"].', votre avis a bien été modifié!</p></div>';        
   } 
-
-?>

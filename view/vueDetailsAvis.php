@@ -20,7 +20,7 @@ include("head.php");
       <div class="innerInputs">
         <label for="updateOn">Crée/modifié le: <?= $detailsAvis["updatedOn"] ?></label>
       </div>
-        <div class="innerInputs">Note: <?= $detailsAvis["note"] ?>/5<br>
+      <div class="innerInputs">Note: <?= $detailsAvis["note"] ?>/5<br>
         <input type="hidden" name="note" id="note" value="<?= $detailsAvis["note"] ?>">
       </div>
       <div class="innerInputs">
@@ -34,8 +34,11 @@ include("head.php");
       <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis">
       <button class="styled"><a href="../controller/showUserAvis.php">Revenir aux avis</a></button>
     </form>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>
+
 </html>

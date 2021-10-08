@@ -23,8 +23,9 @@
     
     //Redirection vers la page login si l'utilisateur n'est pas déjà connecté
     if(!isset($_SESSION["user"])){
-        
-        echo "<p>Veuillez vous connecter</p>";
+
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "Veuillez vous connecter";</script>';
         header("Location: ../view/vueLogin.php");
         
     } else {      
@@ -36,12 +37,6 @@
         //Appel méthode de création d'une réservation
         $allResByUser = $reserv->showReserv($bdd);
 
-        // foreach($allResByUser as $reserv){
-        //     $date = explode('-',$reserv["date_reserv"]);
-        //     $date_eu = ($date[2].'/'.$date[1].'/'.$date[0]);       
-        // }
-
         //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur)
         require("../view/vueReservList.php"); 
     }
-?>

@@ -70,8 +70,7 @@
     /*-----------------------------------------------------
                             Fonctions :
     -----------------------------------------------------*/
-        
-    
+            
     /****************************************************************/
         //méthode ajout d'un Avis en en bdd 
         public function createAvis($bdd){  
@@ -103,6 +102,7 @@
         }
         
     /****************************************************************/
+
         public function updateAvis($bdd){
 
             //récupération des valeurs de l'objet
@@ -139,7 +139,6 @@
 
             try{
                 $sql = "SELECT * FROM avis";
-
                 $avis = $bdd->query($sql);
                 $allAvis = $avis->fetchAll();
                 return $allAvis;
@@ -179,16 +178,9 @@
                 $avis = $bdd->prepare($sql);
                 $avis->bindValue("id_avis", $id_avis);
                 $avis->execute();
-                $detailsAvis = $avis->fetch();
-
-                if(!$detailsAvis){
-                    $_SESSION["erreur"] = "Cet id_user n'existe pas";
-                    header("Location: ../controller/showAvis.php" );
-
-                } else {
-
-                    return $detailsAvis;
-                }
+                $detailsAvis = $avis->fetch();                
+                return $detailsAvis;
+            
                 
             } catch(Exception $e) {
                 die('Erreur : '.$e->getMessage());
@@ -216,4 +208,3 @@
             }
         }
     }
-?>

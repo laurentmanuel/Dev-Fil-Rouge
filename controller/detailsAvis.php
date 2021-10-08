@@ -24,6 +24,3 @@
 
   //appel de la vue
   include ("../view/vueDetailsAvis.php");
-
-
-?>

@@ -5,13 +5,11 @@ if (!isset($_SESSION["user"])) {
 $titre = "Inscription";
 include("head.php");
 ?>
-
 <body>
   <!-- bordure -->
   <?php include "bordure.php"; ?>
   <!-- header -->
   <?php include("header.php"); ?>
-
   <div class="userForm">
     <form action="../controller/addUser.php" method="post">
 
@@ -47,7 +45,6 @@ include("head.php");
     <div class="errMssg"></div>
     <div class="okMssg"></div>
   </div>
-
   <?php include("footer.php"); ?>
 </body>
 

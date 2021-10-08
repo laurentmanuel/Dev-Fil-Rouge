@@ -7,13 +7,10 @@ include("head.php");
 ?>
 
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
   <!-- header -->
   <?php include("header.php"); ?>
-
   </header>
   <div class="userForm">
     <form action="../controller/updateRes.php" method="post">
@@ -30,10 +27,10 @@ include("head.php");
         <input type="submit" value="Modifier" class="styled"></input>
         <button class="styled"><a href="../controller/showReserv.php">Voir vos réservations</a></button>
       </div>
-
     </form>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
-
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

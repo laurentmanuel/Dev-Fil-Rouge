@@ -62,6 +62,8 @@ include("head.php");
         <button class="styled"><a href="../controller/showAvis.php">Voir tous les avis</a></button>
       <?php endif; ?>
     </section>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

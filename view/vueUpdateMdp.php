@@ -35,14 +35,9 @@ include("head.php");
         <button class="styled"><a href="../view/vueProfil.php">Retour</a></button>
       </span>
     </form>
-
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
-  <!--Affichage message -->
-  <?php if (isset($_SESSION["user"])) : ?>
-    <p><?= $_SESSION["user"]["message"] ?></p>
-  <?php endif; ?>
-  </div>
-
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

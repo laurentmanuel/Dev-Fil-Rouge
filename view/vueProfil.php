@@ -44,9 +44,9 @@ include("head.php");
           </div>
         </div>
       </div>
-      <div class="errMssg"></div>
-      <div class="okMssg"></div>
     </form>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>
