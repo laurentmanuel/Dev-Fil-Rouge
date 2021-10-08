@@ -7,15 +7,14 @@ include("head.php");
 ?>
 
 <body>
-
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
   <!-- header -->
   <?php include("header.php"); ?>
 
   <div class="userForm">
     <form action="../controller/addUser.php" method="post">
+
       <h3>Créer un compte</h3>
       <p>Merci de bien vouloir remplir les champs suivants:</p>
       <div class="innerInputs">
@@ -37,19 +36,18 @@ include("head.php");
       <div class="innerInputs">
         <label for="confirm_mdp">Confirmer mot de passe: </label>
         <input type="password" name="confirm_mdp" placeholder="8 caractères minimum">
-        <div>
-          <p><a href="../view/vueLogin.php">Déjà un compte?</a></p>
-          <span>
-            <input class="styled" type="submit" value="Créer mon compte">
-          </span>
+      </div>
+      <span>
+        <p><a href="../view/vueLogin.php">Déjà un compte?</a></p>
+      </span>
+      <span>
+        <input class="styled" type="submit" value="Créer mon compte">
+      </span>
     </form>
-    <!--Affichage message -->
-    <?php if (isset($_SESSION["user"])) : ?>
-      <p><?= $_SESSION["user"]["message"] ?></p>
-    <?php endif; ?>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
 
-  <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>
 

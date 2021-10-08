@@ -46,13 +46,15 @@
 
                 //Appel méthode de création d'une réservation
                 $avis->createAvis($bdd);
-                
-                
-                echo '<p>Merci '.$_SESSION["user"]["first_name_user"].' pour votre évaluation!</p></div>';    
+
+                //Affichage message
+                echo '<script>let message = document.querySelector(".okMssg");';
+                echo 'message.innerHTML = "Merci '.$_SESSION["user"]["first_name_user"].' pour votre avis!";</script>';
             
             } else {
-
-                echo "<p>Veuillez compléter les informations manquantes SVP.</p>";
+                //Affichage message erreur formulaire incomplet
+                echo '<script>let message = document.querySelector(".errMssg");';
+                echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
             }
 
         } 

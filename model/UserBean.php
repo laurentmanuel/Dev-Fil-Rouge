@@ -115,10 +115,7 @@
                 ));
             
                 //On récupère l'id du nouvel utilisateur
-                $id_user = $bdd->lastInsertId();
-            
-                //Message de confirmation de création du compte
-                $message = '<p>Le compte utilisateur <span>'.$_POST['first_name_user'].'</span> <span>'.$_POST['name_user'].'</span> a été créé!</p>';
+                $id_user = $bdd->lastInsertId(); 
             
                 //On stocke dans $session les infos de l'utilisateur (mais surtout pas le mdp)
                 $_SESSION["user"] = [
@@ -127,12 +124,11 @@
                 "first_name_user" => $first_name_user,
                 "email_user" => $email_user,
                 "mdp_user" => $mdp_user,
-                "is_admin" => $is_admin,
-                "message" => $message
+                "is_admin" => $is_admin
                 ];
                 
                 //On redirige vers la page profil.php une fois le compte créé 
-                header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
+                //header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
                         
             } catch(Exception $e) {
             
@@ -141,9 +137,7 @@
             }        
         }
     
-    
-    
-        /****************************************************************/
+    /****************************************************************/
     
         //méthode pour vérifier si un utilisateur existe dans la bdd
         public function userExists($bdd): bool{
@@ -182,7 +176,7 @@
             }        
         }
     
-        /***************************************************************/
+    /***************************************************************/
     
         public function logUser($bdd){
         
@@ -202,25 +196,21 @@
             
                 //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
                 if(!password_verify($mdp_user, $user["mdp_user"])){
-                
-                    die("<p>L'email et/ou le mot de passe est incorrect</p>");  
-                
+                    
+                    echo '<script>let message = document.querySelector(".errMssg");';
+                    echo 'message.innerHTML = "email ou mot de passe incorrect";</script>';                
                 } else {
-                
-                    $message = "<p>Vous êtes connecté!</p>"; 
                 
                     //Ici l'email et le mdp sont OK      
                     //On stocke dans $session les infos de l'utilisateur 
-                        $_SESSION["user"] = [
-                            "id_user" => $user["id_user"],
-                            "name_user" => $user["name_user"],
-                            "first_name_user" => $user["first_name_user"],
-                            "email_user" => $user["email_user"],
-                            "mdp_user" => $user["mdp_user"],
-                            "is_admin" => $user["is_admin"],
-                            "message" => $user["message"]
-                        ];
-                    
+                    $_SESSION["user"] = [
+                        "id_user" => $user["id_user"],
+                        "name_user" => $user["name_user"],
+                        "first_name_user" => $user["first_name_user"],
+                        "email_user" => $user["email_user"],
+                        "mdp_user" => $user["mdp_user"], //ici mdp hashé
+                        "is_admin" => $user["is_admin"]
+                    ];                    
                 }
             
             } catch(Exception $e) {
@@ -230,56 +220,7 @@
             }
         }   
         
-        /***************************************************************/
-    
-        public function createSession($bdd){
-            
-            //récupération des valeurs de l'objet       
-            $email_user = $this->getEmailUser();        
-            $mdp_user = $this->getMdpUser();  
-            
-            try{
-                
-                //Reqûete Sql
-                $sql = "SELECT * FROM users WHERE email_user = :email_user";
-                
-                $query = $bdd->prepare($sql);
-                
-                //$query->bindValue;
-                $query->bindValue(":email_user", $email_user, PDO::PARAM_STR);//facultatif, il s'agit d'un paramètre par défaut
-                $query->execute();      
-                $user = $query->fetch();
-                
-                //Ici l'utilisateur est déjà crée dans la bdd, on doit vérfier le hash du mdp
-                if(!password_verify($mdp_user, $user["mdp_user"])){
-                    
-                    die("<p>L'email et/ou le mot de passe est incorrect</p>");      
-                } else {
-                    
-                    //Ici l'email et le mdp sont OK      
-                    $message = '<p>Vous êtes connecté!</p>'; 
-                    
-                    //On stocke dans $session les infos de l'utilisateur
-                    $_SESSION["user"] = [
-                        "id_user" => $user["id_user"],
-                        "name_user" => $user["name_user"],
-                        "first_name_user" => $user["first_name_user"],
-                        "email_user" => $user["email_user"],
-                        "mdp_user" => $user["mdp_user"],//il s'agit ici du hash du mdp et non du mdp
-                        "is_admin" => $user["is_admin"],
-                        "message" => $message
-                    ];
-                }
-                
-            } catch(Exception $e) {
-                
-                //affichage d'une mssg en cas d’erreur
-                die('Erreur : '.$e->getMessage());
-            }
-        }
-    
-    
-        /***************************************************************/
+    /***************************************************************/
     
         public function updateUser($bdd){
             $name_user = $this->getNameUser();
@@ -306,7 +247,7 @@
         
         }
 
-        /***************************************************************/
+    /***************************************************************/
     
         public function updateMdp($bdd){
             $mdp_user = $this->getMdpUser();
@@ -328,10 +269,11 @@
             }
         }
     
-        /***************************************************************/
+    /***************************************************************/
+    
         public function deleteUser($bdd){
         
-        //récupération id
+        //Récupération id
         $id_user = $this->getIdUser();
         //pour affichage message
         $name_user = $this->getNameUser();
@@ -353,7 +295,6 @@
             //affichage d'une exception en cas d’erreur
             die('Erreur : '.$e->getMessage());
             }
-            
         } 
     }
     

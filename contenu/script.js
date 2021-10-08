@@ -73,3 +73,8 @@ window.onload = ()=>{
 }
 
 /*******************************************************/
+
+
+let message = document.getElementById("message")
+console.log(message);
+message.innerHTML = "testdepuisJs";

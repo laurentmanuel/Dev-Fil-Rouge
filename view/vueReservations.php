@@ -30,12 +30,14 @@ include("head.php");
       <div class="innerInputs">
         <?php if (isset($_SESSION["user"])) : ?>
           <input class="styled" type="submit" value="Confirmer "></input>
-          <button class="styled"><a href="../controller/showReserv.php">Vos réservations</a></button>
+          <button class="styled"><a href="../controller/showReserv.php">Revenir aux réservations</a></button>
         <?php else : ?>
           <button class="styled"><a href="../controller/logUser.php" class="favorite styled">Se connecter</a></button>
         <?php endif; ?>
       </div>
     </form>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
 
 

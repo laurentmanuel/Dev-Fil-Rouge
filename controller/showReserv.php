@@ -35,7 +35,12 @@
         $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
         //Appel méthode de création d'une réservation
         $allResByUser = $reserv->showReserv($bdd);
-        
+
+        // foreach($allResByUser as $reserv){
+        //     $date = explode('-',$reserv["date_reserv"]);
+        //     $date_eu = ($date[2].'/'.$date[1].'/'.$date[0]);       
+        // }
+
         //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur)
         require("../view/vueReservList.php"); 
     }

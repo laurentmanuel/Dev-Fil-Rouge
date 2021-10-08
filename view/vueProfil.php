@@ -32,22 +32,21 @@ include("head.php");
         <input type="text" placeholder="Votre email" name="email_user" value="<?= $_SESSION["user"]["email_user"] ?>" size="35">
       </div>
       <div class="btnContainer">
-      <div>
-        <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
-        <input class="styled" type="submit" value="Modifier vos Informations">
-      </div>
+        <div>
+          <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
+          <input class="styled" type="submit" value="Modifier vos Informations">
+        </div>
         <div class="dropdown">
           <div class="dropbtn">Autres actions</div>
           <div class="dropdown-content">
             <a href="../controller/updateMdp.php">Modifier mot de passe</a>
             <a href="../controller/deleteUser.php">Supprimer mon compte</a>
           </div>
-          </div>
         </div>
+      </div>
+      <div class="errMssg"></div>
+      <div class="okMssg"></div>
     </form>
-
-    <!--Affichage message -->
-    <p><?= $_SESSION["user"]["message"] ?></p>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>
