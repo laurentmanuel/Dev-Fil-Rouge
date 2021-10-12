@@ -17,7 +17,7 @@
     include("../utils/connexionBdd.php");
     
     //import de la vue view_add_user.php (formulaire d'insertion d'un utilisateur)
-    include("../view/vueReservations.php"); 
+    include("../view/vueReservPost.php"); 
     /*-----------------------------------------------------
                             Tests :
     -----------------------------------------------------*/
@@ -25,7 +25,7 @@
     //pour rediriger vers la page login si l'utilisateur n'est pas déjà connecté
     if(!isset($_SESSION["user"])){    
     
-        header("Location: ../view/vueLogin.php");
+        header("Location: ../view/vueLogUser.php");
     } else {
 
         //On vérifie si le formulaire a été envoyé

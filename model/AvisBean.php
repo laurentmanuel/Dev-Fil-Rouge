@@ -19,7 +19,7 @@
         }
 
         /*----------------------------------------------------
-                            Getter & Setter :
+                            Accesseurs:
         -----------------------------------------------------*/
 
         //id_avis Getter & Setter
@@ -72,7 +72,7 @@
     -----------------------------------------------------*/
             
     /****************************************************************/
-        //méthode ajout d'un Avis en en bdd 
+        //méthode d'ajout d'un Avis en bdd 
         public function createAvis($bdd){  
 
             //récupération des valeurs de l'objet

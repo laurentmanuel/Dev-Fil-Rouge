@@ -12,7 +12,7 @@ include("head.php");
   <?php include("header.php"); ?>
   </header>
   <div class="userForm">
-    <form action="../controller/addReserv.php" method="post">
+    <form action="../controller/createReserv.php" method="post">
       <h3 class="connexTitle">Réserver:</h3>
       <div class="innerInputs">
         <label for="date_reserv">Selectionner une date: </label>
@@ -25,7 +25,7 @@ include("head.php");
       <div class="innerInputs">
         <?php if (isset($_SESSION["user"])) : ?>
           <input class="styled" type="submit" value="Confirmer "></input>
-          <button class="styled"><a href="../controller/showReserv.php">Revenir aux réservations</a></button>
+          <button class="styled"><a href="../controller/readReserv.php">Revenir aux réservations</a></button>
         <?php else : ?>
           <button class="styled"><a href="../controller/logUser.php" class="favorite styled">Se connecter</a></button>
         <?php endif; ?>

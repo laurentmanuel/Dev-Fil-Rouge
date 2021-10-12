@@ -18,7 +18,7 @@
     require("../utils/connexionBdd.php");
 
     //appel vue Inscription
-    require("../view/vueLogin.php"); 
+    require("../view/vueLogUser.php"); 
 
   /*-----------------------------------------------------
                         CONTROLLER:
@@ -66,7 +66,8 @@
           echo 'message.innerHTML = "Vous êtes connecté!";</script>';
 
           //Redirection à gérer
-          //header("Location: ../view/vueProfil.php"); 
+          sleep(3);
+          header("Location: ../view/vueProfil.php"); 
           
         }
 

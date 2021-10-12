@@ -14,7 +14,7 @@ include("head.php");
   <?php include("header.php"); ?>
 
   <div class="userForm">
-    <form action="../controller/addAvis.php" method="post">
+    <form action="../controller/createAvis.php" method="post">
       <h3>Déposer un avis:</h3>
       <div class="stars">Note:
         <!-- ligne 33 doit rester sur une seule ligne pour affichage étoile sans espace intermédiaires -->
@@ -30,7 +30,7 @@ include("head.php");
         <textarea name="comments" id="" cols="30" rows="10"></textarea>
       </div>
       <button class="styled" type="submit">Valider</button>
-      <button class="styled"><a href="../controller/showAvis.php">Revenir aux avis</a></button>
+      <button class="styled"><a href="../controller/readAvis.php">Revenir aux avis</a></button>
     </form>
     <div class="errMssg"></div>
     <div class="okMssg"></div>

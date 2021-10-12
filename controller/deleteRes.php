@@ -25,6 +25,6 @@
 
     //appel de la vue
     //redirection vers liste d'avis
-    $location = "../controller/showReserv.php";
+    $location = "../controller/readReserv.php";
     echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
   } 

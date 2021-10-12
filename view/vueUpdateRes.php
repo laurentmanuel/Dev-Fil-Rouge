@@ -24,8 +24,8 @@ include("head.php");
       </div>
       <div class="innerInputs">
         <input type="hidden" name="id_reserv" value="<?= $reserv["id_reserv"] ?>">
-        <input type="submit" value="Modifier" class="styled"></input>
-        <button class="styled"><a href="../controller/showReserv.php">Voir vos réservations</a></button>
+        <input type="submit" value="Confirmer" class="styled"></input>
+        <button class="styled"><a href="../controller/readReserv.php">Voir vos réservations</a></button>
       </div>
     </form>
     <div class="errMssg"></div>

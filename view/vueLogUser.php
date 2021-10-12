@@ -19,11 +19,11 @@ include("head.php");
       <h3 class="connexTitle">Connexion:</h3>
       <div>
         <label for="email">Email: </label>
-        <input type="text" name="email_user" size="35" placeholder="votre email">
+        <input type="email" name="email_user" size="35" placeholder="votre email" required>
       </div>
       <div class="innerInputs">
         <label for="mdp">Mot de passe: </label>
-        <input type="password" name="mdp_user" placeholder="8 caractères minimum">
+        <input type="password" name="mdp_user" placeholder="8 caractères minimum" required>
       </div>
       <div class="innerInputs">
         </label>

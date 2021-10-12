@@ -32,7 +32,11 @@ include("head.php");
         <textarea name="comments" id="" cols="30" rows="10"><?= $detailsAvis["comments"] ?></textarea>
       </div>
       <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis">
+      <?php if(isset($SESSION["user"])) : ?>
       <button class="styled"><a href="../controller/showUserAvis.php">Revenir aux avis</a></button>
+      <?php else: ?>
+        <button class="styled"><a href="../controller/readAvis.php">Retour</a></button>
+      <?php endif; ?>
     </form>
     <div class="errMssg"></div>
     <div class="okMssg"></div>

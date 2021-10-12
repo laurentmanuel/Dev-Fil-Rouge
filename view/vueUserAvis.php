@@ -55,11 +55,11 @@ include("head.php");
         </tbody>
       </table>
       <?php if (!isset($_SESSION["user"])) : ?>
-        <button class="styled"><a href="../view/vueLogin.php">Ajouter un avis</a></button>
-        <button class="styled"><a href="../view/vueLogin.php">Voir mes avis</a></button>
+        <button class="styled"><a href="../view/vueLogUser.php">Ajouter un avis</a></button>
+        <button class="styled"><a href="../view/vueLogUSer.php">Voir mes avis</a></button>
       <?php else : ?>
-        <button class="styled"><a href="../controller/addAvis.php">Ajouter un avis</a></button>
-        <button class="styled"><a href="../controller/showAvis.php">Voir tous les avis</a></button>
+        <button class="styled"><a href="../controller/createAvis.php">Ajouter un avis</a></button>
+        <button class="styled"><a href="../controller/readAvis.php">Voir tous les avis</a></button>
       <?php endif; ?>
     </section>
     <div class="errMssg"></div>

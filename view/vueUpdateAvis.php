@@ -34,10 +34,11 @@ include("head.php");
       </div>
       <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis">
       <input class="styled"type="submit" value="Valider"></input>
-      <button class="styled"><a href="../controller/showUserAvis.php">Revenir aux avis</a></button>
+      <button class="styled"><a href="../controller/readUserAvis.php">Annuler</a></button>
     </form>
-    <div class="errMssg"></div>
-    <div class="okMssg"></div>
+    <!-- <div class="errMssg"></div>
+    <div class="okMssg"></div> -->
+    <p id="message"></p>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

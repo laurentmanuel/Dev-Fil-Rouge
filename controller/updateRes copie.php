@@ -31,21 +31,21 @@
   && !empty($_POST["id_reserv"]) && !empty($_POST["date_reserv"]) && !empty($_POST["nb_people"])){
       
         $id_reserv = htmlspecialchars($_POST["id_reserv"]);
-        $reserv = new ReservBean();
-        $reserv->setIdReserv($id_reserv);
-        $reserv->setDateReserv($_POST["date_reserv"]);
-        $reserv->setNbPeople($_POST["nb_people"]);
-        $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
+        $updatedRes = new ReservBean();
+        $updatedRes->setIdReserv($id_reserv);
+        $updatedRes->setDateReserv($_POST["date_reserv"]);
+        $updatedRes->setNbPeople($_POST["nb_people"]);
+        $updatedRes->setIdUserRes($_SESSION["user"]["id_user"]);
 
         //Appel méthode updateAvis
-        $reserv->updateRes($bdd);
+        $reserv = $updatedRes->updateRes($bdd);
         echo '<script>let message = document.querySelector(".errMssg");';
         echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
 
         //Affichage et redirection à gérermessage de confirmation de la modification
         
         //Redirection vers la liste des réservations aprés modif
-        //require("../controller/updateRes.php?id_reserv='. $updatedRes->getIdReserv() .''");
+        header('Location: ../controller/updateRes.php?id_reserv='. $updatedRes->getIdReserv() .'');
         /*"../controller/updateRes.php?id_reserv=<?= $reserv["id_reserv"] ?>";*/
         //echo '<p>'.$_SESSION["user"]["first_name_user"].', votre réservation a bien été modifiée!</p></div>';
   } else {

@@ -25,7 +25,7 @@
     //Si utilisateur pas connecté, on le redirige vers la page login
     if(!isset($_SESSION["user"])){    
     
-        header("Location: ../view/vueLogin.php");
+        header("Location: ../view/vueLogUser.php");
     } else {
 
         //On vérifie si le formulaire a été envoyé
