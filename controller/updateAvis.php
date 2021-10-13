@@ -18,7 +18,7 @@
     $detailsAvis = $avisDetail->getAvis($bdd);
 
     //appel de la vue
-    include("../view/vueUpdateAvis.php");
+    require("../view/vueAvisUpdate.php");
 
   } else {
     echo '<script>let message = document.querySelector(".errMssg");';
@@ -42,9 +42,8 @@
       $updatedAvis->setIdUserAvis($_SESSION["user"]["id_user"]);
       
       //Appel méthode updateAvis
-      $updatedAvis->updateAvis($bdd);      
-      echo '<script>let message = document.querySelector(".okMssg");';
-      echo 'message.innerHTML = "L\'ancien mot de passe est incorrect";</script>';
+      $updatedAvis->updateAvis($bdd);
+      
       //Rechargement de la page
       header('Location: ../controller/updateAvis.php?id_avis='. $updatedAvis->getIdAvis() .'');
 

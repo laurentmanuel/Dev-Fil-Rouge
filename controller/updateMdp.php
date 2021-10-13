@@ -38,17 +38,13 @@
             if(isset($_POST["email_user"]) && isset($_POST["mdp_user"]) && isset($_POST["new_mdp"]) && isset($_POST["confirm_mdp"])
             && !empty($_POST["email_user"]) && !empty($_POST["mdp_user"]) && !empty($_POST["new_mdp"]) && !empty($_POST["confirm_mdp"])){
                 //Le formulaire est complet
-                var_dump($_SESSION["user"]);
+
                 //On contrôle l'ancien mdp avec le hash
                 if(!password_verify($_POST["mdp_user"], $_SESSION["user"]["mdp_user"])){
 
                     echo '<script>let message = document.querySelector(".errMssg");';
                     echo 'message.innerHTML = "L\'ancien mot de passe est incorrect";</script>';
-                } else {
-
-                    echo '<script>let message = document.querySelector(".okMssg");';
-                    echo 'message.innerHTML = "Ancien mot de passe OK";</script>';
-                }
+                } 
                 
                 if(strlen($_POST["new_mdp"])<8){
 
@@ -78,7 +74,7 @@
                 echo '<script>let message = document.querySelector(".okMssg");';
                 echo 'message.innerHTML = "Votre mot de passe a bien été modifié";</script>';           
                 //Redirection gestion de l'affichage
-                header("Location: ../view/vueProfil.php");
+                //header("Location: ../view/vueProfil.php");
 
             } else {
 

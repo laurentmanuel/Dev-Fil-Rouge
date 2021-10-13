@@ -192,7 +192,7 @@
 
                 if(!$allResByUser){
                     $_SESSION["message"] = "Cet id_reserv n'existe pas";
-                    header("Location: ../controller/showReserv.php" );
+                    header("Location: ../controller/readReserv.php" );
 
                 } else {
 

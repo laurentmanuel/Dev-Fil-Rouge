@@ -32,7 +32,7 @@ include("head.php");
       <span>
         <input type="hidden" name="email_user" value="<?= $_SESSION["user"]["email_user"] ?>">
         <input type="submit" value="Confirmer" class="styled">
-        <button class="styled"><a href="../view/vueProfil.php">Retour</a></button>
+        <button class="styled"><a href="../controller/updateUser.php">Retour</a></button>
       </span>
     </form>
     <div class="errMssg"></div>

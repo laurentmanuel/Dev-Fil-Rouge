@@ -18,7 +18,7 @@
     require("../utils/connexionBdd.php");
 
     //appel vue Inscription
-    require("../view/vueInscription.php"); 
+    require("../view/vueCreateUser.php"); 
 
   /*-----------------------------------------------------
                         CONTROLLER:

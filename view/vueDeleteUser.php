@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION["user"])) {
+if (!isset($_SESSION["user"])) {
   session_start();
 }
 $titre = "Supprimer mon compte";
@@ -27,7 +27,7 @@ include("head.php");
       <div class="btnContainer">
         <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
         <input class="dangerBtn" type="submit" value="Confirmer suppression">
-        <button class="styled"><a href="../view/vueProfil.php">Retour</a></button>
+        <button class="styled"><a href="../controller/updateUser.php">Retour</a></button>
       </div>
     </form>
     <div class="errMssg"></div>

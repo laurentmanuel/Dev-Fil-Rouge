@@ -5,6 +5,7 @@ if (!isset($_SESSION["user"])) {
 $titre = "Modifier l'avis";
 include("head.php");
 ?>
+
 <body>
   <!-- bordure -->
   <?php include "bordure.php"; ?>
@@ -33,12 +34,11 @@ include("head.php");
         <textarea name="comments" id="" cols="30" rows="10"><?= $detailsAvis["comments"] ?></textarea>
       </div>
       <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis">
-      <input class="styled"type="submit" value="Valider"></input>
-      <button class="styled"><a href="../controller/readUserAvis.php">Annuler</a></button>
+      <input class="styled" type="submit" value="Valider"></input>
+      <button class="styled"><a href="../controller/readUserAvis.php">Retour aux Avis</a></button>
     </form>
-    <!-- <div class="errMssg"></div>
-    <div class="okMssg"></div> -->
-    <p id="message"></p>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

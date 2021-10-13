@@ -206,16 +206,13 @@
                     //Ici l'email et le mdp sont OK      
                     //On stocke dans $session les infos de l'utilisateur 
                     $_SESSION["user"] = [
-                    "id_user" => $user["id_user"],
-                    "name_user" => $user["name_user"],
-                    "first_name_user" => $user["first_name_user"],
-                    "email_user" => $user["email_user"],
-                    "mdp_user" => $user["mdp_user"], //ici il s'agit du hash du mdp
-                    "is_admin" => $user["is_admin"],                
-                    ];
-                    $_SESSION["message"]; 
-                    
-                    return true;
+                        "id_user" => $user["id_user"],
+                        "name_user" => $user["name_user"],
+                        "first_name_user" => $user["first_name_user"],
+                        "email_user" => $user["email_user"],
+                        "mdp_user" => $user["mdp_user"], //ici mdp hashé
+                        "is_admin" => $user["is_admin"]
+                    ];                    
                 }
             
             } catch(Exception $e) {
@@ -249,6 +246,7 @@
                 //affichage d'une mssg en cas d’erreur
                 die('Erreur : '.$e->getMessage());
             }
+        
         }
 
     /***************************************************************/

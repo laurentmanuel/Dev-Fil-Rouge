@@ -56,21 +56,23 @@
 
           echo '<script>let message = document.querySelector(".errMssg");';
           echo 'message.innerHTML = "Le compte utilisateur n\'existe pas";</script>';
-        } else {
-
-          //L'utilisateur existe, on appelle la fonction de login
-          $userToLog->logUser($bdd);
-          
-          //Ici l'email et le mdp sont OK  
-          echo '<script>let message = document.querySelector(".okMssg");';
-          echo 'message.innerHTML = "Vous êtes connecté!";</script>';
-
-          //Redirection à gérer
-          sleep(3);
-          header("Location: ../view/vueProfil.php"); 
-          
         }
-
+          
+        //L'utilisateur existe, on appelle la fonction de login
+        if($userToLog->logUser($bdd)==true){
+        
+        echo '<script>let message = document.querySelector(".okMssg");';
+        echo 'message.innerHTML = "Vous êtes connecté!";</script>';
+        //header("Location: ../view/vueProfil.php");
+        $location = "../view/vueProfil.php";
+        echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
+        sleep(1);
+        }
+        
+      
+      
+        
+        
       } else {
         echo '<script>let message = document.querySelector(".errMssg");';
         echo 'message.innerHTML = "Le formulaire est incomplet";</script>';

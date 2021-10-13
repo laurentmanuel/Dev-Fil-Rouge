@@ -26,7 +26,7 @@
 
         echo '<script>let message = document.querySelector(".errMssg");';
         echo 'message.innerHTML = "Veuillez vous connecter";</script>';
-        header("Location: ../view/vueLogin.php");
+        header("Location: ../view/vueLogUser.php");
         
     } else {      
         

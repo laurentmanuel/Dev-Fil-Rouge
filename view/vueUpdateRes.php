@@ -2,7 +2,7 @@
 if (!isset($_SESSION["user"])) {
   session_start();
 }
-$titre = "Modifer Réservation";
+$titre = "Modifier Réservation";
 include("head.php");
 ?>
 
@@ -28,8 +28,9 @@ include("head.php");
         <button class="styled"><a href="../controller/readReserv.php">Voir vos réservations</a></button>
       </div>
     </form>
-    <div class="errMssg"></div>
-    <div class="okMssg"></div>
+    <p id="message"></p>
+    <!-- <div class="errMssg"></div>
+    <div class="okMssg"></div> -->
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

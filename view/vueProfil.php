@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION["user"])) {
+if(!isset($_SESSION["user"])) {
   session_start();
 }
 $titre = "Vos informations";
@@ -15,7 +15,7 @@ include("head.php");
 
   <div class="userForm">
     <form action="../controller/updateUser.php" method="post">
-      <h3 id="titleProfil">Mon Compte:</h3>
+      <h3 id="titleProfil">Mon Compte:<?= $_SESSION["session_mssg"] ?></h3>
       <div class="innerInputs">
         <h4>Vos Informations:</h4>
       </div>
@@ -39,8 +39,8 @@ include("head.php");
         <div class="dropdown">
           <div class="dropbtn">Autres actions</div>
           <div class="dropdown-content">
-            <a href="../controller/updateMdp.php">Modifier mot de passe</a>
-            <a href="../controller/deleteUser.php">Supprimer mon compte</a>
+            <a href="../view/vueUpdateMdp.php">Modifier mot de passe</a>
+            <a href="../view/vueDeleteUser.php">Supprimer mon compte</a>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
 
     //pour protéger deconnexion: si pas connecté, on renvoie vers le formulaire de connexion
     if(!isset($_SESSION["user"])){
-    header("Location: ../view/vueLogin.php");
+    header("Location: ../view/vueLogUser.php");
     exit;
     }
 
