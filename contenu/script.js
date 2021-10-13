@@ -73,3 +73,8 @@ window.onload = ()=>{
 }
 
 /*******************************************************/
+
+// let okBtn = document.querySelector(".dropbtn");
+// okBtn.addEventListener("click", () => {
+//     confirm("êtes-vous sûr de vouloir supprimer?");
+// });

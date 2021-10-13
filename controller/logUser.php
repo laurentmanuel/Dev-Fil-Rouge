@@ -60,18 +60,16 @@
           
         //L'utilisateur existe, on appelle la fonction de login
         if($userToLog->logUser($bdd)==true){
-        
-        echo '<script>let message = document.querySelector(".okMssg");';
-        echo 'message.innerHTML = "Vous êtes connecté!";</script>';
-        //header("Location: ../view/vueProfil.php");
-        $location = "../view/vueProfil.php";
-        echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
-        sleep(1);
+
+          //insertion message dans session car redirection
+          $_SESSION["status"] = "Vous êtes connecté!";
+          //Redirection vers page profil
+          header("Location: ../view/vueProfil.php");
+        } else {
+
+          echo '<script>let message = document.querySelector(".errMssg");';
+          echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';
         }
-        
-      
-      
-        
         
       } else {
         echo '<script>let message = document.querySelector(".errMssg");';

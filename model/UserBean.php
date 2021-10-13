@@ -127,11 +127,9 @@
                 "mdp_user" => $mdp_user,
                 "is_admin" => $is_admin,
                 ];
+                $_SESSION["status"];//pour insertion message
+                return true;
 
-                
-                //On redirige vers la page profil.php une fois le compte créé 
-                //header("Location: ../view/vueProfil.php"); //ATTENTION SYNTAXE: PAS D'ESPACE "Location: " ET NON "Location : " SINON ERREUR 500
-                        
             } catch(Exception $e) {
             
                 //affichage d'une mssg en cas d’erreur
@@ -213,8 +211,7 @@
                     "mdp_user" => $user["mdp_user"], //ici il s'agit du hash du mdp
                     "is_admin" => $user["is_admin"],                
                     ];
-                    $_SESSION["message"]; 
-                    
+                    $_SESSION["status"];//pour insertion message
                     return true;
                 }
             
@@ -299,4 +296,3 @@
         } 
     }
     
-?>

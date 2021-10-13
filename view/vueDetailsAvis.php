@@ -29,7 +29,7 @@ include("head.php");
       </div>
       <div class="innerInputs">
         <label for="comments">Vos commentaires: </label><br>
-        <textarea name="comments" id="" cols="30" rows="10"><?= $detailsAvis["comments"] ?></textarea>
+        <textarea name="comments" id="" cols="30" rows="5"><?= $detailsAvis["comments"] ?></textarea>
       </div>
       <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis">
       <?php if(isset($SESSION["user"])) : ?>

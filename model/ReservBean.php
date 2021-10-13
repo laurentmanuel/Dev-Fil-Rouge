@@ -88,12 +88,10 @@
                 }  
         }      
         
-
-
     /****************************************************************/
 
         //méthode affichage de toutes les tâches (méthode testée OK)
-        public function showReserv($bdd){
+        public function readReserv($bdd){
             $id_user = $this->getIdUserRes();
 
             try {
@@ -135,6 +133,7 @@
                 "nb_people" => $nb_people,
                 "id_user" => $id_user
                 ));
+                return true;
 
             }catch(Exception $e){
 

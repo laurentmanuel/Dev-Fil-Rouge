@@ -2,7 +2,7 @@
 if (!isset($_SESSION["user"])) {
   session_start();
 }
-$titre = "Modifier Réservation";
+$titre = "Réservations";
 include("head.php");
 ?>
 
@@ -28,9 +28,23 @@ include("head.php");
         <button class="styled"><a href="../controller/readReserv.php">Voir vos réservations</a></button>
       </div>
     </form>
-    <p id="message"></p>
-    <!-- <div class="errMssg"></div>
-    <div class="okMssg"></div> -->
+    <?php if (isset($_SESSION["status"])) : ?>
+      <div class="okMssg">
+        <?php
+        echo $_SESSION["status"];
+        unset($_SESSION["status"]);
+        ?>
+      </div>
+    <?php else : ?>
+      <div class="errMssg">
+        <?php
+        echo $_SESSION["status"];
+        unset($_SESSION["status"]);
+        ?>
+      </div>
+    <?php endif; ?>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

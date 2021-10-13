@@ -88,11 +88,17 @@
         echo '<script>let message = document.querySelector(".errMssg");';
         echo 'message.innerHTML = "Le compte utilisateur existe déjà";</script>';
       
-      } else {
-        $user->createUser($bdd);
+      } else if($user->createUser($bdd)==true){
 
-        echo '<script>let message = document.querySelector(".okMssg");';
-        echo 'message.innerHTML = "Le compte utilisateur '.$_POST['first_name_user'].' '.$_POST['name_user'].' a été créé!"</script>'; 
+        //insertion message dans session car redirection
+        $_SESSION["status"] = 'Le compte utilisateur '.$_SESSION["user"]['first_name_user'].' '.$_SESSION["user"]['name_user'].' a bien été créé!';
+        
+        //Redirection vers page profil
+        header("Location: ../view/vueProfil.php");
+      } else{
+
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "L\'application a rencontré une erreur";</script>';
       }
     
     } else {

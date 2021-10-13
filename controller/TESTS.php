@@ -9,5 +9,5 @@
 
 
         //redirection vers liste d'avis avec refresh
-//     $location = "../controller/showAvis.php";
+//     $location = "../controller/readAvis.php";
 //     echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';

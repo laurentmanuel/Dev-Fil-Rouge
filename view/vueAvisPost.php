@@ -27,7 +27,7 @@ include("head.php");
       </div>
       <div class="innerInputs">
         <label for="comments">Vos commentaires: </label><br>
-        <textarea name="comments" id="" cols="30" rows="10"></textarea>
+        <textarea name="comments" id="" cols="30" rows="5"></textarea>
       </div>
       <button class="styled" type="submit">Valider</button>
       <button class="styled"><a href="../controller/readAvis.php">Revenir aux avis</a></button>

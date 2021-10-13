@@ -18,7 +18,7 @@
     $detailsAvis = $avisDetail->getAvis($bdd);
 
     //appel de la vue
-    require("../view/vueAvisUpdate.php");
+    require("../view/vueUpdateAvis.php");
 
   } else {
     echo '<script>let message = document.querySelector(".errMssg");';
@@ -42,10 +42,15 @@
       $updatedAvis->setIdUserAvis($_SESSION["user"]["id_user"]);
       
       //Appel méthode updateAvis
-      $updatedAvis->updateAvis($bdd);
-      
-      //Rechargement de la page
-      header('Location: ../controller/updateAvis.php?id_avis='. $updatedAvis->getIdAvis() .'');
+      if($updatedAvis->updateAvis($bdd)==true){
 
-      echo '<p>'.$_SESSION["user"]["first_name_user"].', votre avis a bien été modifié!</p></div>';        
+        //Insertion message dans superglobale session car redirection
+        $_SESSION["status"] = "Votre Avis a bien été modifié!";
+        //Rechargement de la page
+        header("Location: ../controller/updateAvis.php?id_avis=$id_avis");
+      } else {
+
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';
+      };       
   } 

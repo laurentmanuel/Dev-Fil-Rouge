@@ -18,20 +18,12 @@
               <td class="col_res_4"><?= $reserv["updatedOn"] ?></td>
               <td class="col_res_5">
                 <div class="dropdown">
-                  <button class="dropbtn" onclick="confirm()">Actions</button>
+                  <button class="dropbtn">Actions</button>
                   <div class="dropdown-content">
                     <a href="../controller/updateRes.php?id_reserv=<?= $reserv["id_reserv"] ?>">Modifier</a>
-                    <a href="../controller/deleteRes.php?id_reserv=<?= $reserv["id_reserv"] ?>" onclick="ok()">Supprimer</a>
+                    <a href="../controller/deleteRes.php?id_reserv=<?= $reserv["id_reserv"] ?>">Supprimer</a>
                   </div>
                 </div>
-                <script>
-                  function confirm(){
-                    if(confirm("Êtes-vous sûr de vouloir supprimer cette réservation?"){
-                      
-                      
-                    }
-                  }
-                </script>
               </td>
             </tr>
           <?php endforeach; ?>

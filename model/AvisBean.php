@@ -126,6 +126,7 @@
                     "comments" => $comments,
                     "id_user" => $id_user
                 ));
+                return true;
                 
             } catch(Exception $e) {
                 //affichage d'une exception en cas d’erreur

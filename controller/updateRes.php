@@ -43,28 +43,23 @@
         echo 'message.innerHTML = "Nombre de personnes incorrect";</script>';
     } else {
       
-        $id_reserv = htmlspecialchars($_POST["id_reserv"]);
-        $updatedRes = new ReservBean();
-        $updatedRes->setIdReserv($id_reserv);
-        $updatedRes->setDateReserv($_POST["date_reserv"]);
-        $updatedRes->setNbPeople($_POST["nb_people"]);
-        $updatedRes->setIdUserRes($_SESSION["user"]["id_user"]);
+      $id_reserv = htmlspecialchars($_POST["id_reserv"]);
+      $updatedRes = new ReservBean();
+      $updatedRes->setIdReserv($id_reserv);
+      $updatedRes->setDateReserv($_POST["date_reserv"]);
+      $updatedRes->setNbPeople($_POST["nb_people"]);
+      $updatedRes->setIdUserRes($_SESSION["user"]["id_user"]);
 
-        //Appel méthode updateAvis
-        $reserv = $updatedRes->updateRes($bdd);
+      //Appel méthode updateAvis
+      if($updatedRes->updateRes($bdd)==true){
         
-        //$location = "../controller/updateRes.php?id_reserv=$id_reserv";
-        //echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
-        //echo "<h1>test affichage</h1>";
-        echo '<script>let message = document.querySelector("#message");';
-        echo 'message.innerHTML = "'.$_SESSION["user"]["first_name_user"].', votre réservation a bien été modifiée!";</script>';
-        //header('Location: ../controller/readReserv.php');
-        
-        /*header("Location: ../controller/updateRes.php?id_reserv='.<?= $id_reserv ?>.'");*/
-
-        //Affichage et redirection à gérermessage de confirmation de la modification
-        
-        //Redirection vers la liste des réservations aprés modif
-  
+        //insertion message dans session car redirection
+        $_SESSION["status"] = "Votre réservation a bien été modifiée!";
+        //Redirection vers page profil
+        header("Location: ../controller/updateRes.php?id_reserv=$id_reserv");
+      } else {
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';
+      }
     } 
   }

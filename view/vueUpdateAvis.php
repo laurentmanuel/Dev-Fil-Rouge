@@ -31,12 +31,27 @@ include("head.php");
       </div>
       <div class="innerInputs">
         <label for="comments">Vos commentaires: </label><br>
-        <textarea name="comments" id="" cols="30" rows="10"><?= $detailsAvis["comments"] ?></textarea>
+        <textarea name="comments" id="" cols="30" rows="5"><?= $detailsAvis["comments"] ?></textarea>
       </div>
       <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis">
       <input class="styled" type="submit" value="Valider"></input>
       <button class="styled"><a href="../controller/readUserAvis.php">Retour aux Avis</a></button>
     </form>
+    <?php if (isset($_SESSION["status"])) : ?>
+      <div class="okMssg">
+        <?php
+        echo $_SESSION["status"];
+        unset($_SESSION["status"]);
+        ?>
+      </div>
+    <?php else : ?>
+      <div class="errMssg">
+        <?php
+        echo $_SESSION["status"];
+        unset($_SESSION["status"]);
+        ?>
+      </div>
+    <?php endif; ?>
     <div class="errMssg"></div>
     <div class="okMssg"></div>
   </div>

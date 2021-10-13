@@ -1,5 +1,5 @@
 <?php
-if(!isset($_SESSION["user"])) {
+if (!isset($_SESSION["user"])) {
   session_start();
 }
 $titre = "Vos informations";
@@ -45,6 +45,21 @@ include("head.php");
         </div>
       </div>
     </form>
+    <?php if(isset($_SESSION["status"])): ?>
+      <div class="okMssg">
+      <?php 
+      echo $_SESSION["status"];
+      unset($_SESSION["status"]);
+      ?>
+      </div>
+    <?php else: ?>
+      <div class="errMssg">
+      <?php 
+      echo $_SESSION["status"];
+      unset($_SESSION["status"]);
+      ?>
+      </div>
+    <?php endif; ?>
     <div class="errMssg"></div>
     <div class="okMssg"></div>
   </div>

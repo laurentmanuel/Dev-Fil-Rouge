@@ -225,11 +225,11 @@ article{
 
 textarea{
     width: 600px;
-    height: 170px;
+    height: 120px;
 }
 
 .innerInputs, .stars, .btnContainer{
-    margin-top: 15px;
+    margin-top: 13px;
 }
 
 .innerInputs h4{
@@ -362,10 +362,10 @@ article{
 .pgTitle{
     display: block;
     position: absolute;
-    top: 0.9em;
+    top: 0.5em;
     left: 80px;
     margin-left: 15%;
-    font-size: 1.7em;
+    font-size: 1.9em;
     font-style: italic;
     text-shadow: 1px 1px 0 #000,
     -1px 1px 0 #000,
@@ -396,7 +396,7 @@ article{
 footer{    
     display: flex;
     justify-content: center;
-    margin-top: 20vh;
+    margin-top: 140vh;
     height: 75px;
     width: 130%;
     background-color:#030A8C;
