@@ -68,16 +68,12 @@ include("head.php");
     <div class="modal" id="modal" role="dialog">
       <div class="modal-content">
         <div class="modal-close" data-dismiss="dialog">X</div>
-        <!-- <div class="modal-header">
-          <p>Modifications des informations:</p>
-        </div> -->
-        <div class="modal-body">
-          <p>Voulez-vous enregistrer les modifications?</p>
+        <div class="modal-header">
+          <p>Ouvrir modal 1</p>
         </div>
+        <div class="modal-body">Voulez-vous enregistrer les modifications?</div>
         <div class="modal-footer">
-          <a href="#" class="btn btn-close" role="button" data-dismiss="dialog">Annuler</a>
-          
-
+          <a href="../controller/updateUser.php" class="btn btn-close" role="button" data-dismiss="dialog">Annuler</a>
           <a href="../view/vueAccueil.php" class="btn" role="button">Confirmer</a>
         </div> 
       </div>

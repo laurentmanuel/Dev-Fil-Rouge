@@ -52,8 +52,6 @@ include("head.php");
         ?>
       </div>
     <?php endif; ?>
-    <div class="errMssg"></div>
-    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

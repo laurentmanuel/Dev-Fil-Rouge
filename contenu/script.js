@@ -72,9 +72,43 @@ window.onload = ()=>{
     }
 }
 
-/*******************************************************/
+/**********************MODAL*********************/
 
-// let okBtn = document.querySelector(".dropbtn");
-// okBtn.addEventListener("click", () => {
-//     confirm("êtes-vous sûr de vouloir supprimer?");
-// });
+window.onload = () => {
+    //On récupère tous les boutons d'ouverture de modales
+    const modalButtons = document.querySelectorAll("[data-toggle=modal]");
+
+    for(let button of modalButtons){
+        button.addEventListener("click", function(e){
+            //On empêche la navigation
+            e.preventDefault();
+            //On récupère le data-target
+            let target = this.dataset.target;
+
+            //On récupère la bonne modale
+            let modal = document.querySelector(target);
+            //On affiche la modale
+            modal.classList.add("show");
+            
+            //On récupère les boutons de fermeture
+            const modalClose = document.querySelectorAll(["[data-dismiss=dialog]"]);
+            console.log(modalClose); 
+
+            for(let close of modalClose){
+                close.addEventListener("click", ()=>{
+                    modal.classList.remove("show");
+                });
+            }
+
+            //Pour gérer la fermeture sur click dans zone grise
+            modal.addEventListener("click", function(){
+                this.classList.remove("show");
+            });
+
+            //On évite la propagation du click d'un enfant à son parent
+            modal.children[0].addEventListener("click", function(e){
+                e.stopPropagation(); 
+            });
+        });
+    }
+}

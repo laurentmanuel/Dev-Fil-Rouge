@@ -62,8 +62,8 @@
         ];
 
         //Affichage et redirection à gérer
-        echo '<script>let message = document.querySelector(".okMssg");';
-        echo 'message.innerHTML = "Votre profil a bien été mis à jour";</script>';
+        // echo '<script>let message = document.querySelector(".okMssg");';
+        // echo 'message.innerHTML = "Votre profil a bien été mis à jour";</script>';
         //Redirection 
         header("Location: ../controller/updateUser.php");
         

@@ -34,9 +34,7 @@ include("head.php");
       <div class="btnContainer">
         <div>
           <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
-          <input class="styled" type="submit" value="Modifier vos Informations" role="button" data-target="#modal" data-toggle="modal">
-          <!-- <a href="#" role="button" data-target="#modal" data-toggle="modal">ouvrir modal1</a>
-          <a href="#" role="button" data-target="#modal2" data-toggle="modal">ouvrir modal2</a> -->
+          <input class="styled" type="submit" value="Modifier vos Informations">
         </div>
         <div class="dropdown">
           <div class="dropbtn">Autres actions</div>
@@ -44,44 +42,25 @@ include("head.php");
             <a href="../view/vueUpdateMdp.php">Modifier mot de passe</a>
             <a href="../view/vueDeleteUser.php">Supprimer mon compte</a>
           </div>
-        </div> 
+        </div>
       </div>
     </form>
-    <?php if (isset($_SESSION["status"])) : ?>
+    <?php if(isset($_SESSION["status"])): ?>
       <div class="okMssg">
-        <?php
-        echo $_SESSION["status"];
-        unset($_SESSION["status"]);
-        ?>
+      <?php 
+      echo $_SESSION["status"];
+      unset($_SESSION["status"]);
+      ?>
       </div>
-    <?php else : ?>
+    <?php else: ?>
       <div class="errMssg">
-        <?php
-        echo $_SESSION["status"];
-        unset($_SESSION["status"]);
-        ?>
+      <?php 
+      echo $_SESSION["status"];
+      unset($_SESSION["status"]);
+      ?>
       </div>
     <?php endif; ?>
   </div>
-
-  <!-- modal -->
-    <div class="modal" id="modal" role="dialog">
-      <div class="modal-content">
-        <div class="modal-close" data-dismiss="dialog">X</div>
-        <!-- <div class="modal-header">
-          <p>Modifications des informations:</p>
-        </div> -->
-        <div class="modal-body">
-          <p>Voulez-vous enregistrer les modifications?</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-close" role="button" data-dismiss="dialog">Annuler</a>
-          
-
-          <a href="../view/vueAccueil.php" class="btn" role="button">Confirmer</a>
-        </div> 
-      </div>
-    </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

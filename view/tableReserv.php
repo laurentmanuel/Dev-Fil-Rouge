@@ -24,14 +24,8 @@
                     <a href="../controller/deleteRes.php?id_reserv=<?= $reserv["id_reserv"] ?>" onclick="ok()">Supprimer</a>
                   </div>
                 </div>
-                <script>
-                  function confirm(){
-                    if(confirm("Êtes-vous sûr de vouloir supprimer cette réservation?"){
-                      
-                      
-                    }
-                  }
-                </script>
+                <!-- <script>code modale à écrire
+                </script> -->
               </td>
             </tr>
           <?php endforeach; ?>

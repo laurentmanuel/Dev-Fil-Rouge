@@ -38,8 +38,6 @@ include("head.php");
         <button class="styled"><a href="../controller/readAvis.php">Retour</a></button>
       <?php endif; ?>
     </form>
-    <div class="errMssg"></div>
-    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>
