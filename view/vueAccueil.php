@@ -9,10 +9,9 @@
   <?php include "bordure.php"; ?>
   <!-- header -->
   <?php include("header.php"); ?>
-
-  <div id="une">
+  <main>
     <article>
-      <h1>Apollo Space Park vous souhaite la Bienvenue!</h1>
+      <h1>Apollo Space Park, la conquête spatiale enfin à votre portée!</h1>
       <h3>Une expérience mémorable!</h3>
       <h3><a href="../view/vueReservations.php">Réservez maintenant!</a></h3>
       <p>
@@ -23,14 +22,8 @@
     </article>
     <img id="decollage" src="../contenu/images_fR/Apollo8Launch.jpg" alt="Appolo8launch">
     <img id="image_park" src="../contenu/images_fR/image_park.png" alt="image_park">
-    <p></p>
-  </div>
-
-  <!-- footer  -->
-  <?php include('footer.php'); ?>
-
-
-
+  </main>
+  <?php include("footer.php"); ?>
 </body>
 
 </html>

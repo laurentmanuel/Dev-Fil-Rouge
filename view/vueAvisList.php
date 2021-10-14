@@ -20,58 +20,22 @@ include("head.php");
   <!-- header -->
   <?php include("header.php"); ?>
 
-  <div class="userForm">
+  <div class="container">
     <section>
-      <?php if (!isset($_SESSION["user"])) : ?>
-        <h3>Tous les avis publiés: </h3>
+      <?php if ($allAvis == null) : ?>
+        <h3>Aucun Avis n'a été publié</h3>
       <?php else : ?>
-        <h3><?= $_SESSION["user"]["first_name_user"] ?>, vos avis publiés:</h3>
-      <?php endif; ?>
-      <table>
-        <thead>
-          <tr>
-            <th>id Avis:</th>
-            <th>Note attribuée:</th>
-            <th>Titre:</th>
-            <th>Commentaires:</th>
-            <th>Créé/Modifié le:</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($allAvis as $avis) : ?>
-            <tr>
-              <td><?= $avis["id_avis"] ?></td>
-              <td><?= $avis["note"] ?></td>
-              <td><?= $avis["title_avis"] ?></td>
-              <td><?= $avis["comments"] ?></td>
-              <td><?= $avis["updatedOn"] ?></td>
-              <td>
-                <?php if (isset($_SESSION["user"])) : ?>
-                  <div class="dropdown">
-                    <button class="dropbtn">Actions</button>
-                    <div class="dropdown-content">
-                      <a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a>
-                      <a href="../controller/updateAvis.php?id_avis=<?= $avis["id_avis"] ?>">Modifier</a>
-                      <a href="../controller/deleteAvis.php?id_avis=<?= $avis["id_avis"] ?>">Supprimer</a>
-                    <?php else : ?>
-                      <a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a>
-                    <?php endif; ?>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
-              </td>
-            </tr>
-        </tbody>
-      </table>
+        <?php include("tableAvis.php"); ?>
+      <?php endif; ?>      
       <?php if (!isset($_SESSION["user"])) : ?>
-        <button class="styled"><a href="../view/vueLogin.php" class="favorite styled">Ajouter un avis</a></button>
-        <button class="styled"><a href="../view/vueLogin.php" class="favorite styled">Voir mes avis</a></button>
+        <button class="styled"><a href="../view/vueLogUser.php">Ajouter un avis</a></button>
+        <button class="styled"><a href="../view/vueLogUser.php">Voir mes avis</a></button>
       <?php else : ?>
-        <button class="styled"><a href="../controller/addAvis.php">Ajouter un avis</a></button>
+        <button class="styled"><a href="../controller/createAvis.php">Ajouter un avis</a></button>
       <?php endif; ?>
-  </div>
-  </section>
+    </section>
+    <div class="errMssg"></div>
+    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

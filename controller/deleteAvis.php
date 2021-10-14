@@ -18,13 +18,10 @@
     $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
     $avis->deleteAvis($bdd);
 
-    $_SESSION["message"] = "Avis supprimé";
-
+    echo '<script>let message = document.querySelector(".okMssg");';///NE SE VOIT CAR REDIREC, A CORRIGER
+    echo 'message.innerHTML = "L\'avis a été supprimé";</script>';
     //appel de la vue
-    //redirection vers liste d'avis
-    $location = "../controller/showAvis.php";
+    //redirection vers liste d'avis avec refresh
+    $location = "../controller/readAvis.php";
     echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
-
   } 
-
-?>

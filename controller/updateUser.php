@@ -61,13 +61,16 @@
           "is_admin" => $user->getIsAdmin()
         ];
 
-        //refresh
+        //Affichage et redirection à gérer
+        // echo '<script>let message = document.querySelector(".okMssg");';
+        // echo 'message.innerHTML = "Votre profil a bien été mis à jour";</script>';
+        //Redirection 
         header("Location: ../controller/updateUser.php");
-        echo "<p>Votre profil a été mis à jour</p>";
         
       } else {
 
-        die("<p>Le formulaire n'est pas incomplet</p>");
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
       }
     }
   }

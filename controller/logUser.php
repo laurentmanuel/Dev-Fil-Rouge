@@ -7,7 +7,6 @@
   //On connecte l'utilisateur aprés la création de son compte
   session_start();// on démarre la session php (un cookie se crée à cet instant, la session est un tableau )
   
-
   /*----------------------------------------------------
             IMPORTS à effectuer pour ajout en bdd:
   -----------------------------------------------------*/
@@ -19,13 +18,12 @@
     require("../utils/connexionBdd.php");
 
     //appel vue Inscription
-    require("../view/vueLogin.php"); 
-
+    require("../view/vueLogUser.php"); 
 
   /*-----------------------------------------------------
                         CONTROLLER:
    -----------------------------------------------------*/
-  //pour protéger connexionUser si déjà connecté
+  //pour protéger connexionUser si déjà connecté on redirige vers la page"mon compte
   if(isset($_SESSION["user"])){
 
     header("Location: ../view/vueProfil.php");
@@ -43,8 +41,9 @@
 
         //Filtrage par le Back-end du format email (plus sûr qu'en JS car peut-être js peut être désactivé)
         if(!filter_var($_POST["email_user"], FILTER_VALIDATE_EMAIL)){
-          die ("<p>L'adresse email est incorrecte</p>");
 
+          echo '<script>let message = document.querySelector(".errMssg");';
+          echo 'message.innerHTML = "L\'adresse email est incorrecte";</script>';
         } 
 
         //On créé un objet 
@@ -54,28 +53,32 @@
 
         //Vérif sur l'utilisateur est existant
         if($userToLog->userExists($bdd)==false){
+
+          echo '<script>let message = document.querySelector(".errMssg");';
+          echo 'message.innerHTML = "Le compte utilisateur n\'existe pas";</script>';
+        }
           
-          die("<p>Le compte utilisateur n'existe pas, veuillez créer un compte.");
+        //L'utilisateur existe, on appelle la fonction de login
+        if($userToLog->logUser($bdd)==true){
+
+          //insertion message dans session car redirection
+          $_SESSION["status"] = "Vous êtes connecté!";
+          //Redirection vers page profil
+          header("Location: ../view/vueProfil.php");
         } else {
 
-          //L'utilisateur existe, on appelle la fonction de login
-          $userToLog->logUser($bdd);
-        }        
-          
-          //Ici l'email et le mdp sont OK  
-          header("Location: ../view/vueProfil.php"); 
-          
+          echo '<script>let message = document.querySelector(".errMssg");';
+          echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';
+        }
         
       } else {
-
-        die("<p>Le formulaire est incomplet</p>");
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
       }
     
-
     } else {
-
-      die("<p>Le formulaire n'est pas renseigné</p>");
+      echo '<script>let message = document.querySelector(".errMssg");';
+      echo 'message.innerHTML = "Le formulaire est vide";</script>';
     }
-  }
+  } 
 
-?>

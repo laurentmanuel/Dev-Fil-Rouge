@@ -19,7 +19,7 @@
         }
 
         /*----------------------------------------------------
-                            Getter & Setter :
+                            Accesseurs:
         -----------------------------------------------------*/
 
         //id_avis Getter & Setter
@@ -70,10 +70,9 @@
     /*-----------------------------------------------------
                             Fonctions :
     -----------------------------------------------------*/
-        
-    
+            
     /****************************************************************/
-        //méthode ajout d'un Avis en en bdd 
+        //méthode d'ajout d'un Avis en bdd 
         public function createAvis($bdd){  
 
             //récupération des valeurs de l'objet
@@ -103,6 +102,7 @@
         }
         
     /****************************************************************/
+
         public function updateAvis($bdd){
 
             //récupération des valeurs de l'objet
@@ -126,6 +126,7 @@
                     "comments" => $comments,
                     "id_user" => $id_user
                 ));
+                return true;
                 
             } catch(Exception $e) {
                 //affichage d'une exception en cas d’erreur
@@ -139,7 +140,6 @@
 
             try{
                 $sql = "SELECT * FROM avis";
-
                 $avis = $bdd->query($sql);
                 $allAvis = $avis->fetchAll();
                 return $allAvis;
@@ -154,6 +154,7 @@
 
         public function showUserAvis($bdd){
             $id_user = $this->getIdUserAvis();
+
             try{
                 $sql = "SELECT * FROM avis WHERE id_user = :id_user ORDER BY updatedOn ASC";
                 $avis = $bdd->prepare($sql);
@@ -161,6 +162,7 @@
                 $avis->execute();
                 $userAvis = $avis->fetchAll();
                 return $userAvis;
+                
             } catch(Exception $e) {
                 die('Erreur : '.$e->getMessage());
             }
@@ -177,16 +179,9 @@
                 $avis = $bdd->prepare($sql);
                 $avis->bindValue("id_avis", $id_avis);
                 $avis->execute();
-                $detailsAvis = $avis->fetch();
-
-                if(!$detailsAvis){
-                    $_SESSION["erreur"] = "Cet id_user n'existe pas";
-                    header("Location: ../controller/showAvis.php" );
-
-                } else {
-
-                    return $detailsAvis;
-                }
+                $detailsAvis = $avis->fetch();                
+                return $detailsAvis;
+            
                 
             } catch(Exception $e) {
                 die('Erreur : '.$e->getMessage());
@@ -214,4 +209,3 @@
             }
         }
     }
-?>

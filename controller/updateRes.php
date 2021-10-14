@@ -22,32 +22,44 @@
 
   } else {
 
-      $_SESSION["message"] = "URL invalide";
+    echo '<script>let message = document.querySelector(".errMssg");';
+    echo 'message.innerHTML = "URL invalide";</script>';
   }
 
   //Vérif si tous les champs sont complets
   if(isset($_POST["id_reserv"]) && isset($_POST["date_reserv"]) && isset($_POST["nb_people"])
   && !empty($_POST["id_reserv"]) && !empty($_POST["date_reserv"]) && !empty($_POST["nb_people"])){
       
-        $id_reserv = htmlspecialchars($_POST["id_reserv"]);
-        $updatedRes = new ReservBean();
-        $updatedRes->setIdReserv($id_reserv);
-        $updatedRes->setDateReserv($_POST["date_reserv"]);
-        $updatedRes->setNbPeople($_POST["nb_people"]);
-        $updatedRes->setIdUserRes($_SESSION["user"]["id_user"]);
-
-        //Appel méthode updateAvis
-        $reserv = $updatedRes->updateRes($bdd);
-
-        //Redirection vers la liste des réservations aprés modif
-        header('Location: ../controller/showReserv.php?id_reserv='. $updatedRes->getIdReserv() .'');
-
-        //message de confirmation de la modification
-        echo '<p>'.$_SESSION["user"]["first_name_user"].', votre réservation a bien été modifiée!</p></div>';
+    $currentDate = date_create("now")->format("Y-m-d H:i:s"); //pour empêcher de sélectionner une date antérieure à la date du jour
+    if($_POST["date_reserv"]<$currentDate){
         
-  } else {
+        //pour empêcher saisie date incorrecte
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "Date incorrecte";</script>';                
+    } else if ($_POST["nb_people"]<1){
 
-        echo "<p>Le formulaire est incomplet</p>";
+        //pour empêcher mauvaise saisie du nombre de personnes
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "Nombre de personnes incorrect";</script>';
+    } else {
+      
+      $id_reserv = htmlspecialchars($_POST["id_reserv"]);
+      $updatedRes = new ReservBean();
+      $updatedRes->setIdReserv($id_reserv);
+      $updatedRes->setDateReserv($_POST["date_reserv"]);
+      $updatedRes->setNbPeople($_POST["nb_people"]);
+      $updatedRes->setIdUserRes($_SESSION["user"]["id_user"]);
+
+      //Appel méthode updateAvis
+      if($updatedRes->updateRes($bdd)==true){
+        
+        //insertion message dans session car redirection
+        $_SESSION["status"] = "Votre réservation a bien été modifiée!";
+        //Redirection vers page profil
+        header("Location: ../controller/updateRes.php?id_reserv=$id_reserv");
+      } else {
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';
+      }
+    } 
   }
-
-?>

@@ -2,7 +2,7 @@
 if (!isset($_SESSION["user"])) {
   session_start();
 }
-$titre = "Votre compte";
+$titre = "Vos informations";
 include("head.php");
 ?>
 
@@ -15,33 +15,73 @@ include("head.php");
 
   <div class="userForm">
     <form action="../controller/updateUser.php" method="post">
-      <h3>Mon Compte</h3>
-      <div>
+      <h3 id="titleProfil">Mon Compte:<?= $_SESSION["session_mssg"] ?></h3>
+      <div class="innerInputs">
+        <h4>Vos Informations:</h4>
+      </div>
+      <div class="innerInputs">
         <label for="name">Nom:</label>
-        <input type="text" name="name_user" value="<?= $_SESSION["user"]["name_user"] ?>" size="25">
+        <input type="text" placeholder="Votre nom" name="name_user" value="<?= $_SESSION["user"]["name_user"] ?>" size="25">
       </div>
-      <div>
+      <div class="innerInputs">
         <label for="first_name">Prénom: </label>
-        <input type="text" name="first_name_user" value="<?= $_SESSION["user"]["first_name_user"] ?>" size="25">
+        <input type="text" placeholder="Votre prénom" name="first_name_user" value="<?= $_SESSION["user"]["first_name_user"] ?>" size="25">
       </div>
-      <div>
+      <div class="innerInputs">
         <label for="email">Email: </label>
-        <input type="text" name="email_user" value="<?= $_SESSION["user"]["email_user"] ?>" size="35">
+        <input type="text" placeholder="Votre email" name="email_user" value="<?= $_SESSION["user"]["email_user"] ?>" size="35">
       </div>
-      <span>
-        <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
-        <input class="connexionBtn" type="submit" value="Modifier mon profil">
-      </span>
-      <span> 
-        <button><a href="../controller/updateMdp.php">Modifier mot de passe</a></button>
-      </span>
-      <span> 
-        <button><a href="../controller/deleteUser.php">Supprimer mon compte</a></button>
-      </span>
+      <div class="btnContainer">
+        <div>
+          <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
+          <input class="styled" type="submit" value="Modifier vos Informations" role="button" data-target="#modal" data-toggle="modal">
+          <!-- <a href="#" role="button" data-target="#modal" data-toggle="modal">ouvrir modal1</a>
+          <a href="#" role="button" data-target="#modal2" data-toggle="modal">ouvrir modal2</a> -->
+        </div>
+        <div class="dropdown">
+          <div class="dropbtn">Autres actions</div>
+          <div class="dropdown-content">
+            <a href="../view/vueUpdateMdp.php">Modifier mot de passe</a>
+            <a href="../view/vueDeleteUser.php">Supprimer mon compte</a>
+          </div>
+        </div> 
+      </div>
     </form>
-    <!--Affichage message -->
-    <p><?= $_SESSION["user"]["message"] ?></p>
+    <?php if (isset($_SESSION["status"])) : ?>
+      <div class="okMssg">
+        <?php
+        echo $_SESSION["status"];
+        unset($_SESSION["status"]);
+        ?>
+      </div>
+    <?php else : ?>
+      <div class="errMssg">
+        <?php
+        echo $_SESSION["status"];
+        unset($_SESSION["status"]);
+        ?>
+      </div>
+    <?php endif; ?>
   </div>
+
+  <!-- modal -->
+    <div class="modal" id="modal" role="dialog">
+      <div class="modal-content">
+        <div class="modal-close" data-dismiss="dialog">X</div>
+        <!-- <div class="modal-header">
+          <p>Modifications des informations:</p>
+        </div> -->
+        <div class="modal-body">
+          <p>Voulez-vous enregistrer les modifications?</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-close" role="button" data-dismiss="dialog">Annuler</a>
+          
+
+          <a href="../view/vueAccueil.php" class="btn" role="button">Confirmer</a>
+        </div> 
+      </div>
+    </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>
 </body>

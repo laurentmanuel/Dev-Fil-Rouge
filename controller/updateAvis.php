@@ -12,39 +12,45 @@
   if(isset($_GET["id_avis"]) && !empty($_GET["id_avis"])){
 
     //on retire les caractères non souhaités
-    $id_avis = strip_tags($_GET["id_avis"]);
+    $id_avis = htmlspecialchars($_GET["id_avis"]);
     $avisDetail = new AvisBean();
     $avisDetail->setIdAvis($id_avis);
     $detailsAvis = $avisDetail->getAvis($bdd);
 
     //appel de la vue
-    require("../view/vueAvisUpdate.php");
+    require("../view/vueUpdateAvis.php");
 
   } else {
-
-      $_SESSION["message"] = "URL invalide";
+    echo '<script>let message = document.querySelector(".errMssg");';
+    echo 'message.innerHTML = "L\'ancien mot de passe est incorrect";</script>';
   }
+  
   //Vérif si tous les champs sont complets
   if(isset($_POST["id_avis"]) && isset($_POST["note"]) && isset($_POST["title_avis"]) && isset($_POST["comments"])
   && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"]) && !empty($_POST["id_avis"])){  
-             
+       
+      //on filtre les chamo
       $id_avis = htmlspecialchars($_POST["id_avis"]);
+      $title_avis = htmlspecialchars($_POST["title_avis"]);
+      $comments = htmlspecialchars($_POST["comments"]);
+
       $updatedAvis = new AvisBean();
       $updatedAvis->setIdAvis($id_avis);
       $updatedAvis->setNote($_POST["note"]);
-      $updatedAvis->setTitleAvis($_POST["title_avis"]);
-      $updatedAvis->setComments($_POST["comments"]);
+      $updatedAvis->setTitleAvis($title_avis);
+      $updatedAvis->setComments($comments);
       $updatedAvis->setIdUserAvis($_SESSION["user"]["id_user"]);
       
       //Appel méthode updateAvis
-      $updatedAvis->updateAvis($bdd);
-      //Rechargement de la page
-      header('Location: ../controller/updateAvis.php?id_avis='. $updatedAvis->getIdAvis() .'');
+      if($updatedAvis->updateAvis($bdd)==true){
 
-      echo '<p>'.$_SESSION["user"]["first_name_user"].', votre avis a bien été modifié!</p></div>';
-        
-  } else {
-    echo "<p>Le formulaire est incomplet</p>";
-  }
+        //Insertion message dans superglobale session car redirection
+        $_SESSION["status"] = "Votre Avis a bien été modifié!";
+        //Rechargement de la page
+        header("Location: ../controller/updateAvis.php?id_avis=$id_avis");
+      } else {
 
-?>
+        echo '<script>let message = document.querySelector(".errMssg");';
+        echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';
+      };       
+  } 

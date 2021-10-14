@@ -18,13 +18,13 @@
     $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
     $reserv->deleteRes($bdd);
 
-    $_SESSION["message"] = "Réservation supprimée";
+    //affichage temporaire à gérer
+    echo '<script>let message = document.querySelector(".okMssg");';///NE SE VOIT CAR REDIREC, A CORRIGER
+    echo 'message.innerHTML = "La réservation a bien été supprimée";</script>';
 
+    header("Location: ../controller/readReserv.php");
     //appel de la vue
-    //redirection vers liste d'avis
-    $location = "../controller/showReserv.php";
-    echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
-
+    // //redirection vers liste d'avis
+    // $location = "../controller/readReserv.php";
+    // echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
   } 
-
-?>

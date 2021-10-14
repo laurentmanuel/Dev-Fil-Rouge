@@ -19,11 +19,8 @@
 
   } else {
     $_SESSION["erreur"] = "URL invalide";
-    header("Location: ../controller/showAvis.php");
+    header("Location: ../controller/readAvis.php");
   }
 
   //appel de la vue
   include ("../view/vueDetailsAvis.php");
-
-
-?>

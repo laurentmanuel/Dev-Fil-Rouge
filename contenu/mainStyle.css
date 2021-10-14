@@ -13,14 +13,15 @@
 }
 
 
+
 body{
     min-height: 100vh;
     font-family: 'futura-renner', sans-serif;  
     background-color: #949494;
     background-image: url(images_fR/fond_home_transparent.png);
     border-image-repeat: round;
-    margin: 0;
-    padding: 0;
+    margin: 0 0;
+    padding: 0 0;
 }
 
 header{
@@ -39,11 +40,11 @@ h2{
     color: #FFF;
 }
 
-/*Allonger les champs*/
+/*Allonger les champs
 input{
     size: 50;
 }
-
+*/
 
 #logo{
     z-index: 4;
@@ -58,9 +59,21 @@ input{
     box-shadow: 0px 0px 5px 0px black;
 }
 
-#une{
-    width: 95%;
+.led{
+    z-index: 5;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    Right: 0px;
+    margin-right: 2%;
+    margin-top: 1em;
+    border-radius: 50%; /*Contour arrondi*/
+    border: 1px solid #fff;
+}
+
+main{
     display: flex;
+    justify-content: left;
 }
 
 h1{
@@ -72,7 +85,8 @@ h1{
 h3{
     color: #FFF;
     font-size: 2em;
-    font-style: Futura, bold;
+    text-align: center;
+    font-style: italic;
 }
 
 p{
@@ -80,7 +94,7 @@ p{
     font-size: 1.2em;
 }
 
-nav{
+#navbar{
     position: absolute;
     right: 0px;
     display: flex;
@@ -88,34 +102,43 @@ nav{
     width: auto;
     font-style: italic;
     margin-top: 1.5em;
-    margin-right: 3%;
 }
 
-nav a, article a{
+article{
+    margin-top: 5em;                             
+}
+
+
+#navbar a, article a{
     text-decoration: none; /*liens non soulignés*/
     color: #FFFFFF;
 }
 
-nav ul{
+#navbar li{
+    margin-right: 17px;
+    font-size: 1.5em;
+}
+
+#navbar ul{
     list-style-type: none;  /*puces supprimées */
     display: flex;
     color: #FFFFFF;
 }
 
-nav li{
-    margin-right: 25px;
-    font-size: 1.5em;
-}
-
-
 .container{
-    /* z-index: -1; */
-    position: absolute;
+    display: flex;
+    text-align: left;
+    flex-direction: column;
     color: #FFF;
+    margin: auto;
     margin-top: 5%;
-    margin-left: 10%;
-    margin-right:3%;
+    width: 80%;
 }
+
+.container h2{
+    font-size: 2em;
+}
+
 #bordure{
     z-index: 5;
     display: flex;
@@ -130,57 +153,138 @@ nav li{
 #vertical_title{
     vertical-align: middle;
     color: #5c5b5b;
-    font-size: 3em;
+    font-size: 2.5em;
     font-style: italic;
     position: absolute;
-    left: 0px; top: 40%;
+    left: 0px; top: 37%;
     width: 400px;
     margin-left: -150px;
     transform: rotate(-90deg);
 }
 
-.userForm{
-    margin-left: 50%;
+.actu{
     display: flex;
     justify-content: center;
-    background-color: white;
-    border: 1px solid #707070;
-    border-radius: 70px;
-    width: 55%;
-    height: 30em;
-    margin: auto;
-    margin-top: 4em;
-    padding-top: 30px;
 }
 
-.userForm p, .userForm h3, .connexionBtn{
-    margin-top: auto;
-    color: #000;
-    font-style: italic;
-    padding-top: 3px;
+.userForm{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;    
+    background-color: white;
+    border: 1px solid #707070;
+    border-radius: 10px;
+    width: 62%;
+    height: 25em;
+    margin: auto;
+    margin-top: 4em;
+    font-size: 1.3em;
     font-family: 'futura-renner';
+    font-style: italic;
+}
+
+.userForm p, .userForm h3{
+    color: #000;
     text-align: center;
 }
 
+#avisUpdate{
+    margin-bottom: 10px;
+}
+
+.userForm h3{
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.userForm .connexTitle{
+    margin-top: 0px;
+}
+
+.userForm h4{
+    text-align: center;
+}
+
+.errMssg{
+    color: red;
+    margin-top: 0.5em;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.okMssg{
+    color: green;
+    margin-top: 0.5em;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+textarea{
+    width: 600px;
+    height: 120px;
+}
+
+.innerInputs, .stars, .btnContainer{
+    margin-top: 13px;
+}
+
+.innerInputs h4{
+    font-size: 1.2em;
+}
+
+
+/**************Tableaux************/
+
+section{
+    margin: auto;
+}
+
+table{
+    border-collapse: collapse;
+    width: auto;
+    cursor: pointer;
+    margin: 20px auto;
+    background-color: #fff;
+    color: #5c5b5b;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+table caption{
+    color: #fff;
+    font-family: 'futura-renner', sans-serif;
+    font-style: italic;
+    margin-bottom: 1.1em;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+thead tr{
+    background-color: #030A8C;
+    color: #fff;
+    text-align: center;
+}
+
+th, td{
+    padding: 15px 20px;
+    border: 2px solid #fff;
+}
+
+tbody tr, td{
+    border: 2px solid #ddd;
+}
+
+tbody tr:nth-child(even){
+    background-color: #f3f3f3;
+}
+
+/**************************************/
+
 .userForm a{
     text-decoration: none;
-}
-
-
-
-#erreur{
-    display: none;
-    color: red;
-}
-
-#ok{
-    display: none;
-    color: green;
-}
-
-.connexionBtn{
-    font-size: 25px;
-    margin-top: 10px;
 }
 
 .userForm span{
@@ -188,14 +292,23 @@ nav li{
     justify-content: center;
 }
 
+.userForm p{
+    margin-bottom: 0px;
+}
+
+#messagePhp p{
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+}
 
 
 article{
     z-index: 1; 
     position: absolute;
     text-align: center;
-    width: 380px;
-    margin-left: 19%;
+    width: 40%;
+    margin-left: 10%;
     text-shadow: 1px 1px 0 #000,
     -1px 1px 0 #000,
     1px -1px 0 #000,
@@ -231,11 +344,9 @@ article{
     right: 0px;
     margin-top: 40px;
     margin-right: 3%;
-    /* z-index: -3; */
 }
 
 #decollage{
-    /* z-index: -4; */
     position: absolute;
     right: 0px;
     margin-right: 30%;
@@ -246,30 +357,149 @@ article{
     border: 1px solid #707070;
 }
 
-.pgTitle{
-    display: none;
 
+.pgTitle{
+    display: block;
+    position: absolute;
+    top: 0.5em;
+    left: 80px;
+    margin-left: 15%;
+    font-size: 1.9em;
+    font-style: italic;
+    text-shadow: 1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000,
+    0px 1px 0 #000,
+    0px -1px 0 #000,
+    -1px 0px 0 #000,
+    1px 0px 0 #000,
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0px 2px 0 #000,
+    0px -2px 0 #000,
+    -2px 0px 0 #000,
+    2px 0px 0 #000,
+    1px 2px 0 #000,
+    -1px 2px 0 #000,
+    1px -2px 0 #000,
+    -1px -2px 0 #000,
+    2px 1px 0 #000,
+    -2px 1px 0 #000,
+    2px -1px 0 #000,
+    -2px -1px 0 #000;
 }
+
+/*********************MODAL**********************/
+
+.modal{
+    background-color: rgba(0, 0, 0, .75);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    padding: 2rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s;
+    text-align: center;
+}
+
+.modal.show{
+    visibility: visible;
+    opacity: 1 ;
+}
+
+
+.modal-open{
+    visibility: visible;
+    opacity: 1 ;
+}
+
+.modal-content{
+    background-color: white;
+    max-width: 40vw;
+    margin: auto;
+    flex: 1;
+    position: relative;
+    border-radius: 4px;
+}
+
+.modal-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/*A voir on conserve le titre aux modales
+.modal-header{
+    padding-left: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.modal-header p{
+    color: black;
+} */
+
+.modal-body{
+    padding: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-body p{
+    color: #000;
+}
+
+.modal-footer{
+    padding: 15px ;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.btn{
+    padding: 7px 15px;
+    background-color: darkcyan;
+    color: white;
+    text-decoration: none;  
+    border-radius: 4px; 
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 1.2rem;
+}
+
+.btn-close{
+    padding: 7px 15px;
+    background-color: red;
+    border-radius: 4px; 
+}
+
+/******************************************************/
 
 footer{    
     display: flex;
     justify-content: center;
-    position: absolute;
-    margin-top: 2500px;
+    margin-top: 140vh;
     height: 75px;
-    width: 100%;
+    width: 130%;
     background-color:#030A8C;
     border-top: 3px solid #b3daf2;
     box-shadow: 0px 0px 20px 0px black;
     opacity: 1;
-    justify-content: center;
 }
 
 footer a{
     margin-top: 27px;
     color: white;
     text-decoration: none;
-    position: absolute;
     text-align: center;
 }
 
@@ -280,12 +510,6 @@ footer a{
 .burgerBtn{
     display: none;
 }
-
-
-
-
-
-
 
 
 /* Bouton burger et animation */
@@ -340,9 +564,9 @@ footer a{
 
 /******Contenu Menu déployant burger*****/
 .menuBg{
-    height: 350px;
+    height: 310px;
     background-color:#030A8C;
-    width: 200px;
+    width: 170px;
     border-radius: 0 0 0px 10px;
     border: 1px solid #b3daf2;
     box-shadow: 0 0 2px 2px;
@@ -355,7 +579,7 @@ footer a{
 
 .menuBg li{
     list-style-type: none;/*pour masquer les puces*/
-    margin-top: 14px;
+    margin-top: 15px;
 }
 
 .menuBg a{
@@ -364,12 +588,11 @@ footer a{
     font-size: 1em;
     display: block;
     text-align: left;
-    padding-top: 12px; 
     font-family: sans-serif;
 }
 
 /* menu déployant fermé */
-.invisible{
+.invisiblex{
     z-index: 2;
     margin-top: -355px;
     transition-duration: 0.3s;
@@ -378,20 +601,65 @@ footer a{
 } 
   
 /* ouverture menu déployant */
-.invisible.visible{
+.invisiblex.visiblex{
     margin-top: -10px;
     transition-duration: 0.3s;
 }
 
-/*********Boutons**********/
-.styled {
+
+/*********Boutons Rouge **********/
+.dangerBtn {
+    margin-top: 15px;
     border: 0;
-    line-height: 2.5;
+    line-height: 2;
     padding: 0 20px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: center;
+    font-family: 'futura-renner', sans-serif;  
     color: #fff;
-    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: #d03030;
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+
+.dangerBtn a{
+    color: #fff;
+}
+
+.dangerBtn:hover {
+    background-color: #e85555;
+}
+
+.dangerBtn a{
+    text-decoration: none;
+}
+
+.dangerBtn:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+          
+    inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+/*****************************/
+
+
+/*********Boutons**********/
+.styled{
+    margin-left: 5px;
+    margin-top: 15px;
+    border: 0;
+    line-height: 2;
+    padding: 0 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    font-family: 'futura-renner', sans-serif;  
+    color: #fff;
     border-radius: 10px;
     background-color: #0361cc;
     background-image: linear-gradient(to top left,
@@ -402,38 +670,67 @@ footer a{
                 inset -2px -2px 3px rgba(0, 0, 0, .6);
 }
 
+.styled a{
+    color: #fff;
+    text-decoration: none;
+}
+
 .styled:hover {
-    background-color: #0168d9;
+    background-color: #0c49a5;
 }
 
 .styled:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-                inset 2px 2px 3px rgba(0, 0, 0, .6);
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6), inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
+
 /*****************************/
 
 /*****************************/
 /*effets surlignés au survol navbar*/
 
-nav a {
+#navbar a {
   display: inline-block;
 }
 
-.menu__item:before {
- content: "";
- display: block;
- height: 0.17em;
- width: 0%;
- margin-bottom: -3px;
- background-color: #FFF;
- transition: width 0.4s;
+.menu__itemx:before {
+    content: "";
+    display: block;
+    height: 0.17em;
+    width: 0%;
+    margin-bottom: -3px;
+    background-color: #FFF;
+    color: #fff;
+    text-decoration: none;
+    transition: width 0.4s;
 }
 
-.menu__item:hover:before {
- width: 100%;
+.menu__itemx:hover:before {
+    width: 100%;
+}
+
+/*****************************/
+/*effets surlignés au survol burger*/
+
+.menu__itemy:before {
+    content: "";
+    display: block;
+    height: 0.17em;
+    width: 0%;
+    margin-bottom: 2px;
+    background-color: #FFF;
+    transition: width 0.4s;
+}
+
+.menu__itemy:hover:before {
+    width: 73%;
+    text-decoration: none;
+    color: #fff;
 }
 
 
+/*****************************/
+/*****************************/
+/*****************************/
 /*****************************/
 
 
@@ -451,8 +748,31 @@ nav a {
         left: 0px;
         margin-left: 25px;
         margin-top: 5px;
+        margin-left: 3%;
     }
     
+
+    /*Réduction nbre de colonnes sur petits écran*/
+    .col_av_5{
+        display: none;
+    }
+
+    .col_res_4{
+        display: none;
+    }
+
+    .led{
+        z-index: 1;
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        Right: 50px;
+        margin-right: 3%;
+        margin-top: 1.1em;
+        border-radius: 50%; /*Contour arrondi*/
+        border: 1px solid #fff;
+    }
+
     .burgerBtn{
         position: absolute;
         right: 25px;
@@ -460,8 +780,33 @@ nav a {
 
     }
     
+    section{
+        margin: auto;
+    }
+
+    .userForm{
+        font-size: 1em;
+    }
+
+    textarea{
+        width: min-content;
+        height: max-content;
+    }
+    
+    table{
+        font-size: 1em;
+    }
+
+    table caption{
+        text-align: left;
+    }
+
+    th, td{
+        padding: 0px 5px;
+    }
+
     /****masquer la navbar desktop******/
-    nav{
+    #navbar{
         display: none;
     }
     
@@ -494,9 +839,9 @@ nav a {
     .pgTitle{
         display: block;
         position: absolute;
-        top: 0.2em;
-        left: 85px;
-        margin-left: 5%;
+        top: 0.1em;
+        left: 80px;
+        margin-left: 2%;
         font-size: 1.5em;
         font-style: italic;
         text-shadow: 1px 1px 0 #000,
@@ -534,53 +879,71 @@ nav a {
 
 }
 
+/*************boutons******************/
 
 
 /*****************************/
 
 /* Style The Dropdown Button */
 .dropbtn {
-    background-color: #4CAF50;
+    margin-left: 5px;
+    margin-top: 15px;
+    border: 0;
+    line-height: 2;
+    padding: 0 20px;
+    font-size: 1.2rem;
+    background-color: #0361cc;    
+    font-family: 'futura-renner', sans-serif; 
+    font-style: normal;
     color: white;
-    padding: 16px;
-    font-size: 16px;
     border: none;
     cursor: pointer;
-  }
+    border-radius: 10px;
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
   
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
+/* The container (pour afficher le contenu du menu déroulant) */
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+}
+
+/* Dropdown Contenu (caché par défaut) */
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
     display: block;
-  }
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-  }
+}
+
+.dropdown:hover .dropbtn {
+      background-color: #0c49a5;
+}
+
+
+.btnContainer{
+    display: flex;
+    justify-content: center;
+}

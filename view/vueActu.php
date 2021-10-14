@@ -5,20 +5,16 @@
   $titre = "Actualité";
   include("head.php"); 
 ?>
-
 <body>
-  
   <!-- bordure -->
   <?php include "bordure.php"; ?>
-
   <!-- header -->
   <?php include("header.php"); ?>
-
+  <div class="actu">
+    <img id="travaux" src="../contenu/images_fR/travaux.png" alt="travaux">
+  </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>
-
-<h1>Work In progress</h1>
-
 </body>
 
 </html>
