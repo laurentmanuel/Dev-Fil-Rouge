@@ -153,10 +153,10 @@ article{
 #vertical_title{
     vertical-align: middle;
     color: #5c5b5b;
-    font-size: 2.2em;
+    font-size: 2.5em;
     font-style: italic;
     position: absolute;
-    left: 0px; top: 35%;
+    left: 0px; top: 37%;
     width: 400px;
     margin-left: -150px;
     transform: rotate(-90deg);
@@ -171,8 +171,7 @@ article{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
-    
+    align-items: center;    
     background-color: white;
     border: 1px solid #707070;
     border-radius: 10px;
@@ -393,7 +392,6 @@ article{
     -2px -1px 0 #000;
 }
 
-
 /*********************MODAL**********************/
 
 .modal{
@@ -413,6 +411,12 @@ article{
 }
 
 .modal.show{
+    visibility: visible;
+    opacity: 1 ;
+}
+
+
+.modal-open{
     visibility: visible;
     opacity: 1 ;
 }

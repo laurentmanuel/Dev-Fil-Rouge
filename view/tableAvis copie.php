@@ -27,11 +27,11 @@
                   <div class="dropdown">
                     <button class="dropbtn">Actions</button>
                     <div class="dropdown-content">
-                      <a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Détails</a>
+                      <a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a>
                       <a href="../controller/updateAvis.php?id_avis=<?= $avis["id_avis"] ?>">Modifier</a>
                       <a href="../controller/deleteAvis.php?id_avis=<?= $avis["id_avis"] ?>">Supprimer</a>
                     <?php else : ?>
-                      <button class="styled"><a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Détails</a></button>
+                      <button class="styled"><a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Voir plus</a></button>
                     <?php endif; ?>
                     </div>
                   </div>

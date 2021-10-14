@@ -1,3 +1,5 @@
+window.onload = ()=>{
+
 /**********************Menu burger ***********************/
 const burgerBtn = document.querySelector(".burgerBtn");
 const invisible = document.querySelector(".invisiblex");
@@ -13,7 +15,6 @@ burgerBtn.addEventListener("click", () => {
 
 /******************js pour étoiles***********************/
 
-window.onload = ()=>{
     
     //On va chercher toutes les étoiles
     const stars = document.querySelectorAll(".la-star");
@@ -70,11 +71,10 @@ window.onload = ()=>{
             }
         }
     }
-}
+
 
 /**********************MODAL*********************/
 
-window.onload = () => {
     //On récupère tous les boutons d'ouverture de modales
     const modalButtons = document.querySelectorAll("[data-toggle=modal]");
 
