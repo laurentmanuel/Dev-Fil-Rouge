@@ -19,7 +19,7 @@ WHERE id_reserv = 4 AND id_user = 2;
 DELETE FROM reservations WHERE id_reserv = 3 AND id_user = 2;
 
 /*Requête select toutes les avis d'un utilisateur*/
-SELECT * FROM avis WHERE id_user = 1 ORDER BY createdOn ASC;
+SELECT * FROM avis WHERE id_user = 1 ORDER BY updatedOn ASC;
 
 /*Requête DELETE avis */
 DELETE FROM avis WHERE id_avis = 4 AND id_user  = 2;
@@ -27,4 +27,17 @@ DELETE FROM avis WHERE id_avis = 4 AND id_user  = 2;
 /*Update Avis*/
 UPDATE avis SET note = 1, title_avis = "Ouiiiii!", comments = "bof!" WHERE id_avis = 1 AND id_user = 1;
 
+/*Requête formatage date eur*/
+/*SELECT DATE_FORMAT(yourColumnName,'%d/%m/%Y') as anyVariableName FROM yourTableName;*/
 
+/*sur table reservations*/
+SELECT DATE_FORMAT(date_reserv,'%d/%m/%Y') as date_reserv FROM reservations;
+SELECT DATE_FORMAT(updatedOn,'%d/%m/%Y') as updatedOn FROM reservations;
+
+SELECT DATE_FORMAT(updatedOn,'%d/%m/%Y') as updatedOn FROM reservations;
+
+/*sur table avis*/
+SELECT DATE_FORMAT(updatedOn,'%d/%m/%Y') as updatedOn FROM avis;
+
+/*sur table news*/
+SELECT DATE_FORMAT(date_news,'%d/%m/%Y') as date_news FROM news;

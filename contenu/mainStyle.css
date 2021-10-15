@@ -406,17 +406,11 @@ article{
     padding: 2rem;
     visibility: hidden;
     opacity: 0;
-    transition: 0.2s;
+    transition: 0.3s;
     text-align: center;
 }
 
 .modal.show{
-    visibility: visible;
-    opacity: 1 ;
-}
-
-
-.modal-open{
     visibility: visible;
     opacity: 1 ;
 }
@@ -435,18 +429,8 @@ article{
     top: 10px;
     right: 10px;
     cursor: pointer;
+    color: #000;
 }
-
-/*A voir on conserve le titre aux modales
-.modal-header{
-    padding-left: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-
-.modal-header p{
-    color: black;
-} */
 
 .modal-body{
     padding: 10px;
@@ -751,7 +735,6 @@ footer a{
         margin-left: 3%;
     }
     
-
     /*Réduction nbre de colonnes sur petits écran*/
     .col_av_5{
         display: none;
@@ -777,7 +760,6 @@ footer a{
         position: absolute;
         right: 25px;
         top: 20px;
-
     }
     
     section{

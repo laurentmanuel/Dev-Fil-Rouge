@@ -29,7 +29,7 @@
                     <div class="dropdown-content">
                       <a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Détails</a>
                       <a href="../controller/updateAvis.php?id_avis=<?= $avis["id_avis"] ?>">Modifier</a>
-                      <a href="../controller/deleteAvis.php?id_avis=<?= $avis["id_avis"] ?>">Supprimer</a>
+                      <a href="#" role="button" data-target="#modal" data-toggle="modal">Supprimer</a>
                     <?php else : ?>
                       <button class="styled"><a href="../controller/detailsAvis.php?id_avis=<?= $avis["id_avis"] ?>">Détails</a></button>
                     <?php endif; ?>
@@ -40,3 +40,17 @@
             </tr>
         </tbody>
       </table>
+
+      <!-- modal -->
+<div class="modal" id="modal" role="dialog">
+  <div class="modal-content">
+    <div class="modal-close" data-dismiss="dialog">X</div>
+    <div class="modal-body">
+      <p>Êtes-vous sûr de vouloir supprimer l'avis'?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn btn-close" role="button" data-dismiss="dialog">Annuler</a>
+      <a href="../controller/deleteAvis.php?id_avis=<?= $avis["id_avis"] ?>" class="btn" role="button">Confirmer</a>
+    </div>
+  </div>
+</div>
