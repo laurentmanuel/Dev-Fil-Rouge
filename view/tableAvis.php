@@ -10,7 +10,7 @@
             <th class="col_av_2">Note:</th>
             <th class="col_av_3">Titre:</th>
             <th class="col_av_4">Commentaires:</th>
-            <th class="col_av_5">Créé/Modifié le:</th>
+            <th class="col_av_5">Créé le:</th>
             <th class="col_av_6">Actions</th>
           </tr>
         </thead>
@@ -21,7 +21,7 @@
               <td class="col_av_2"><?= $avis["note"] ?></td>
               <td class="col_av_3"><?= $avis["title_avis"] ?></td>
               <td class="col_av_4"><?= $avis["comments"] ?></td>
-              <td class="col_av_5"><?= $avis["updatedOn"] ?></td>
+              <td class="col_av_5"><?= $avis["createdOn"] ?></td>
               <td class="col_av_6">
                 <?php if (isset($_SESSION["user"])) : ?>
                   <div class="dropdown">

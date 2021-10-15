@@ -20,7 +20,7 @@
     $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
         
     //Appel méthode 
-    $allAvis = $avis->showUserAvis($bdd);
+    $allAvis = $avis->readUserAvis($bdd);
 
     if($allAvis==null){
         echo ("<p>Aucun avis n'a été publié.</p>");

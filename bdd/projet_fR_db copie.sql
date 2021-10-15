@@ -25,7 +25,7 @@ CREATE TABLE users(
 CREATE TABLE news(
         id_news Int auto_increment primary key not null,
         text_news Longtext,
-        createdOn timestamp NOT NULL DEFAULT current_timestamp,
+        date_news Date,
         id_user Int);
 
 /*ajout foreign key*/
@@ -43,7 +43,8 @@ CREATE TABLE reservations(
         date_reserv Date,
         nb_people Int,
         id_user Int,
-        createdOn timestamp NOT NULL DEFAULT current_timestamp);
+        createdOn timestamp NOT NULL DEFAULT current_timestamp,
+        updatedOn timestamp NOT NULL DEFAULT current_timestamp);
         
 /*ajout foreign key*/
 alter table reservations
@@ -61,7 +62,8 @@ CREATE TABLE avis(
         title_avis varchar(100),
         comments Text NOT NULL,
         id_user Int,
-        createdOn timestamp NOT NULL DEFAULT current_timestamp);
+        createdOn timestamp NOT NULL DEFAULT current_timestamp,
+        updatedOn timestamp NOT NULL DEFAULT current_timestamp);
         
 /*ajout foreign key*/
 alter table avis

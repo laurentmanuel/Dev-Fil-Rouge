@@ -16,7 +16,7 @@ include("head.php");
     <form action="../controller/updateAvis.php" method="post">
       <h3 id="avisUpdate">Modifier l'avis:</h3>
       <div>
-        <label for="updateOn">Crée/modifié le: <?= $detailsAvis["updatedOn"] ?></label>
+        <label for="updateOn">Crée le: <?= $detailsAvis["createdOn"] ?></label>
       </div>
       <div class="innerInputs">
         <label for="oldNote">Note précédente: <?= $detailsAvis["note"] ?>/5</label>

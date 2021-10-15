@@ -15,7 +15,7 @@
     if(!isset($_SESSION["user"])){
 
         //Si l'utilisateur n'est pas connecté, on publie tous les avis
-        $allAvis = $avis->showAllAvis($bdd); 
+        $allAvis = $avis->readAllAvis($bdd); 
         
         //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur)
         require("../view/vueAvisList.php");
@@ -25,8 +25,8 @@
         $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
         
         //Appel méthode de création d'une réservation
-        $allAvis = $avis->showUserAvis($bdd);
-
+        $allAvis = $avis->readUserAvis($bdd);
+        
         //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur
         require("../view/vueAvisList.php");
     }

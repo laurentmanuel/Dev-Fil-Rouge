@@ -90,18 +90,13 @@
         
     /****************************************************************/
 
-        //méthode affichage de toutes les tâches
+        //méthode affichage de toutes les tâches (méthode testée OK)
         public function readReserv($bdd){
             $id_user = $this->getIdUserRes();
 
             try {
 
-                $sql = "SELECT *,
-                        DATE_FORMAT(date_reserv, '%d/%m/%Y') as date_reserv,
-                        DATE_FORMAT(createdOn, '%d/%m/%Y') as createdOn
-                        FROM reservations WHERE id_user = :id_user
-                        ORDER BY date_reserv ASC";
-                    
+                $sql = "SELECT * FROM reservations WHERE id_user = :id_user ORDER BY date_reserv asc";
                 $reserv = $bdd->prepare($sql);
                 $reserv->bindValue(":id_user", $id_user);
                 $reserv->execute();

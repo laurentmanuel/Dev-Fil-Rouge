@@ -5,7 +5,7 @@
             <th class="col_res_1">#</th>
             <th class="col_res_2">Pour le :</th>
             <th class="col_res_3">Nombre:</th>
-            <th class="col_res_4">Créé/Modifié le:</th>
+            <th class="col_res_4">Créé le:</th>
             <th class="col_res_5">Actions</th>
           </tr>
         </thead>
@@ -15,7 +15,7 @@
               <td class="col_res_1"><?= $reserv["id_reserv"] ?></td>
               <td class="col_res_2"><?= $reserv["date_reserv"] ?></td>
               <td class="col_res_3"><?= $reserv["nb_people"] ?></td>
-              <td class="col_res_4"><?= $reserv["updatedOn"] ?></td>
+              <td class="col_res_4"><?= $reserv["createdOn"] ?></td>
               <td class="col_res_5">
                 <div class="dropdown">
                   <button class="dropbtn" onclick="confirm()">Actions</button>

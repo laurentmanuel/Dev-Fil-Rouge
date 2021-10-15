@@ -36,7 +36,7 @@ include("head.php");
         <input type="password" name="confirm_mdp" placeholder="8 caractères minimum" required>
       </div>
       <span>
-        <p><a href="../view/vueLogUser.php">Déjà un compte?</a></p>
+        <p><a href="../controller/logUser.php">Déjà un compte?</a></p>
       </span>
       <span>
         <input class="styled" type="submit" value="Créer mon compte">

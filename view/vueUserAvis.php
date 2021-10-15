@@ -24,7 +24,7 @@ include("head.php");
             <th>Note attribuée:</th>
             <th>Titre:</th>
             <th>Commentaires:</th>
-            <th>Créé/Modifié le:</th>
+            <th>Créé le:</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -35,7 +35,7 @@ include("head.php");
               <td><?= $avis["note"] ?></td>
               <td><?= $avis["title_avis"] ?></td>
               <td><?= $avis["comments"] ?></td>
-              <td><?= $avis["updatedOn"] ?></td>
+              <td><?= $avis["createdOn"] ?></td>
               <td>
                 <?php if (isset($_SESSION["user"])) : ?>
                   <div class="dropdown">
