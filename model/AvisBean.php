@@ -119,7 +119,7 @@
                 $query = $bdd->prepare($sql);
 
                 //éxécution de la requête SQL
-                $updatedAvis = $query->execute(array(
+                $query->execute(array(
                     "id_avis" => $id_avis,
                     "note" => $note,
                     "title_avis" => $title_avis,
@@ -136,10 +136,14 @@
 
     /****************************************************************/
 
-        public function showAllAvis($bdd){
+        public function readAllAvis($bdd){
 
             try{
-                $sql = "SELECT * FROM avis";
+                $sql = "SELECT *,
+                        DATE_FORMAT(createdOn, '%d/%m/%Y') as createdOn
+                        FROM avis
+                        ORDER BY createdOn DESC";
+
                 $avis = $bdd->query($sql);
                 $allAvis = $avis->fetchAll();
                 return $allAvis;
@@ -152,11 +156,15 @@
 
     /****************************************************************/
 
-        public function showUserAvis($bdd){
+        public function readUserAvis($bdd){
             $id_user = $this->getIdUserAvis();
 
             try{
-                $sql = "SELECT * FROM avis WHERE id_user = :id_user ORDER BY updatedOn ASC";
+                $sql = "SELECT *,
+                        DATE_FORMAT(createdOn, '%d/%m/%Y') as createdOn
+                        FROM avis WHERE id_user = :id_user
+                        ORDER BY createdOn DESC";
+
                 $avis = $bdd->prepare($sql);
                 $avis->bindValue(":id_user", $id_user);
                 $avis->execute();
@@ -174,7 +182,9 @@
             $id_avis = $this->getIdAvis();
 
             try{
-                $sql = "SELECT * FROM avis WHERE id_avis = :id_avis";
+                $sql = "SELECT *,
+                        DATE_FORMAT(createdOn, '%d/%m/%Y') as createdOn
+                        FROM avis WHERE id_avis = :id_avis";
 
                 $avis = $bdd->prepare($sql);
                 $avis->bindValue("id_avis", $id_avis);
@@ -195,7 +205,7 @@
             $id_user = $this->getIdUserAvis();
 
             try{
-                $sql = "DELETE FROM avis WHERE id_avis = :id_avis AND id_user  = :id_user";
+                $sql = "DELETE FROM avis WHERE id_avis = :id_avis AND id_user = :id_user";
                 
                 $avis = $bdd->prepare($sql);
                 $avis->bindValue("id_avis", $id_avis);

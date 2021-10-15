@@ -18,7 +18,7 @@ include("head.php");
     <form action="../controller/updateAvis.php" method="post">
       <h3>Détails de l'avis:</h3>
       <div class="innerInputs">
-        <label for="updateOn">Crée/modifié le: <?= $detailsAvis["updatedOn"] ?></label>
+        <label for="updateOn">Crée/modifié le: <?= $detailsAvis["createdOn"] ?></label>
       </div>
       <div class="innerInputs">Note: <?= $detailsAvis["note"] ?>/5<br>
         <input type="hidden" name="note" id="note" value="<?= $detailsAvis["note"] ?>">

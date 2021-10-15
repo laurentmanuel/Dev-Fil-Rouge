@@ -58,8 +58,10 @@
 
                     //Appel méthode de création d'une réservation
                     $reserv->createReserv($bdd);
+
+                    //Insertion message confirmation
                     echo '<script>let message = document.querySelector(".okMssg");';
-                    echo 'message.innerHTML = "Réservation pour '.$_POST["nb_people"].' personne(s) confirmée pour le '.$_POST["date_reserv"].'";</script>';
+                    echo 'message.innerHTML = "Réservation pour '.$_POST["nb_people"].' personne(s) confirmée!";</script>';
                 }
 
             } else {

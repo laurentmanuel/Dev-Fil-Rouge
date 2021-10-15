@@ -18,7 +18,7 @@ require("../utils/connexionBdd.php");
 
 /*-----------------------------------------------------
     Tests :
-    -----------------------------------------------------*/
+-----------------------------------------------------*/
 
 
 //Redirection vers la page login si l'utilisateur n'est pas déjà connecté
@@ -34,8 +34,9 @@ if (!isset($_SESSION["user"])) {
     //Récupération de l'id de l'utilisateur
     $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
     //Appel méthode de création d'une réservation
-    $allResByUser = $reserv->readReserv($bdd);
 
+    $allResByUser = $reserv->readReserv($bdd);
+    
     //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur)
     require("../view/vueReservList.php");
 }

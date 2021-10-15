@@ -28,7 +28,7 @@ include("head.php");
       </div>
       <div class="innerInputs">
         </label>
-        <p><a href="../controller/logUser.php">Pas encore de compte?</a></p>
+        <p><a href="../controller/createUser.php">Pas encore de compte?</a></p>
       </div>
       <span>
         <input class="styled" type="submit" value="se connecter">

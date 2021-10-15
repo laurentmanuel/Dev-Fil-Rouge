@@ -1,21 +1,17 @@
 window.onload = ()=>{
 
-/**********************Menu burger ***********************/
-const burgerBtn = document.querySelector(".burgerBtn");
-const invisible = document.querySelector(".invisiblex");
+    /**********************Menu burger ***********************/
+    const burgerBtn = document.querySelector(".burgerBtn");
+    const invisible = document.querySelector(".invisiblex");
 
-// Ouverture fermeture menu burger
-burgerBtn.addEventListener("click", () => {
-    burgerBtn.classList.toggle("active");
-    invisible.classList.toggle("visiblex");    
-});
+    // Ouverture fermeture menu burger
+    burgerBtn.addEventListener("click", () => {
+        burgerBtn.classList.toggle("active");
+        invisible.classList.toggle("visiblex");    
+    });
 
-/*******************************************************/
+    /******************js pour Notes attribué (étoiles)***********************/
 
-
-/******************js pour étoiles***********************/
-
-    
     //On va chercher toutes les étoiles
     const stars = document.querySelectorAll(".la-star");
     
@@ -54,10 +50,9 @@ burgerBtn.addEventListener("click", () => {
     }  
     
     /**
-     *
      *Reset des étoile en vérifiant la note dans l'input (caché)
-     *@param{number}note
      * **/
+
     function resetStars(note = 0){ //nb=0 si pas d'infos, c'est comme si on avait pas mis de note
         for(star of stars){ 
             if(star.dataset.value>note){
@@ -72,7 +67,6 @@ burgerBtn.addEventListener("click", () => {
         }
     }
 
-
 /**********************MODAL*********************/
 
     //On récupère tous les boutons d'ouverture de modales
@@ -82,33 +76,46 @@ burgerBtn.addEventListener("click", () => {
         button.addEventListener("click", function(e){
             //On empêche la navigation
             e.preventDefault();
+
             //On récupère le data-target
             let target = this.dataset.target;
-
             //On récupère la bonne modale
             let modal = document.querySelector(target);
+
             //On affiche la modale
-            modal.classList.add("show");
+            modal.classList.add("show");          
             
             //On récupère les boutons de fermeture
             const modalClose = document.querySelectorAll(["[data-dismiss=dialog]"]);
-            console.log(modalClose); 
-
+            
             for(let close of modalClose){
                 close.addEventListener("click", ()=>{
                     modal.classList.remove("show");
                 });
             }
-
+        
             //Pour gérer la fermeture sur click dans zone grise
             modal.addEventListener("click", function(){
                 this.classList.remove("show");
             });
-
-            //On évite la propagation du click d'un enfant à son parent
+        
+            //Pour éviter la propagation du click d'un enfant à son parent
             modal.children[0].addEventListener("click", function(e){
                 e.stopPropagation(); 
             });
+
+            const confirmation =  document.getElementById("confirmer");
+            confirmation.addEventListener("click", function(e){
+                console.log("clicc!!!!"); 
+                infoForm.submit();
+
+            }); 
+            
+        
         });
     }
 }
+
+
+
+
