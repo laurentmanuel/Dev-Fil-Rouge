@@ -61,7 +61,9 @@
           "is_admin" => $user->getIsAdmin()
         ];
         
-        header("Location: ../controller/updateUser.php");
+        //Refresh screen après update
+        $location = "../controller/updateUser.php";
+        echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
         
       } else {
 

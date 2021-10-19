@@ -45,7 +45,7 @@
       if($updatedAvis->updateAvis($bdd)==true){
 
         //Insertion message dans superglobale session car redirection
-        $_SESSION["status"] = "Votre Avis a bien été modifié!";
+        $_SESSION["message"] = "Votre Avis a bien été modifié!";
         //Rechargement de la page
         header("Location: ../controller/updateAvis.php?id_avis=$id_avis");
       } else {

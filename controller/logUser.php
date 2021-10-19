@@ -62,7 +62,7 @@
         if($userToLog->logUser($bdd)==true){
 
           //insertion message dans session car redirection
-          $_SESSION["status"] = "Vous êtes connecté!";
+          $_SESSION["message"] = "Vous êtes connecté!";
           //Redirection vers page profil
           header("Location: ../view/vueProfil.php");
         } else {

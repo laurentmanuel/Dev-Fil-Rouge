@@ -41,7 +41,7 @@
         </tbody>
       </table>
 
-      <!-- modal -->
+<!-- modal -->
 <div class="modal" id="modal" role="dialog">
   <div class="modal-content">
     <div class="modal-close" data-dismiss="dialog">X</div>

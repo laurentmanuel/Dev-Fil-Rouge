@@ -34,7 +34,7 @@ include("head.php");
       <div class="btnContainer">
         <div>
           <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
-          <input class="styled" type="button" value="Modifier vos Informations" data-target="#modal" data-toggle="modal">
+          <button class="styled" type="button" value="Modifier vos Informations" data-target="#modal" data-toggle="modal">Modifier vos Informations</button>
         </div>
         <div class="dropdown">
           <div class="dropbtn">Autres actions</div>
@@ -45,18 +45,18 @@ include("head.php");
         </div>
       </div>
     </form>
-    <?php if (isset($_SESSION["status"])) : ?>
+    <?php if (isset($_SESSION["message"])) : ?>
       <div class="okMssg">
         <?php
-        echo $_SESSION["status"];
-        unset($_SESSION["status"]);
+        echo $_SESSION["message"];
+        unset($_SESSION["message"]);
         ?>
       </div>
     <?php else : ?>
       <div class="errMssg">
         <?php
-        echo $_SESSION["status"];
-        unset($_SESSION["status"]);
+        echo $_SESSION["message"];
+        unset($_SESSION["message"]);
         ?>
       </div>
     <?php endif; ?>

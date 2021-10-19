@@ -56,7 +56,6 @@
                 echo '<script>let message = document.querySelector(".errMssg");';
                 echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
             }
-
         } 
     }
 ?> 

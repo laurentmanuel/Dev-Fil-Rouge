@@ -73,8 +73,6 @@
                 //Affichage à gérer
                 echo '<script>let message = document.querySelector(".okMssg");';
                 echo 'message.innerHTML = "Votre mot de passe a bien été modifié";</script>';           
-                //Redirection gestion de l'affichage
-                //header("Location: ../view/vueProfil.php");
 
             } else {
 

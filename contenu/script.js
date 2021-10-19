@@ -106,16 +106,17 @@ window.onload = ()=>{
 
             const confirmation =  document.getElementById("confirmer");
             confirmation.addEventListener("click", function(e){
-                console.log("clicc!!!!"); 
                 infoForm.submit();
-
-            }); 
-            
-        
+            });
         });
     }
+
+    //OK
+    let modified = document.querySelector('input[name="email_user"]' || 'input[name="name_user"]' || 'input[name="first_name_user"]'  );
+
+    modified.addEventListener("change", (e) => {
+        console.log("modifié");
+    });  
 }
-
-
 
 

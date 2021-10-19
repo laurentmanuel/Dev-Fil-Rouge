@@ -45,9 +45,7 @@
         //Affichage temporaire à gérer
         echo '<script>let message = document.querySelector(".okMssg");';///NE SE VOIT CAR REDIREC, A CORRIGER
         echo 'message.innerHTML = "L\'utilisateur '.$_SESSION["user"]["first_name_user"].' '.$_SESSION["user"]["name_user"].' a bien été supprimé";</script>';
-          
-        //message confirmation suppression
-        //echo '<p>Le compte utilisateur de '.$name_user.' '.$first_name_user.' a bien été supprimée.</p>';
+        
         //Redirection
         header("Location: ../utils/deconnexion.php");
       }
