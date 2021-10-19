@@ -29,7 +29,7 @@
   if(isset($_POST["id_avis"]) && isset($_POST["note"]) && isset($_POST["title_avis"]) && isset($_POST["comments"])
   && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"]) && !empty($_POST["id_avis"])){  
        
-      //on filtre les chamo
+      //on filtre les champ
       $id_avis = htmlspecialchars($_POST["id_avis"]);
       $title_avis = htmlspecialchars($_POST["title_avis"]);
       $comments = htmlspecialchars($_POST["comments"]);

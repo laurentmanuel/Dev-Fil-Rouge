@@ -50,7 +50,7 @@
         $user->setFirstNameUser($_POST["first_name_user"]);
         $user->setEmailUser($_POST["email_user"]);
         
-        $user->updateUser($bdd);
+        if($user->updateUser($bdd)==true){
 
         //Mise à jour des valeurs de la session
         $_SESSION["user"] = [
@@ -61,9 +61,18 @@
           "is_admin" => $user->getIsAdmin()
         ];
         
+        //Affichage messgae
+        $_SESSION["message"] = "Votre profil a bien été modifié!";
+        $_SESSION["errorStatus"] = false;//pour que l'affichage se fasse dans la bonne couleur
+
         //Refresh screen après update
         $location = "../controller/updateUser.php";
         echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
+
+        } else {
+          $_SESSION["message"] = "L'application a rencontré un problème";
+          $_SESSION["errorStatus"] = true;
+        }
         
       } else {
 

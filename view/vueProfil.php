@@ -45,11 +45,12 @@ include("head.php");
         </div>
       </div>
     </form>
-    <?php if (isset($_SESSION["message"])) : ?>
+    <?php if (isset($_SESSION["message"]) && $_SESSION["errorStatus"]==false): ?>
       <div class="okMssg">
         <?php
         echo $_SESSION["message"];
         unset($_SESSION["message"]);
+        unset($_SESSION["errorStatus"]);
         ?>
       </div>
     <?php else : ?>
@@ -57,6 +58,7 @@ include("head.php");
         <?php
         echo $_SESSION["message"];
         unset($_SESSION["message"]);
+        unset($_SESSION["errorStatus"]);
         ?>
       </div>
     <?php endif; ?>

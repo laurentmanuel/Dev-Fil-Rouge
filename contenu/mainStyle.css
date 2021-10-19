@@ -792,7 +792,6 @@ footer a{
         display: none;
     }
     
-    
     /***Activation menu small devices*******/
     .burgerBtn{
         display: block;
@@ -923,7 +922,6 @@ footer a{
 .dropdown:hover .dropbtn {
       background-color: #0c49a5;
 }
-
 
 .btnContainer{
     display: flex;

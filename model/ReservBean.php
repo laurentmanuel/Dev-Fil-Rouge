@@ -9,6 +9,7 @@
         private $date_reserv;
         private $nb_people;
         private $id_user;
+        //private $createdOn;
 
         /*----------------------------------------------------
                             Constucteur :
@@ -57,6 +58,14 @@
             $this->id_user = $newIdUser;
         }
 
+        //createdOn Getter & Setter
+        // public function getCreatedRes() {
+        //     return $this->createdOn;
+        // }
+
+        // public function setCreateRes($newCreateRes) {
+        //     $this->createdOn = $newCreateRes;
+        // }
         /*-----------------------------------------------------
                                 Fonctions :
         -----------------------------------------------------*/

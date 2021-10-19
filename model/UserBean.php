@@ -144,7 +144,7 @@
         public function userExists($bdd): bool{
         
             //récupération des valeurs de l'objet       
-            $email_user = $this->getEmailUser();  
+            $email_user = $this->getEmailUser(); 
         
             try{                   
             
@@ -242,6 +242,7 @@
                     "first_name_user" => $first_name_user,
                     "email_user" => $email_user
                 ));
+                return true;
             
             } catch(Exception $e) {
                                 

@@ -12,7 +12,7 @@ include("head.php");
   <?php include("header.php"); ?>
   <div class="container">
     <section>
-    <?php if ($allResByUser == null) : ?>
+    <?php if($allResByUser == null) : ?>
         <h3>Aucune réservation n'a été enregistrée</h3>
       <?php else : ?>
         <?php include("tableReserv.php"); ?>
