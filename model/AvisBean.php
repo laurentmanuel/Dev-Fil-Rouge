@@ -191,8 +191,7 @@
                 $avis->execute();
                 $detailsAvis = $avis->fetch();                
                 return $detailsAvis;
-            
-                
+                            
             } catch(Exception $e) {
                 die('Erreur : '.$e->getMessage());
             }
@@ -211,8 +210,6 @@
                 $avis->bindValue("id_avis", $id_avis);
                 $avis->bindValue("id_user", $id_user);
                 $avis->execute();
-
-                $_SESSION["message"] = "Avis supprimé";
 
             } catch(Exception $e) {
                 die('Erreur : '.$e->getMessage());

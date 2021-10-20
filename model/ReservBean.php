@@ -177,6 +177,7 @@
                 "id_reserv" => $id_reserv,
                 "id_user" => $id_user
                 ));
+                return true;
 
                 //message confirmation suppression
                 echo '<p>La réservation n°'.$id_reserv.' en date du '.$date_reserv.' a été supprimée</p>';

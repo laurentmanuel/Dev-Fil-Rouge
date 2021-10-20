@@ -18,6 +18,23 @@ include("head.php");
         <?php include("tableReserv.php"); ?>
       <?php endif; ?>   
            <button type="button" class="styled"><a href="../view/vueReservPost.php">Ajouter une réservation</a></button>
+           <?php if (isset($_SESSION["message"]) && $_SESSION["errorStatus"]==false): ?>
+             <div class="okTable">
+               <?php
+               echo $_SESSION["message"];
+               unset($_SESSION["message"]);
+               unset($_SESSION["errorStatus"]);
+               ?>
+             </div>
+           <?php else : ?>
+             <div class="errTable">
+               <?php
+               echo $_SESSION["message"];
+               unset($_SESSION["message"]);
+               unset($_SESSION["errorStatus"]);
+               ?>
+             </div>
+           <?php endif; ?>
     </section>
   </div>
   <!-- footer  -->
