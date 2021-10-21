@@ -12,12 +12,10 @@
         private $mdp_user;
         private $is_admin = 0; //attribut false par défaut
 
-
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
         public function __construct(){}
-    
     
         /*-----------------------------------------------------
                               Accesseurs: 
