@@ -32,15 +32,19 @@
       
     $currentDate = date_create("now")->format("Y-m-d H:i:s"); //pour empêcher de sélectionner une date antérieure à la date du jour
     if($_POST["date_reserv"]<$currentDate){
-        
-        //pour empêcher saisie date incorrecte
-        echo '<script>let message = document.querySelector(".errMssg");';
-        echo 'message.innerHTML = "Date incorrecte";</script>';                
+
+        $_SESSION["message"] = "Date incorrecte";
+        $_SESSION["errorStatus"] = true;//pour afficher le message dans la bonne couleur
+        //Redirection sur page de l'avis concerné (sinon page blanche)
+        header('Location: ../controller/updateRes.php?id_reserv='.$_POST['id_reserv'].''); 
+
     } else if ($_POST["nb_people"]<1){
 
         //pour empêcher mauvaise saisie du nombre de personnes
-        echo '<script>let message = document.querySelector(".errMssg");';
-        echo 'message.innerHTML = "Nombre de personnes incorrect";</script>';
+        $_SESSION["message"] = "Nombre de personnes incorrect";
+        $_SESSION["errorStatus"] = true;//pour afficher le message dans la bonne couleur
+        //Redirection sur page de l'avis concerné (sinon page blanche)
+        header('Location: ../controller/updateRes.php?id_reserv='.$_POST['id_reserv'].''); 
     } else {
       
       $id_reserv = htmlspecialchars($_POST["id_reserv"]);
@@ -54,9 +58,10 @@
       if($updatedRes->updateRes($bdd)==true){
         
         //insertion message dans session car redirection
-        $_SESSION["status"] = "Votre réservation a bien été modifiée!";
+        $_SESSION["message"] = "Votre réservation a bien été modifiée!";
         //Redirection vers page profil
         header("Location: ../controller/updateRes.php?id_reserv=$id_reserv");
+        
       } else {
         echo '<script>let message = document.querySelector(".errMssg");';
         echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';

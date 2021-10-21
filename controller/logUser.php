@@ -62,11 +62,12 @@
         if($userToLog->logUser($bdd)==true){
 
           //insertion message dans session car redirection
-          $_SESSION["status"] = "Vous êtes connecté!";
+          $_SESSION["message"] = "Vous êtes connecté!";
           //Redirection vers page profil
           header("Location: ../view/vueProfil.php");
         } else {
 
+          //Insertion message merreur mais de redirection dans ce cas
           echo '<script>let message = document.querySelector(".errMssg");';
           echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';
         }

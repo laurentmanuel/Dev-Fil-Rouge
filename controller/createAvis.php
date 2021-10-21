@@ -45,18 +45,24 @@
                 $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
 
                 //Appel méthode de création d'une réservation
-                $avis->createAvis($bdd);
+                if($avis->createAvis($bdd)==true){
 
-                //Affichage message
-                echo '<script>let message = document.querySelector(".okMssg");';
-                echo 'message.innerHTML = "Merci '.$_SESSION["user"]["first_name_user"].' pour votre avis!";</script>';
+                    //Affichage message
+                    echo '<script>let message = document.querySelector(".okMssg");';
+                    echo 'message.innerHTML = "Merci '.$_SESSION["user"]["first_name_user"].' pour votre avis!";</script>';
+                } else {
+
+                    //Affichage message
+                    echo '<script>let message = document.querySelector(".errMssg");';
+                    echo 'message.innerHTML = "L\'application a rencontré une erreur!";</script>';
+                }
+
             } else {
                 
                 //Affichage message erreur formulaire incomplet
                 echo '<script>let message = document.querySelector(".errMssg");';
                 echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
             }
-
         } 
     }
 ?> 

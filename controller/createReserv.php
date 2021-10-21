@@ -57,11 +57,17 @@
                     $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
 
                     //Appel méthode de création d'une réservation
-                    $reserv->createReserv($bdd);
+                    if($reserv->createReserv($bdd)==true){
 
-                    //Insertion message confirmation
-                    echo '<script>let message = document.querySelector(".okMssg");';
-                    echo 'message.innerHTML = "Réservation pour '.$_POST["nb_people"].' personne(s) confirmée!";</script>';
+                        echo '<script>let message = document.querySelector(".okMssg");';
+                        echo 'message.innerHTML = "La réservation est confirmée!";</script>';                        
+                    } else {
+
+                        //Insertion message d'erreur si la fonction ne s'est pas exécutée correctement
+                        echo '<script>let message = document.querySelector(".errMssg");';
+                        echo 'message.innerHTML = "L\'application a rencontré une erreur!";</script>';
+                    }
+
                 }
 
             } else {

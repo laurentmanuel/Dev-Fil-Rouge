@@ -21,17 +21,17 @@ include("head.php");
         <label for="updateOn">Crée/modifié le: <?= $detailsAvis["createdOn"] ?></label>
       </div>
       <div class="innerInputs">Note: <?= $detailsAvis["note"] ?>/5<br>
-        <input type="hidden" name="note" id="note" value="<?= $detailsAvis["note"] ?>">
+        <input type="hidden" name="note" id="note" value="<?= $detailsAvis["note"] ?>" disabled>
       </div>
       <div class="innerInputs">
         <label for="title">Titre: </label>
-        <input type="text" name="title_avis" value="<?= $detailsAvis["title_avis"] ?>">
+        <input type="text" name="title_avis" value="<?= $detailsAvis["title_avis"] ?>" disabled>
       </div>
       <div class="innerInputs">
         <label for="comments">Vos commentaires: </label><br>
-        <textarea name="comments" id="" cols="30" rows="5"><?= $detailsAvis["comments"] ?></textarea>
+        <textarea name="comments" disabled id="" cols="30" rows="5"><?= $detailsAvis["comments"] ?></textarea>
       </div>
-      <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis">
+      <input type="hidden" value="<?= $detailsAvis["id_avis"] ?>" name="id_avis" disabled>
       <?php if(isset($SESSION["user"])) : ?>
       <button class="styled"><a href="../controller/showUserAvis.php">Revenir aux avis</a></button>
       <?php else: ?>

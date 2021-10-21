@@ -91,11 +91,11 @@
       } else if($user->createUser($bdd)==true){
 
         //insertion message dans session car redirection
-        $_SESSION["status"] = 'Le compte utilisateur '.$_SESSION["user"]['first_name_user'].' '.$_SESSION["user"]['name_user'].' a bien été créé!';
+        $_SESSION["message"] = 'Le compte utilisateur '.$_SESSION["user"]['first_name_user'].' '.$_SESSION["user"]['name_user'].' a bien été créé!';
         
         //Redirection vers page profil
         header("Location: ../view/vueProfil.php");
-      } else{
+      } else {
 
         echo '<script>let message = document.querySelector(".errMssg");';
         echo 'message.innerHTML = "L\'application a rencontré une erreur";</script>';

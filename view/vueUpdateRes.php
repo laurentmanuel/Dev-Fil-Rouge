@@ -28,18 +28,20 @@ include("head.php");
         <button class="styled"><a href="../controller/readReserv.php">Voir vos réservations</a></button>
       </div>
     </form>
-    <?php if (isset($_SESSION["status"])) : ?>
+    <?php if (isset($_SESSION["message"]) && $_SESSION["errorStatus"]==false): ?>
       <div class="okMssg">
         <?php
-        echo $_SESSION["status"];
-        unset($_SESSION["status"]);
+        echo $_SESSION["message"];
+        unset($_SESSION["message"]);
+        unset($_SESSION["errorStatus"]);
         ?>
       </div>
     <?php else : ?>
       <div class="errMssg">
         <?php
-        echo $_SESSION["status"];
-        unset($_SESSION["status"]);
+        echo $_SESSION["message"];
+        unset($_SESSION["message"]);
+        unset($_SESSION["errorStatus"]);
         ?>
       </div>
     <?php endif; ?>

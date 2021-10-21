@@ -9,13 +9,12 @@
         private $date_reserv;
         private $nb_people;
         private $id_user;
+        private $createdOn;
 
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct(){   
-            //l'id_user est récupéré grâce à la session php ($_SESSION["user"])
-        }
+        public function __construct(){}
 
         /*----------------------------------------------------
                             Accesseurs::
@@ -57,6 +56,15 @@
             $this->id_user = $newIdUser;
         }
 
+        //createdOn Getter & Setter
+        public function getCreatedOn(){
+            return $this->createdOn;
+        }
+
+        public function setCreatedOn($newCreatedOn){
+            $this->createdOn = $newCreatedOn;
+        }
+
         /*-----------------------------------------------------
                                 Fonctions :
         -----------------------------------------------------*/
@@ -81,6 +89,7 @@
                         "nb_people" => $nb_people,
                         "id_user" => $id_user
                     ));
+                    return true;
                     
                 } catch(Exception $e) {
                     //affichage d'une exception en cas d’erreur
@@ -168,9 +177,7 @@
                 "id_reserv" => $id_reserv,
                 "id_user" => $id_user
                 ));
-
-                //message confirmation suppression
-                echo '<p>La réservation n°'.$id_reserv.' en date du '.$date_reserv.' a été supprimée</p>';
+                return true;
 
             }catch(Exception $e){
 

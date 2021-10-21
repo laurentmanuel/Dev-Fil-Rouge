@@ -40,17 +40,21 @@
         $user = new UserBean();
         $user->setIdUser($_POST["id_user"]);
         $user->setMdpUser($_POST["mdp_user"]);
-        $user->deleteUser($bdd);
 
-        //Affichage temporaire à gérer
-        echo '<script>let message = document.querySelector(".okMssg");';///NE SE VOIT CAR REDIREC, A CORRIGER
-        echo 'message.innerHTML = "L\'utilisateur '.$_SESSION["user"]["first_name_user"].' '.$_SESSION["user"]["name_user"].' a bien été supprimé";</script>';
-          
-        //message confirmation suppression
-        //echo '<p>Le compte utilisateur de '.$name_user.' '.$first_name_user.' a bien été supprimée.</p>';
-        //Redirection
-        header("Location: ../utils/deconnexion.php");
+        if($user->deleteUser($bdd)==true){
+
+          $_SESSION["message"] = 'L\'utilisateur '.$_SESSION["user"]["first_name_user"].' '.$_SESSION["user"]["name_user"].' a bien été supprimé';
+
+          //Redirection
+          header("Location: ../utils/deconnexion.php");
+        } else {
+
+          //Insertion message d'erreur
+          echo '<script>let message = document.querySelector(".errMssg");';
+          echo 'message.innerHTML = "L\'application a rencontré une erreur!";</script>';
+        }
       }
+
     } else {
       echo '<script>let message = document.querySelector(".errMssg");';
       echo 'message.innerHTML = "Le formulaire est incomplet";</script>';

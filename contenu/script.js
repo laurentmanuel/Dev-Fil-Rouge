@@ -50,7 +50,7 @@ window.onload = ()=>{
     }  
     
     /**
-     *Reset des étoile en vérifiant la note dans l'input (caché)
+     *Reset des étoiles en vérifiant la note dans l'input (caché)
      * **/
 
     function resetStars(note = 0){ //nb=0 si pas d'infos, c'est comme si on avait pas mis de note
@@ -106,16 +106,17 @@ window.onload = ()=>{
 
             const confirmation =  document.getElementById("confirmer");
             confirmation.addEventListener("click", function(e){
-                console.log("clicc!!!!"); 
                 infoForm.submit();
-
-            }); 
-            
-        
+            });
         });
     }
+
+    //OK
+    // let modified = document.querySelector('input[name="email_user"]' || 'input[name="name_user"]' || 'input[name="first_name_user"]'  );
+
+    // modified.addEventListener("change", (e) => {
+    //     console.log("modifié");
+    // });  
 }
-
-
 
 

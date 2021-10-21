@@ -9,15 +9,12 @@
         private $text_news;
         private $date_news;
         private $id_user;
+        private $createdOn;
 
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct($text_news, $date_news, $id_user){   
-            $this->text_news = $text_news;
-            $this->date_news = $date_news;
-            $this->id_user = $id_user;
-        }
+        public function __construct(){}
 
         /*----------------------------------------------------
                             Accesseurs:
@@ -57,6 +54,15 @@
 
         public function setIdUser($newIdUser){
             $this->id_user = $newIdUser;
+        }
+
+        //createdOn Getter & Setter
+        public function getCreatedOn(){
+            return $this->createdOn;
+        }
+
+        public function setCreatedOn($newCreatedOn){
+            $this->createdOn = $newCreatedOn;
         }
 
     }

@@ -26,16 +26,31 @@ include("head.php");
         <h3>Aucun Avis n'a été publié</h3>
       <?php else : ?>
         <?php include("tableAvis.php"); ?>
-      <?php endif; ?>      
+      <?php endif; ?>
       <?php if (!isset($_SESSION["user"])) : ?>
         <button class="styled"><a href="../view/vueLogUser.php">Ajouter un avis</a></button>
         <button class="styled"><a href="../view/vueLogUser.php">Voir mes avis</a></button>
       <?php else : ?>
         <button class="styled"><a href="../controller/createAvis.php">Ajouter un avis</a></button>
       <?php endif; ?>
+      <?php if (isset($_SESSION["message"]) && $_SESSION["errorStatus"] == false) : ?>
+        <div class="okTable">
+          <?php
+          echo $_SESSION["message"];
+          unset($_SESSION["message"]);
+          unset($_SESSION["errorStatus"]);
+          ?>
+        </div>
+      <?php else : ?>
+        <div class="errTable">
+          <?php
+          echo $_SESSION["message"];
+          unset($_SESSION["message"]);
+          unset($_SESSION["errorStatus"]);
+          ?>
+        </div>
+      <?php endif; ?>
     </section>
-    <div class="errMssg"></div>
-    <div class="okMssg"></div>
   </div>
   <!-- footer  -->
   <?php include("footer.php"); ?>

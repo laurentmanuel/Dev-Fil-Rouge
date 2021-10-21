@@ -10,7 +10,7 @@
   <?php include "bordure.php"; ?>
   <!-- header -->
   <?php include("header.php"); ?>
-  <div class="actu">
+  <div class="container">
     <img id="travaux" src="../contenu/images_fR/travaux.png" alt="travaux">
   </div>
   <!-- footer  -->
