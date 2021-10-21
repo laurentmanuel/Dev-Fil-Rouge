@@ -6,8 +6,8 @@
                             Attributs :
         -----------------------------------------------------*/  
         private $id_news;
+        private $title_news;
         private $text_news;
-        private $date_news;
         private $id_user;
         private $createdOn;
 
@@ -29,6 +29,15 @@
             $this->id_news = $newIdNews;
         }
 
+        //title_news Getter & Setter
+        public function geTitleNews(){
+            return $this->title_news;
+        }
+
+        public function setTitleNews($newTitleNews){
+            $this->title_news = $newTitleNews;
+        }
+
         //text_news Getter & Setter
         public function getTextNews(){
             return $this->text_news;
@@ -36,15 +45,6 @@
 
         public function setTextNews($newTextNews){
             $this->text_news = $newTextNews;
-        }
-
-        //date_news Getter & Setter
-        public function getDateNews(){
-            return $this->date_news;
-        }
-
-        public function setDateNews($newDateNews){
-            $this->date_news = $newDateNews;
         }
 
         //id_user Getter & Setter
