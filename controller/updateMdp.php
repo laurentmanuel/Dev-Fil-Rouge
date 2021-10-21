@@ -65,17 +65,25 @@
                 $user = new UserBean();
                 $user->setMdpUser($mdp_user);
                 $user->setEmailUser($_POST["email_user"]);
-                $user->updateMdp($bdd);
-            
-                //Mise à jour des valeurs de la session
-                $_SESSION["user"]["mdp_user"] = $user->getMdpUser();
 
-                //Affichage à gérer
-                echo '<script>let message = document.querySelector(".okMssg");';
-                echo 'message.innerHTML = "Votre mot de passe a bien été modifié";</script>';           
+                if($user->updateMdp($bdd)==true){
+            
+                    //Mise à jour des valeurs de la session
+                    $_SESSION["user"]["mdp_user"] = $user->getMdpUser();
+
+                    //Affichage message de confirmation
+                    echo '<script>let message = document.querySelector(".okMssg");';
+                    echo 'message.innerHTML = "Votre mot de passe a bien été modifié";</script>';           
+                } else {
+                    
+                    //Affichage message d'erreur
+                    echo '<script>let message = document.querySelector(".errMssg");';
+                    echo 'message.innerHTML = "L\'application a rencontré une erreur!";</script>'; 
+                }
 
             } else {
-
+                
+                //Affichage message d'erreur
                 echo '<script>let message = document.querySelector(".errMssg");';
                 echo 'message.innerHTML = "Le formulaire est incomplet";</script>';
             }

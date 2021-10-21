@@ -95,7 +95,7 @@
         
         //Redirection vers page profil
         header("Location: ../view/vueProfil.php");
-      } else{
+      } else {
 
         echo '<script>let message = document.querySelector(".errMssg");';
         echo 'message.innerHTML = "L\'application a rencontré une erreur";</script>';

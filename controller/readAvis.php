@@ -20,7 +20,8 @@
         //import de la vue liste des réservations (formulaire d'insertion d'un utilisateur)
         require("../view/vueAvisList.php");
 
-    } else {        
+    } else {
+                
         //On mets dans l'instance d'objet avis la valeur de l'id_user
         $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
         

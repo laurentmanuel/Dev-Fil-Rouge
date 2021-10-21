@@ -67,6 +67,7 @@
           header("Location: ../view/vueProfil.php");
         } else {
 
+          //Insertion message merreur mais de redirection dans ce cas
           echo '<script>let message = document.querySelector(".errMssg");';
           echo 'message.innerHTML = "L\'application a rencontré un problème!";</script>';
         }

@@ -16,11 +16,13 @@
     $avis = new AvisBean();
     $avis->setIdAvis($id_avis);
     $avis->setIdUserAvis($_SESSION["user"]["id_user"]);
-    $avis->deleteAvis($bdd);
+    
+    if($avis->deleteAvis($bdd)==true){
 
     $_SESSION["message"] = "L'avis a bien été supprimé!";
     //redirection vers liste d'avis avec refresh
     $location = "../controller/readAvis.php";
     echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
+    }
 
   } 

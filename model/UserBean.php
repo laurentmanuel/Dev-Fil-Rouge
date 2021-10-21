@@ -16,9 +16,7 @@
         /*----------------------------------------------------
                             Constucteur :
         -----------------------------------------------------*/        
-        public function __construct(){
-            //$is_admin n'est pas dans le constructeur car on garde la paramètre par défaut
-        }
+        public function __construct(){}
     
     
         /*-----------------------------------------------------
@@ -69,10 +67,8 @@
         public function setMdpUser($newMdpUser){
             $this->mdp_user = $newMdpUser;
         }
-    
-    
+        
         //is_admin Getter & Setter
-    
         public function getIsAdmin(){
             return $this->is_admin;
         }
@@ -84,8 +80,6 @@
         /*-----------------------------------------------------
                             Fonctions :
         -----------------------------------------------------*/
-
-    /****************************************************************/
     
         //méthode ajout d'un utilisateur en bdd
         public function createUser($bdd){
@@ -128,7 +122,7 @@
                 "is_admin" => $is_admin,
                 ];
                 $_SESSION["message"];//pour insertion message
-                $_SESSION["errorStatus"] = false;//pour Status
+                $_SESSION["errorStatus"] = false;//pour affichage du message dans la bonne couleur
                 return true;
 
             } catch(Exception $e) {
@@ -265,6 +259,7 @@
                     "mdp_user" => $mdp_user,
                     "email_user" => $email_user
                 ));
+                return true;
                             
             } catch(Exception $e) {
                                 
@@ -290,6 +285,7 @@
             $query = $bdd->prepare($sql);            
             $query->bindValue(":id_user", $id_user);
             $query->execute();
+            return true;
 
             } catch(Exception $e) {
             

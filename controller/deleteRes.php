@@ -17,7 +17,6 @@
     $reserv->setIdReserv($id_reserv);
     $reserv->setIdUserRes($_SESSION["user"]["id_user"]);
     
-    
     if($reserv->deleteRes($bdd)==true){
 
       $_SESSION["message"] = "La réservation a bien été supprimée!";
@@ -25,5 +24,12 @@
       //redirection vers liste d'avis
       $location = "../controller/readReserv.php?id_reserv='. $id_reserv .'";
       echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
-    } 
+    } else {
+
+      $_SESSION["message"] = "L'application a rencontré une erreur!'";
+
+      //redirection vers liste d'avis
+      $location = "../controller/readReserv.php?id_reserv='. $id_reserv .'";
+      echo '<META HTTP-EQUIV="Refresh" Content="0; URL='.$location.'">';
+    }
   } 

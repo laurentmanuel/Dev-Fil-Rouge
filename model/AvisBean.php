@@ -10,6 +10,7 @@
         private $title_avis;
         private $comments;
         private $id_user;
+        private $createdOn;
 
         /*----------------------------------------------------
                             Constucteur :
@@ -66,12 +67,20 @@
         public function setIdUserAvis($newIdUser){
             $this->id_user = $newIdUser;
         }
+
+        //createdOn Getter & Setter
+        public function getCreatedOn(){
+            return $this->createdOn;
+        }
+
+        public function setCreatedOn($newCreatedOn){
+            $this->createdOn = $newCreatedOn;
+        }
     
     /*-----------------------------------------------------
                             Fonctions :
     -----------------------------------------------------*/
             
-    /****************************************************************/
         //méthode d'ajout d'un Avis en bdd 
         public function createAvis($bdd){  
 
@@ -94,6 +103,7 @@
                     "comments" => $comments,
                     "id_user" => $id_user
                 ));
+                return true;
                 
             } catch(Exception $e) {
                 //affichage d'une exception en cas d’erreur
@@ -210,6 +220,7 @@
                 $avis->bindValue("id_avis", $id_avis);
                 $avis->bindValue("id_user", $id_user);
                 $avis->execute();
+                return true;
 
             } catch(Exception $e) {
                 die('Erreur : '.$e->getMessage());

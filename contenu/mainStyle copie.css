@@ -813,9 +813,9 @@ footer a{
     section{
         margin: auto;
     }
-
+    
     .userForm{
-        font-size: 1em;
+        font-size: 1.5em;
     }
 
     textarea{
@@ -823,9 +823,9 @@ footer a{
         height: max-content;
     }
     
-    table{
-        font-size: 1em;
-    }
+    /*table{
+        font-size: 1.5em;
+    }*/
 
     table caption{
         text-align: left;
@@ -834,7 +834,7 @@ footer a{
     th, td{
         padding: 0px 5px;
     }
-
+    
     /****masquer la navbar desktop******/
     #navbar{
         display: none;
@@ -1055,13 +1055,6 @@ Responsive (media queries) Format Smartphone*/
         width: 82%;
         height: 30em;
     }
-
-    .container{
-        min-height: 0;
-        height: fit-content;
-    }
-
-
 }
 
 /*************boutons******************/
