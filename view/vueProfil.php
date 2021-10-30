@@ -34,7 +34,7 @@ include("head.php");
       <div class="btnContainer">
         <div>
           <input type="hidden" name="id_user" value="<?= $_SESSION["user"]["id_user"] ?>">
-          <button class="styled" type="button" value="Modifier vos Informations" data-target="#modal" data-toggle="modal">Modifier vos Informations</button>
+          <button class="styled" type="button" value="Modifier" data-target="#modal" data-toggle="modal">Modifier</button>
         </div>
         <div class="dropdown">
           <div class="dropbtn">Autres actions</div>

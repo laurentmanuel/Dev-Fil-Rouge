@@ -29,7 +29,7 @@ window.onload = ()=>{
             //l'élement précédent dans le DOM (de même niveau, balise soeur)
             let previousStar = this.previousElementSibling;
             while(previousStar){
-                //On pass l'étoile qui précéde en jaune
+                //On passe l'étoile qui précéde en jaune
                 previousStar.style.color = "yellow";
                 previousStar.classList.add("las");
                 previousStar.classList.remove("lar");
