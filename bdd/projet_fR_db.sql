@@ -24,6 +24,7 @@ CREATE TABLE users(
 
 CREATE TABLE news(
         id_news Int auto_increment primary key not null,
+        title_news varchar(50),
         text_news Longtext,
         createdOn timestamp NOT NULL DEFAULT current_timestamp,
         id_user Int);

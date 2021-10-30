@@ -95,7 +95,8 @@
                 $sql = "INSERT INTO users(name_user, first_name_user, email_user, mdp_user, is_admin) VALUES
                 (:name_user, :first_name_user, :email_user, :mdp_user, :is_admin)"; 
 
-                //Création de la requête préparée pour protéger des injections SQL (et améliorer les perfs dans le cas de requêtes exécutées plusieurs fois dans la même session)
+                //Création de la requête préparée pour protéger des injections SQL 
+                //(et améliorer les perfs dans le cas de requêtes exécutées plusieurs fois dans la même session)
                 $query = $bdd->prepare($sql);
                 
                 //éxécution de la requête SQL

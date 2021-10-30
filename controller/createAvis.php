@@ -47,7 +47,7 @@
                 //Appel méthode de création d'une réservation
                 if($avis->createAvis($bdd)==true){
 
-                    //Affichage message
+                    //Affichage message 
                     echo '<script>let message = document.querySelector(".okMssg");';
                     echo 'message.innerHTML = "Merci '.$_SESSION["user"]["first_name_user"].' pour votre avis!";</script>';
                 } else {

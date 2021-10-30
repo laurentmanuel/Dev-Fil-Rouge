@@ -1,6 +1,6 @@
 <header>
   <!-- banniere supérieure        -->
-  <a href="../view/vueAccueil.php"><img id="logo" src="../contenu/images_fR/logo/logo_ApolloSpacePark.svg.png" alt="logo_apollo_space_park" /></a>
+  <a href="../view/vueAccueil.php"><img id="logo" src="../contenu/images_fR/logo_ApolloSpacePark.svg.png" alt="logo_apollo_space_park" /></a>
   
   <!-- Voyant connection -->
   <span>
