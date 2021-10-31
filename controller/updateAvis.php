@@ -29,7 +29,7 @@
   if(isset($_POST["id_avis"]) && isset($_POST["note"]) && isset($_POST["title_avis"]) && isset($_POST["comments"])
   && !empty($_POST["note"]) && !empty($_POST["title_avis"]) && !empty($_POST["comments"]) && !empty($_POST["id_avis"])){  
        
-      //on filtre les champ
+      //on filtre les champs
       $id_avis = htmlspecialchars($_POST["id_avis"]);
       $title_avis = htmlspecialchars($_POST["title_avis"]);
       $comments = htmlspecialchars($_POST["comments"]);
@@ -46,7 +46,7 @@
 
         //Insertion message dans superglobale session car redirection
         $_SESSION["message"] = "Votre Avis a bien été modifié!";
-        //Rechargement de la page
+        //Redirection
         header("Location: ../controller/updateAvis.php?id_avis=$id_avis");
       } else {
 
