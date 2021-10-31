@@ -23,7 +23,7 @@ include("head.php");
   <div class="container">
     <section>
       <?php if ($allAvis == null) : ?>
-        <h3>Aucun Avis n'a été publié</h3>
+        <h3>Aucun avis n'a été publié</h3>
       <?php else : ?>
         <?php include("tableAvis.php"); ?>
       <?php endif; ?>
